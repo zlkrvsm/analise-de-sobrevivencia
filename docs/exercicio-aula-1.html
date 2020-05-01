@@ -298,6 +298,12 @@ $(document).ready(function () {
 </div>
 
 
+<div id="introdução" class="section level2">
+<h2>Introdução</h2>
+<p>Estes exercícios podem ser encontrados no livro <em>Análise de Sobrevivência: teoria e aplicações em saúde</em>, de Carvalho, M. S. e colaboradores.</p>
+</div>
+<div id="este-primeiro-bloco-carrega-bibliotecas-e-funções-utilizadas." class="section level2">
+<h2>Este primeiro bloco carrega bibliotecas e funções utilizadas.</h2>
 <pre class="r"><code># Pacotes
 library(tidyverse)
 library(survival)
@@ -394,6 +400,7 @@ indiv_traj &lt;- function(data, i) {
 
   wrap_plots(h, g, nrow = 2)
 }</code></pre>
+</div>
 <div id="exercício-2.1" class="section level2">
 <h2>Exercício 2.1</h2>
 <p>O tempo de aleitamento, isto é, o tempo decorrido desde o nascimento até o desmame, pode ser considerado uma variável tempo de sobrevivência. Suponha que o tempo até o desmame em meses tenha sido registrado para 15 crianças que nasceram no mesmo dia:</p>
@@ -407,7 +414,7 @@ indiv_traj &lt;- function(data, i) {
                 status = 1)
 
 grup_traj(aleit)</code></pre>
-<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Represente as trajetórias dos primeiros cinco indivíduos utilizando as variáveis N(t) e Y(t)</li>
 </ol>
@@ -418,15 +425,15 @@ grup_traj(aleit)</code></pre>
                      status = 1L)
 
 indiv_traj(aleit_cont, 1)</code></pre>
-<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <pre class="r"><code>indiv_traj(aleit_cont, 2)</code></pre>
-<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
+<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
 <pre class="r"><code>indiv_traj(aleit_cont, 3)</code></pre>
-<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-2-3.png" width="672" /></p>
+<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-5-3.png" width="672" /></p>
 <pre class="r"><code>indiv_traj(aleit_cont, 4)</code></pre>
-<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-2-4.png" width="672" /></p>
+<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-5-4.png" width="672" /></p>
 <pre class="r"><code>indiv_traj(aleit_cont, 5)</code></pre>
-<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-2-5.png" width="672" /></p>
+<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-5-5.png" width="672" /></p>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>Como você construiria um banco de dados para analisar esses dados pelo processo clássico?</li>
 </ol>
@@ -486,22 +493,22 @@ indiv_traj(aleit_cont, 1)</code></pre>
   status = c(1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1))
 
 grup_traj(dial)</code></pre>
-<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Represente as trajetórias dos primeiros cinco indivíduos utilizando as variáveis <em>N(t)</em> e <em>Y(t)</em> do processo de contagem.</li>
 </ol>
 <pre class="r"><code>dial_cont &lt;- cbind(dial, tempo.fim = dial$tempo, tempo.ini = 0)
 
 indiv_traj(dial_cont, 1)</code></pre>
-<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <pre class="r"><code>indiv_traj(dial_cont, 2)</code></pre>
-<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
+<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
 <pre class="r"><code>indiv_traj(dial_cont, 3)</code></pre>
-<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-6-3.png" width="672" /></p>
+<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-9-3.png" width="672" /></p>
 <pre class="r"><code>indiv_traj(dial_cont, 4)</code></pre>
-<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-6-4.png" width="672" /></p>
+<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-9-4.png" width="672" /></p>
 <pre class="r"><code>indiv_traj(dial_cont, 5)</code></pre>
-<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-6-5.png" width="672" /></p>
+<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-9-5.png" width="672" /></p>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>Construa um banco de dados para analisar esses dados pelo processo clássico.</li>
 </ol>
@@ -558,10 +565,7 @@ dial_cont</code></pre>
 <div id="exercício-2.3" class="section level2">
 <h2>Exercício 2.3</h2>
 <p>Em um hospital, seis pacientes HIV positivo são acompanhados ao longo de um ano. No gráfico a seguir, as linhas horizontais representam o tempo de acompanhamento de cada paciente: linhas terminadas em “X” indicam a ocorrência do desfecho (óbito), linhas terminadas em com “o” indicam censuras. Represente, utilizando as variáveis <em>N(t)</em> e <em>Y(t)</em>, as trajetórias de cada um dos seis pacientes.</p>
-<div class="figure">
-<img src="questao_2_3.png" alt="Gráfico" />
-<p class="caption">Gráfico</p>
-</div>
+<p><img src="questao_2_3.png" /></p>
 <pre class="r"><code>aids &lt;- tibble(id = 1:6,
                tempo = c(4, 6, 12, 3, 6, 9),
                tempo.ini = c(3, 6, 0, 5, 0, 3),
@@ -579,25 +583,22 @@ aids</code></pre>
 ## 6     6     9         3        12      0</code></pre>
 <pre class="r"><code># Trajetórias
 indiv_traj(aids, 1)</code></pre>
-<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <pre class="r"><code>indiv_traj(aids, 2)</code></pre>
-<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
+<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-12-2.png" width="672" /></p>
 <pre class="r"><code>indiv_traj(aids, 3)</code></pre>
-<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-9-3.png" width="672" /></p>
+<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-12-3.png" width="672" /></p>
 <pre class="r"><code>indiv_traj(aids, 4)</code></pre>
-<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-9-4.png" width="672" /></p>
+<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-12-4.png" width="672" /></p>
 <pre class="r"><code>indiv_traj(aids, 5)</code></pre>
-<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-9-5.png" width="672" /></p>
+<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-12-5.png" width="672" /></p>
 <pre class="r"><code>indiv_traj(aids, 6)</code></pre>
-<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-9-6.png" width="672" /></p>
+<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-12-6.png" width="672" /></p>
 </div>
 <div id="exercício-2.4" class="section level2">
 <h2>Exercício 2.4</h2>
 <p>Considerando a trajetória observada de um paciente apresentada na figura abaixo, responda:</p>
-<div class="figure">
-<img src="questao_2_4.png" alt="Gráfico" />
-<p class="caption">Gráfico</p>
-</div>
+<p><img src="questao_2_4.png" /></p>
 <ol style="list-style-type: lower-alpha">
 <li><p>Qual foi o mês de entrada do paciente no estudo?</p>
 <p>O paciente entrou no estudo no mês 2.</p></li>
@@ -610,10 +611,7 @@ indiv_traj(aids, 1)</code></pre>
 <div id="exercício-2.5" class="section level2">
 <h2>Exercício 2.5</h2>
 <p>Outro paciente tem a seguinte trajetória de observação:</p>
-<div class="figure">
-<img src="questao_2_5.png" alt="Gráfico" />
-<p class="caption">Gráfico</p>
-</div>
+<p><img src="questao_2_5.png" /></p>
 <p>Com base neste gráfico, responda:</p>
 <ol style="list-style-type: lower-alpha">
 <li><p>Qual foi a data de entrada do paciente no estudo?</p>
@@ -662,22 +660,22 @@ indiv_traj(aids, 1)</code></pre>
 <li>Represente graficamente os tempos observados desses indivíduos.</li>
 </ol>
 <pre class="r"><code>grup_traj(hiv_cont)</code></pre>
-<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <ol start="4" style="list-style-type: lower-alpha">
 <li>Represente as trajetórias dos 6 indivíduos utilizando <em>N(t)</em> e <em>Y(t)</em>.</li>
 </ol>
 <pre class="r"><code>indiv_traj(hiv_cont, 1)</code></pre>
-<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <pre class="r"><code>indiv_traj(hiv_cont, 2)</code></pre>
-<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-13-2.png" width="672" /></p>
+<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-16-2.png" width="672" /></p>
 <pre class="r"><code>indiv_traj(hiv_cont, 3)</code></pre>
-<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-13-3.png" width="672" /></p>
+<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-16-3.png" width="672" /></p>
 <pre class="r"><code>indiv_traj(hiv_cont, 4)</code></pre>
-<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-13-4.png" width="672" /></p>
+<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-16-4.png" width="672" /></p>
 <pre class="r"><code>indiv_traj(hiv_cont, 5)</code></pre>
-<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-13-5.png" width="672" /></p>
+<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-16-5.png" width="672" /></p>
 <pre class="r"><code>indiv_traj(hiv_cont, 6)</code></pre>
-<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-13-6.png" width="672" /></p>
+<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-16-6.png" width="672" /></p>
 <ol start="5" style="list-style-type: lower-alpha">
 <li>Quais são os indivíduos em risco no quinto mês de estudo.</li>
 </ol>
@@ -935,62 +933,62 @@ ipec$propcp &lt;- factor(
   main = &quot;Tempo por status&quot;,
   ylab = &quot;Tempo(dias)&quot;,
   xlab = &quot;Desfecho&quot;)</code></pre>
-<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 <pre class="r"><code>boxplot(
   tempo ~ sexo,
   data = ipec,
   main = &quot;Tempo por sexo&quot;,
   ylab = &quot;Tempo(dias)&quot;,
   xlab = &quot;Sexo&quot;)</code></pre>
-<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-24-2.png" width="672" /></p>
+<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-27-2.png" width="672" /></p>
 <pre class="r"><code>boxplot(
   tempo ~ escola,
   data = ipec,
   main = &quot;Tempo por escolaridade&quot;,
   ylab = &quot;Tempo(dias)&quot;,
   xlab = &quot;Escolaridade&quot;)</code></pre>
-<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-24-3.png" width="672" /></p>
+<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-27-3.png" width="672" /></p>
 <pre class="r"><code>boxplot(
   tempo ~ risco,
   data = ipec,
   main = &quot;Tempo por risco&quot;,
   ylab = &quot;Tempo(dias)&quot;,
   xlab = &quot;Risco&quot;)</code></pre>
-<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-24-4.png" width="672" /></p>
+<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-27-4.png" width="672" /></p>
 <pre class="r"><code>boxplot(
   tempo ~ acompan,
   data = ipec,
   main = &quot;Tempo por acompanhamento&quot;,
   ylab = &quot;Tempo(dias)&quot;,
   xlab = &quot;Risco&quot;)</code></pre>
-<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-24-5.png" width="672" /></p>
+<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-27-5.png" width="672" /></p>
 <pre class="r"><code>boxplot(
   tempo ~ tratam,
   data = ipec,
   main = &quot;Tempo por tratamento&quot;,
   ylab = &quot;Tempo(dias)&quot;,
   xlab = &quot;Tratamento&quot;)</code></pre>
-<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-24-6.png" width="672" /></p>
+<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-27-6.png" width="672" /></p>
 <pre class="r"><code>boxplot(
   tempo ~ doenca,
   data = ipec,
   main = &quot;Tempo por doença&quot;,
   ylab = &quot;Tempo(dias)&quot;,
   xlab = &quot;Doença&quot;)</code></pre>
-<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-24-7.png" width="672" /></p>
+<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-27-7.png" width="672" /></p>
 <pre class="r"><code>boxplot(
   tempo ~ propcp,
   data = ipec,
   main = &quot;Tempo por propcp&quot;,
   ylab = &quot;Tempo(dias)&quot;,
   xlab = &quot;Propcp&quot;)</code></pre>
-<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-24-8.png" width="672" /></p>
+<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-27-8.png" width="672" /></p>
 <pre class="r"><code>hist(
   ipec$tempo,
   main = &quot;Sobrevivência&quot;,
   ylab = &quot;Freqüência&quot;,
   xlab = &quot;Dias&quot;)</code></pre>
-<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-24-9.png" width="672" /></p>
+<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-27-9.png" width="672" /></p>
 <pre class="r"><code>hist(
   ipec$tempo/30,
   breaks = seq(0, 120, 6),
@@ -998,17 +996,13 @@ ipec$propcp &lt;- factor(
   main   = &quot;Sobrevivência&quot;,
   ylab   = &quot;Freqüência&quot;,
   xlab   = &quot;Meses&quot;)</code></pre>
-<pre><code>## Warning in plot.window(xlim, ylim, &quot;&quot;, ...): &quot;at&quot; não é um parâmetro
-## gráfico</code></pre>
-<pre><code>## Warning in title(main = main, sub = sub, xlab = xlab, ylab = ylab, ...):
-## &quot;at&quot; não é um parâmetro gráfico</code></pre>
-<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-24-10.png" width="672" /></p>
+<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-27-10.png" width="672" /></p>
 <pre class="r"><code>hist(
   ipec$idade,
   main = &quot;Idade&quot;,
   ylab = &quot;Frequência&quot;,
   xlab = &quot;Idade&quot;)</code></pre>
-<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-24-11.png" width="672" /></p>
+<p><img src="exercicio-aula-1_files/figure-html/unnamed-chunk-27-11.png" width="672" /></p>
 </div>
 
 

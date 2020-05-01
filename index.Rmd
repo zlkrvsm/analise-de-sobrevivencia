@@ -1,13 +1,25 @@
 ---
 title: "Análise de Sobrevivência"
 author: "Vinícius de Souza Maia"
-date: "01/05/2020"
 ---
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = FALSE, cache = TRUE)
 ```
 
-## Análise de Sobrevivência
+# Bem Vindo!
 
-Bem vindo!
+Este site reúne soluções em R para os exercícios propostos na disciplina "DM017 - Tópicos Avançados em Demografia II: Análise de Sobrevivência", da Prof.ª Dra. Luciana Correia Alves.
+
+# Bibliografia:
+
+Carvalho MS, Andreozzi VL, Codeço CT, Barbosa MTS, Shimakura SE. Análise de Sobrevivência: teoria e aplicações em saúde. 2.ed. Rio de Janeiro: Editora Fiocruz, 2011. 432 p.
+
+Hosmer DW, Lemeshow S. Applied Logistic Regression. John Wiley e Sons. 1989.
+http://www.cis.org.br/
+
+Kleinbaum, D., & Klein, M. Survival analysis: a self-learning text. Springer, 1997.
+
+Pagano M. & Gauvreau K (1993). Principles of biostatistics. Belmont, Calif., Duxbury Press.
+
+Selvin S. Survival Analysis for Epidemiologic and Medical Research (Practical Guides to Biostatistics and Epidemiology). New York: Cambridge University Press, 2008.

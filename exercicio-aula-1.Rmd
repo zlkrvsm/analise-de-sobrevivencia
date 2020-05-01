@@ -8,6 +8,12 @@ date: "01/05/2020"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+## Introdução
+
+Estes exercícios podem ser encontrados no livro *Análise de Sobrevivência: teoria e aplicações em saúde*, de Carvalho, M. S. e colaboradores.
+
+## Este primeiro bloco carrega bibliotecas e funções utilizadas.
+
 ```{r func, message = FALSE}
 # Pacotes
 library(tidyverse)
@@ -209,7 +215,7 @@ dial_cont
 
 Em um hospital, seis pacientes HIV positivo são acompanhados ao longo de um ano. No gráfico a seguir, as linhas horizontais representam o tempo de acompanhamento de cada paciente: linhas terminadas em "X" indicam a ocorrência do desfecho (óbito), linhas terminadas em com "o" indicam censuras. Represente, utilizando as variáveis *N(t)* e *Y(t)*, as trajetórias de cada um dos seis pacientes.
 
-![Gráfico](questao_2_3.png)
+![](questao_2_3.png)
 
 ```{r}
 aids <- tibble(id = 1:6,
@@ -235,7 +241,7 @@ indiv_traj(aids, 6)
 
 Considerando a trajetória observada de um paciente apresentada na figura abaixo, responda:
 
-![Gráfico](questao_2_4.png)
+![](questao_2_4.png)
 
 a. Qual foi o mês de entrada do paciente no estudo?
 
@@ -253,7 +259,7 @@ c. Em que meses o paciente esteve sob risco de óbito?
 
 Outro paciente tem a seguinte trajetória de observação:
 
-![Gráfico](questao_2_5.png)
+![](questao_2_5.png)
 
 Com base neste gráfico, responda:
 
@@ -437,7 +443,7 @@ table(ipec$propcp)
 
 g. Construa gráficos para o tempo de sobrevivência e para outras variáveis de interesse.
 
-```{r}
+```{r, warning=FALSE}
 boxplot(
   tempo ~ status,
   data = ipec,
