@@ -1,0 +1,13 @@
+---
+title: "index"
+author: "Vinícius de Souza Maia"
+date: "01/05/2020"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Análise de Sobrevivência
+
+Bem vindo!

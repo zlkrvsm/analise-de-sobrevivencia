@@ -1,0 +1,12 @@
+name: "Análise de sobrevivência"
+output_dir: "docs"
+navbar:
+title: "Análise de sobrevivência"
+left:
+  - text: "Home"
+    href: index.html
+  - text: "Aula 1 - Exercícios"
+    href: exercicio-aula-1.html
+output:
+ html_document:
+  theme: cosmo
