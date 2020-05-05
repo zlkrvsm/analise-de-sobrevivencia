@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Exercício Capítulo 2</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; } /* Alert */
+code span.an { color: #008000; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #0000ff; } /* ControlFlow */
+code span.ch { color: #008080; } /* Char */
+code span.cn { } /* Constant */
+code span.co { color: #008000; } /* Comment */
+code span.cv { color: #008000; } /* CommentVar */
+code span.do { color: #008000; } /* Documentation */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.im { } /* Import */
+code span.in { color: #008000; } /* Information */
+code span.kw { color: #0000ff; } /* Keyword */
+code span.op { } /* Operator */
+code span.ot { color: #ff4000; } /* Other */
+code span.pp { color: #ff4000; } /* Preprocessor */
+code span.sc { color: #008080; } /* SpecialChar */
+code span.ss { color: #008080; } /* SpecialString */
+code span.st { color: #008080; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #008080; } /* VerbatimString */
+code span.wa { color: #008000; font-weight: bold; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Análise de sobrevivência</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="exercicio-cap-2.html">Exercícios Capítulo 2</a>
+</li>
+<li>
+  <a href="exercicios-cap-3.html">Exercícios Capítulo 3</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Exercício Capítulo 2</h1>
+
+</div>
+
+
+<div id="introdução" class="section level2">
+<h2>Introdução</h2>
+<p>Estes exercícios podem ser encontrados no livro <em>Análise de Sobrevivência: teoria e aplicações em saúde</em>, de Carvalho, M. S. e colaboradores.</p>
+</div>
+<div id="este-primeiro-bloco-carrega-bibliotecas-e-funções-utilizadas." class="section level2">
+<h2>Este primeiro bloco carrega bibliotecas e funções utilizadas.</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Pacotes</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="kw">library</span>(survival)</a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="kw">library</span>(patchwork)</a>
+<a class="sourceLine" id="cb1-5" title="5"></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="co"># Definição de algumas funções que serão usadas ao longo do exercício</span></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="co"># Trajetória do grupo</span></a>
+<a class="sourceLine" id="cb1-8" title="8">grup_traj &lt;-<span class="st"> </span><span class="cf">function</span>(data, <span class="dt">tempo =</span> tempo, <span class="dt">id =</span> id) {</a>
+<a class="sourceLine" id="cb1-9" title="9">  <span class="kw">require</span>(ggplot2)</a>
+<a class="sourceLine" id="cb1-10" title="10">  <span class="kw">require</span>(dplyr)</a>
+<a class="sourceLine" id="cb1-11" title="11">  data &lt;-<span class="st"> </span><span class="kw">mutate</span>(data, <span class="dt">status2 =</span> <span class="kw">recode</span>(status, <span class="st">`</span><span class="dt">1</span><span class="st">`</span> =<span class="st"> </span><span class="dv">4</span>, <span class="st">`</span><span class="dt">0</span><span class="st">`</span> =<span class="st"> </span><span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb1-12" title="12">  y_breaks &lt;-<span class="st"> </span><span class="kw">length</span>(data<span class="op">$</span>id)</a>
+<a class="sourceLine" id="cb1-13" title="13">  x_breaks &lt;-<span class="st"> </span><span class="kw">max</span>(data<span class="op">$</span>tempo)</a>
+<a class="sourceLine" id="cb1-14" title="14"></a>
+<a class="sourceLine" id="cb1-15" title="15">  <span class="kw">ggplot</span>(data) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-16" title="16"><span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(tempo, id, <span class="dt">shape =</span> status2), <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-17" title="17"><span class="st">    </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="dv">0</span>, <span class="dt">y =</span> id, <span class="dt">xend =</span> tempo, <span class="dt">yend =</span> id)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-18" title="18"><span class="st">    </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> scales<span class="op">::</span><span class="kw">extended_breaks</span>(x_breaks),</a>
+<a class="sourceLine" id="cb1-19" title="19">                       <span class="dt">name =</span> <span class="st">&quot;Meses&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-20" title="20"><span class="st">    </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks =</span> scales<span class="op">::</span><span class="kw">extended_breaks</span>(y_breaks),</a>
+<a class="sourceLine" id="cb1-21" title="21">                       <span class="dt">name =</span> <span class="st">&quot;Paciente&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-22" title="22"><span class="st">    </span><span class="kw">scale_shape_identity</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-23" title="23"><span class="st">    </span><span class="kw">theme</span>(<span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb1-24" title="24">          <span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>()) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-25" title="25"><span class="st">    </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="fl">0.25</span>, x_breaks <span class="op">+</span><span class="st"> </span><span class="fl">0.5</span>))</a>
+<a class="sourceLine" id="cb1-26" title="26">}</a>
+<a class="sourceLine" id="cb1-27" title="27"></a>
+<a class="sourceLine" id="cb1-28" title="28"></a>
+<a class="sourceLine" id="cb1-29" title="29"><span class="co"># Trajetória do indivíduo</span></a>
+<a class="sourceLine" id="cb1-30" title="30">indiv_traj &lt;-<span class="st"> </span><span class="cf">function</span>(data, i) {</a>
+<a class="sourceLine" id="cb1-31" title="31">  <span class="kw">require</span>(ggplot2)</a>
+<a class="sourceLine" id="cb1-32" title="32">  <span class="kw">require</span>(patchwork)</a>
+<a class="sourceLine" id="cb1-33" title="33"></a>
+<a class="sourceLine" id="cb1-34" title="34">  tmax  &lt;-<span class="st"> </span><span class="kw">max</span>(data<span class="op">$</span>tempo.fim)</a>
+<a class="sourceLine" id="cb1-35" title="35">  t.ini &lt;-<span class="st"> </span>data<span class="op">$</span>tempo.ini[[i]]</a>
+<a class="sourceLine" id="cb1-36" title="36">  t.fim &lt;-<span class="st"> </span>data<span class="op">$</span>tempo.fim[[i]]</a>
+<a class="sourceLine" id="cb1-37" title="37">  censu &lt;-<span class="st"> </span>data<span class="op">$</span>status[[i]]</a>
+<a class="sourceLine" id="cb1-38" title="38"></a>
+<a class="sourceLine" id="cb1-39" title="39">  individuo_n &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb1-40" title="40">    <span class="dt">tempo2 =</span> <span class="kw">seq</span>(<span class="dv">0</span>, tmax <span class="op">+</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb1-41" title="41">    <span class="dt">Yx =</span> <span class="kw">ifelse</span>(tempo2 <span class="op">&gt;=</span><span class="st"> </span>t.ini <span class="op">&amp;</span><span class="st"> </span>tempo2 <span class="op">&lt;</span><span class="st"> </span>t.fim, <span class="dv">1</span>, <span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb1-42" title="42">    <span class="dt">Nx =</span> <span class="kw">ifelse</span>(tempo2 <span class="op">&gt;=</span><span class="st"> </span>t.fim <span class="op">&amp;</span><span class="st"> </span>t.fim <span class="op">!=</span><span class="st"> </span>tmax, <span class="dv">1</span>, <span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb1-43" title="43">    <span class="dt">status =</span> data<span class="op">$</span>status[[i]])</a>
+<a class="sourceLine" id="cb1-44" title="44"></a>
+<a class="sourceLine" id="cb1-45" title="45">  pontos.Nx &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb1-46" title="46">    <span class="dt">x =</span> <span class="kw">with</span>(individuo_n, <span class="kw">ifelse</span>(Nx <span class="op">!=</span><span class="st"> </span><span class="kw">lag</span>(Nx), tempo2, <span class="ot">NA_integer_</span>)),</a>
+<a class="sourceLine" id="cb1-47" title="47">    <span class="dt">y =</span> <span class="kw">with</span>(individuo_n, <span class="kw">ifelse</span>(Nx <span class="op">!=</span><span class="st"> </span><span class="kw">lag</span>(Nx), <span class="dv">1</span>, <span class="ot">NA_integer_</span>)),</a>
+<a class="sourceLine" id="cb1-48" title="48">    <span class="dt">shape =</span> <span class="kw">ifelse</span>(data<span class="op">$</span>status[[i]] <span class="op">==</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>x <span class="op">==</span><span class="st"> </span>data<span class="op">$</span>tempo.fim[[i]], <span class="dv">1</span>, <span class="dv">16</span>))</a>
+<a class="sourceLine" id="cb1-49" title="49"></a>
+<a class="sourceLine" id="cb1-50" title="50">  pontos.Yx &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb1-51" title="51">    <span class="dt">x =</span> <span class="kw">with</span>(individuo_n, <span class="kw">ifelse</span>(Yx <span class="op">!=</span><span class="st"> </span><span class="kw">lag</span>(Yx), tempo2, <span class="ot">NA_integer_</span>)),</a>
+<a class="sourceLine" id="cb1-52" title="52">    <span class="dt">y =</span> <span class="kw">with</span>(individuo_n, <span class="kw">ifelse</span>(Yx <span class="op">!=</span><span class="st"> </span><span class="kw">lag</span>(Yx), <span class="kw">lag</span>(Yx), <span class="ot">NA_integer_</span>)),</a>
+<a class="sourceLine" id="cb1-53" title="53">    <span class="dt">shape =</span> <span class="kw">ifelse</span>(data<span class="op">$</span>status[[i]] <span class="op">==</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>x <span class="op">==</span><span class="st"> </span>data<span class="op">$</span>tempo.fim[[i]], <span class="dv">1</span>, <span class="dv">16</span>))</a>
+<a class="sourceLine" id="cb1-54" title="54"></a>
+<a class="sourceLine" id="cb1-55" title="55">  g &lt;-<span class="st"> </span><span class="kw">ggplot</span>(individuo_n) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-56" title="56"><span class="st">    </span><span class="kw">geom_step</span>(<span class="kw">aes</span>(tempo2, Nx), <span class="dt">direction =</span> <span class="st">&quot;hv&quot;</span>, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-57" title="57"><span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">data =</span> pontos.Nx,</a>
+<a class="sourceLine" id="cb1-58" title="58">               <span class="kw">aes</span>(x, y, <span class="dt">shape =</span> shape),</a>
+<a class="sourceLine" id="cb1-59" title="59">               <span class="dt">size =</span> <span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb1-60" title="60">               <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-61" title="61"><span class="st">    </span><span class="kw">scale_shape_identity</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-62" title="62"><span class="st">    </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, tmax, <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb1-63" title="63">                       <span class="dt">minor_breaks =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb1-64" title="64">                       <span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>, tmax),</a>
+<a class="sourceLine" id="cb1-65" title="65">                       <span class="dt">name =</span> <span class="st">&quot;Meses&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-66" title="66"><span class="st">    </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb1-67" title="67">                       <span class="dt">limits =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb1-68" title="68">                       <span class="dt">minor_breaks =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb1-69" title="69">                       <span class="dt">name =</span> <span class="kw">expression</span>(N[i](x))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-70" title="70"><span class="st">    </span><span class="kw">theme_classic</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-71" title="71"><span class="st">    </span><span class="kw">theme</span>(<span class="dt">panel.grid =</span> <span class="kw">element_blank</span>())</a>
+<a class="sourceLine" id="cb1-72" title="72"></a>
+<a class="sourceLine" id="cb1-73" title="73">  h &lt;-<span class="st"> </span><span class="kw">ggplot</span>(individuo_n) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-74" title="74"><span class="st">    </span><span class="kw">geom_step</span>(<span class="kw">aes</span>(tempo2, Yx), <span class="dt">direction =</span> <span class="st">&quot;hv&quot;</span>, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-75" title="75"><span class="st">    </span><span class="kw">geom_point</span>(</a>
+<a class="sourceLine" id="cb1-76" title="76">      <span class="dt">data =</span> pontos.Yx,</a>
+<a class="sourceLine" id="cb1-77" title="77">      <span class="kw">aes</span>(x, y, <span class="dt">shape =</span> shape),</a>
+<a class="sourceLine" id="cb1-78" title="78">      <span class="dt">size =</span> <span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb1-79" title="79">      <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-80" title="80"><span class="st">    </span><span class="kw">scale_shape_identity</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-81" title="81"><span class="st">    </span><span class="kw">scale_x_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>, tmax), <span class="dt">minor_breaks =</span> <span class="ot">NULL</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-82" title="82"><span class="st">    </span><span class="kw">scale_y_continuous</span>(</a>
+<a class="sourceLine" id="cb1-83" title="83">      <span class="dt">breaks =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb1-84" title="84">      <span class="dt">limits =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb1-85" title="85">      <span class="dt">minor_breaks =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb1-86" title="86">      <span class="dt">name =</span> <span class="kw">expression</span>(Y[i](x))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-87" title="87"><span class="st">    </span><span class="kw">theme_classic</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-88" title="88"><span class="st">    </span><span class="kw">theme</span>(</a>
+<a class="sourceLine" id="cb1-89" title="89">      <span class="dt">axis.title.x =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb1-90" title="90">      <span class="dt">axis.text.x =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb1-91" title="91">      <span class="dt">axis.ticks.x =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb1-92" title="92">      <span class="dt">panel.grid =</span> <span class="kw">element_blank</span>()) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-93" title="93"><span class="st">    </span><span class="kw">ggtitle</span>(<span class="kw">paste0</span>(<span class="st">&quot;Paciente &quot;</span>, i))</a>
+<a class="sourceLine" id="cb1-94" title="94"></a>
+<a class="sourceLine" id="cb1-95" title="95">  <span class="kw">wrap_plots</span>(h, g, <span class="dt">nrow =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb1-96" title="96">}</a></code></pre></div>
+</div>
+<div id="exercício-2.1" class="section level2">
+<h2>Exercício 2.1</h2>
+<p>O tempo de aleitamento, isto é, o tempo decorrido desde o nascimento até o desmame, pode ser considerado uma variável tempo de sobrevivência. Suponha que o tempo até o desmame em meses tenha sido registrado para 15 crianças que nasceram no mesmo dia:</p>
+<pre><code>6 12 10 3 5 1 6 8 1 5 2 2 5 8 1</code></pre>
+<p>Considerando que não houve censura:</p>
+<ol style="list-style-type: lower-alpha">
+<li>Represente graficamente os tempos de observação</li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">aleit &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">id     =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">15</span>,</a>
+<a class="sourceLine" id="cb3-2" title="2">                <span class="dt">tempo  =</span> <span class="kw">c</span>(<span class="dv">6</span>, <span class="dv">12</span>, <span class="dv">10</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb3-3" title="3">                <span class="dt">status =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb3-4" title="4"></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="kw">grup_traj</span>(aleit)</a></code></pre></div>
+<p><img src="exercicio-cap-2_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Represente as trajetórias dos primeiros cinco indivíduos utilizando as variáveis N(t) e Y(t)</li>
+</ol>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">aleit_cont &lt;-<span class="st"> </span><span class="kw">mutate</span>(aleit,</a>
+<a class="sourceLine" id="cb4-2" title="2">                     <span class="dt">tempo.ini =</span> 0L,</a>
+<a class="sourceLine" id="cb4-3" title="3">                     <span class="dt">tempo.fim =</span> <span class="kw">as.integer</span>(tempo),</a>
+<a class="sourceLine" id="cb4-4" title="4">                     <span class="dt">tempo =</span> tempo.fim <span class="op">-</span><span class="st"> </span>tempo.ini,</a>
+<a class="sourceLine" id="cb4-5" title="5">                     <span class="dt">status =</span> 1L)</a>
+<a class="sourceLine" id="cb4-6" title="6"></a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="kw">indiv_traj</span>(aleit_cont, <span class="dv">1</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-2_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">indiv_traj</span>(aleit_cont, <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-2_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">indiv_traj</span>(aleit_cont, <span class="dv">3</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-2_files/figure-html/unnamed-chunk-2-3.png" width="672" /></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">indiv_traj</span>(aleit_cont, <span class="dv">4</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-2_files/figure-html/unnamed-chunk-2-4.png" width="672" /></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">indiv_traj</span>(aleit_cont, <span class="dv">5</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-2_files/figure-html/unnamed-chunk-2-5.png" width="672" /></p>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Como você construiria um banco de dados para analisar esses dados pelo processo clássico?</li>
+</ol>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">aleit</a></code></pre></div>
+<pre><code>## # A tibble: 15 x 3
+##       id tempo status
+##    &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;
+##  1     1     6      1
+##  2     2    12      1
+##  3     3    10      1
+##  4     4     3      1
+##  5     5     5      1
+##  6     6     1      1
+##  7     7     6      1
+##  8     8     8      1
+##  9     9     1      1
+## 10    10     5      1
+## 11    11     2      1
+## 12    12     2      1
+## 13    13     5      1
+## 14    14     8      1
+## 15    15     1      1</code></pre>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>E pelo processo de contagem?</li>
+</ol>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">aleit_cont</a></code></pre></div>
+<pre><code>## # A tibble: 15 x 5
+##       id tempo status tempo.ini tempo.fim
+##    &lt;int&gt; &lt;int&gt;  &lt;int&gt;     &lt;int&gt;     &lt;int&gt;
+##  1     1     6      1         0         6
+##  2     2    12      1         0        12
+##  3     3    10      1         0        10
+##  4     4     3      1         0         3
+##  5     5     5      1         0         5
+##  6     6     1      1         0         1
+##  7     7     6      1         0         6
+##  8     8     8      1         0         8
+##  9     9     1      1         0         1
+## 10    10     5      1         0         5
+## 11    11     2      1         0         2
+## 12    12     2      1         0         2
+## 13    13     5      1         0         5
+## 14    14     8      1         0         8
+## 15    15     1      1         0         1</code></pre>
+</div>
+<div id="exercício-2.2" class="section level2">
+<h2>Exercício 2.2</h2>
+<p>Considere agora o tempo de sobrevivência de 15 pacientes submetidos à hemodiálise. Neste caso, a variável de interesse é o tempo desde a primeira diálise até o óbito (em meses).</p>
+<pre><code>2 4 29+ 6+ 3 1 1 2 3 9+ 10 11 5+ 5 1</code></pre>
+<p>Os tempos censurados estão indicados pelo sinal de +. Considere que todos os pacientes entraram juntos no início do estudo.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Represente graficamente os tempos de observação dos pacientes utilizando a notação clássica.</li>
+</ol>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">dial &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb14-2" title="2">  <span class="dt">id     =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">15</span>, </a>
+<a class="sourceLine" id="cb14-3" title="3">  <span class="dt">tempo  =</span> <span class="kw">c</span>(2L, 4L, 29L, 6L, 3L, 1L, 1L, 2L, 3L, 9L, 10L, 11L, 5L, 5L, 1L), </a>
+<a class="sourceLine" id="cb14-4" title="4">  <span class="dt">status =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb14-5" title="5"></a>
+<a class="sourceLine" id="cb14-6" title="6"><span class="kw">grup_traj</span>(dial)</a></code></pre></div>
+<p><img src="exercicio-cap-2_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Represente as trajetórias dos primeiros cinco indivíduos utilizando as variáveis <em>N(t)</em> e <em>Y(t)</em> do processo de contagem.</li>
+</ol>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">dial_cont &lt;-<span class="st"> </span><span class="kw">cbind</span>(dial, <span class="dt">tempo.fim =</span> dial<span class="op">$</span>tempo, <span class="dt">tempo.ini =</span> <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb15-2" title="2"></a>
+<a class="sourceLine" id="cb15-3" title="3"><span class="kw">indiv_traj</span>(dial_cont, <span class="dv">1</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-2_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw">indiv_traj</span>(dial_cont, <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-2_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">indiv_traj</span>(dial_cont, <span class="dv">3</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-2_files/figure-html/unnamed-chunk-6-3.png" width="672" /></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">indiv_traj</span>(dial_cont, <span class="dv">4</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-2_files/figure-html/unnamed-chunk-6-4.png" width="672" /></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="kw">indiv_traj</span>(dial_cont, <span class="dv">5</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-2_files/figure-html/unnamed-chunk-6-5.png" width="672" /></p>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Construa um banco de dados para analisar esses dados pelo processo clássico.</li>
+</ol>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1">dial</a></code></pre></div>
+<pre><code>## # A tibble: 15 x 3
+##       id tempo status
+##    &lt;int&gt; &lt;int&gt;  &lt;dbl&gt;
+##  1     1     2      1
+##  2     2     4      1
+##  3     3    29      0
+##  4     4     6      0
+##  5     5     3      1
+##  6     6     1      1
+##  7     7     1      1
+##  8     8     2      1
+##  9     9     3      1
+## 10    10     9      0
+## 11    11    10      1
+## 12    12    11      1
+## 13    13     5      0
+## 14    14     5      1
+## 15    15     1      1</code></pre>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Reconstrua o banco de dados, na forma de processo de contagem, considerando que essa é uma coorte aberta e as datas de início do tempo de observação de cada paciente são dadas pela tabela abaixo.</li>
+</ol>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1">dial_cont &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb22-2" title="2">  <span class="dt">id        =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">15</span>,</a>
+<a class="sourceLine" id="cb22-3" title="3">  <span class="dt">tempo.ini =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">12</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">12</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">22</span>),</a>
+<a class="sourceLine" id="cb22-4" title="4">  <span class="dt">tempo     =</span> <span class="kw">c</span>(2L, 4L, 29L, 6L, 3L, 1L, 1L, 2L, 3L, 9L, 10L, 11L, 5L, 5L, 1L),</a>
+<a class="sourceLine" id="cb22-5" title="5">  <span class="dt">tempo.fim =</span> tempo <span class="op">+</span><span class="st"> </span>tempo.ini,</a>
+<a class="sourceLine" id="cb22-6" title="6">  <span class="dt">status    =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb22-7" title="7">)</a>
+<a class="sourceLine" id="cb22-8" title="8"></a>
+<a class="sourceLine" id="cb22-9" title="9">dial_cont</a></code></pre></div>
+<pre><code>## # A tibble: 15 x 5
+##       id tempo.ini tempo tempo.fim status
+##    &lt;int&gt;     &lt;dbl&gt; &lt;int&gt;     &lt;dbl&gt;  &lt;dbl&gt;
+##  1     1         0     2         2      1
+##  2     2         1     4         5      1
+##  3     3        12    29        41      0
+##  4     4         3     6         9      0
+##  5     5         1     3         4      1
+##  6     6         7     1         8      1
+##  7     7         0     1         1      1
+##  8     8         1     2         3      1
+##  9     9         1     3         4      1
+## 10    10         3     9        12      0
+## 11    11        12    10        22      1
+## 12    12         4    11        15      1
+## 13    13         4     5         9      0
+## 14    14         1     5         6      1
+## 15    15        22     1        23      1</code></pre>
+</div>
+<div id="exercício-2.3" class="section level2">
+<h2>Exercício 2.3</h2>
+<p>Em um hospital, seis pacientes HIV positivo são acompanhados ao longo de um ano. No gráfico a seguir, as linhas horizontais representam o tempo de acompanhamento de cada paciente: linhas terminadas em “X” indicam a ocorrência do desfecho (óbito), linhas terminadas em com “o” indicam censuras. Represente, utilizando as variáveis <em>N(t)</em> e <em>Y(t)</em>, as trajetórias de cada um dos seis pacientes.</p>
+<p><img src="questao_2_3.png" /></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1">aids &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">id =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">6</span>,</a>
+<a class="sourceLine" id="cb24-2" title="2">               <span class="dt">tempo =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">12</span>, <span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">9</span>),</a>
+<a class="sourceLine" id="cb24-3" title="3">               <span class="dt">tempo.ini =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb24-4" title="4">               <span class="dt">tempo.fim =</span> tempo <span class="op">+</span><span class="st"> </span>tempo.ini,</a>
+<a class="sourceLine" id="cb24-5" title="5">               <span class="dt">status =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>))</a>
+<a class="sourceLine" id="cb24-6" title="6">aids</a></code></pre></div>
+<pre><code>## # A tibble: 6 x 5
+##      id tempo tempo.ini tempo.fim status
+##   &lt;int&gt; &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;
+## 1     1     4         3         7      1
+## 2     2     6         6        12      0
+## 3     3    12         0        12      0
+## 4     4     3         5         8      0
+## 5     5     6         0         6      1
+## 6     6     9         3        12      0</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="co"># Trajetórias</span></a>
+<a class="sourceLine" id="cb26-2" title="2"><span class="kw">indiv_traj</span>(aids, <span class="dv">1</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-2_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1"><span class="kw">indiv_traj</span>(aids, <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-2_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="kw">indiv_traj</span>(aids, <span class="dv">3</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-2_files/figure-html/unnamed-chunk-9-3.png" width="672" /></p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="kw">indiv_traj</span>(aids, <span class="dv">4</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-2_files/figure-html/unnamed-chunk-9-4.png" width="672" /></p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1"><span class="kw">indiv_traj</span>(aids, <span class="dv">5</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-2_files/figure-html/unnamed-chunk-9-5.png" width="672" /></p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="kw">indiv_traj</span>(aids, <span class="dv">6</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-2_files/figure-html/unnamed-chunk-9-6.png" width="672" /></p>
+</div>
+<div id="exercício-2.4" class="section level2">
+<h2>Exercício 2.4</h2>
+<p>Considerando a trajetória observada de um paciente apresentada na figura abaixo, responda:</p>
+<p><img src="questao_2_4.png" /></p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Qual foi o mês de entrada do paciente no estudo?</p>
+<p>O paciente entrou no estudo no mês 2.</p></li>
+<li><p>Em que mês ocorreu o desfecho?</p>
+<p>O desfecho ocorreu no mês 4.</p></li>
+<li><p>Em que meses o paciente esteve sob risco de óbito?</p>
+<p>Nos meses 3 e 4.</p></li>
+</ol>
+</div>
+<div id="exercício-2.5" class="section level2">
+<h2>Exercício 2.5</h2>
+<p>Outro paciente tem a seguinte trajetória de observação:</p>
+<p><img src="questao_2_5.png" /></p>
+<p>Com base neste gráfico, responda:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Qual foi a data de entrada do paciente no estudo?</p>
+<p>O paciente entrou no estudo no início, ou seja, no t = 0.</p></li>
+<li><p>Em que data ocorreu o desfecho?</p>
+<p>O desfecho ocorreu no mês 8.</p></li>
+</ol>
+</div>
+<div id="exercício-2.6" class="section level2">
+<h2>Exercício 2.6</h2>
+<p>Considere seis indivíduos em uma coorte para avaliação de fatores de risco para infecção por HIV. O estudo iniciou-se em 01/06/2008, quando dois dos indivíduos entraram no estudo, com resultados negativos para a infecção. Um deles, ao realizar o segundo exame, um mês depois, apresentou resultado positivo, e o outro, positivou dois meses depois. O outros quatro indivíduos entraram no estudo em 01/07/2008, 01/09/2008, 01/08/2008, e 01/08/2008 e suas respectivas datas de soroconversão foram 2, 3, 2 e 5 meses após a entrada.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Construa o banco de dados no formato clássico.</li>
+</ol>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1">(hiv &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb32-2" title="2">  <span class="dt">id     =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">6</span>,</a>
+<a class="sourceLine" id="cb32-3" title="3">  <span class="dt">tempo =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">5</span>),</a>
+<a class="sourceLine" id="cb32-4" title="4">  <span class="dt">status =</span> <span class="dv">1</span>))</a></code></pre></div>
+<pre><code>## # A tibble: 6 x 3
+##      id tempo status
+##   &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;
+## 1     1     1      1
+## 2     2     3      1
+## 3     3     2      1
+## 4     4     3      1
+## 5     5     2      1
+## 6     6     5      1</code></pre>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Construa o banco de dados na forma de processo de contagem.</li>
+</ol>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1">(hiv_cont &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">id     =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">6</span>,</a>
+<a class="sourceLine" id="cb34-2" title="2">                   <span class="dt">tempo.ini  =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb34-3" title="3">                   <span class="dt">tempo =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">5</span>),</a>
+<a class="sourceLine" id="cb34-4" title="4">                   <span class="dt">tempo.fim  =</span> tempo.ini <span class="op">+</span><span class="st"> </span>tempo,</a>
+<a class="sourceLine" id="cb34-5" title="5">                   <span class="dt">status =</span> <span class="dv">1</span>))</a></code></pre></div>
+<pre><code>## # A tibble: 6 x 5
+##      id tempo.ini tempo tempo.fim status
+##   &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;
+## 1     1         0     1         1      1
+## 2     2         0     3         3      1
+## 3     3         1     2         3      1
+## 4     4         3     3         6      1
+## 5     5         2     2         4      1
+## 6     6         2     5         7      1</code></pre>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Represente graficamente os tempos observados desses indivíduos.</li>
+</ol>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1"><span class="kw">grup_traj</span>(hiv_cont)</a></code></pre></div>
+<p><img src="exercicio-cap-2_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Represente as trajetórias dos 6 indivíduos utilizando <em>N(t)</em> e <em>Y(t)</em>.</li>
+</ol>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="kw">indiv_traj</span>(hiv_cont, <span class="dv">1</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-2_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="kw">indiv_traj</span>(hiv_cont, <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-2_files/figure-html/unnamed-chunk-13-2.png" width="672" /></p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1"><span class="kw">indiv_traj</span>(hiv_cont, <span class="dv">3</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-2_files/figure-html/unnamed-chunk-13-3.png" width="672" /></p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1"><span class="kw">indiv_traj</span>(hiv_cont, <span class="dv">4</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-2_files/figure-html/unnamed-chunk-13-4.png" width="672" /></p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1"><span class="kw">indiv_traj</span>(hiv_cont, <span class="dv">5</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-2_files/figure-html/unnamed-chunk-13-5.png" width="672" /></p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"><span class="kw">indiv_traj</span>(hiv_cont, <span class="dv">6</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-2_files/figure-html/unnamed-chunk-13-6.png" width="672" /></p>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>Quais são os indivíduos em risco no quinto mês de estudo.</li>
+</ol>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1"><span class="kw">filter</span>(hiv_cont, tempo.ini <span class="op">&lt;</span><span class="st"> </span><span class="dv">5</span>, tempo.fim <span class="op">&gt;=</span><span class="st"> </span><span class="dv">5</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 2 x 5
+##      id tempo.ini tempo tempo.fim status
+##   &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;
+## 1     4         3     3         6      1
+## 2     6         2     5         7      1</code></pre>
+<ol start="6" style="list-style-type: lower-alpha">
+<li><p>Que tipo de censura ocorreu neste estudo?</p>
+<p>Censura intervalar.</p></li>
+<li><p>Em que situação ocorreria truncamento?</p>
+<p>Truncamento a esquerda ocorreria no caso de pacientes positivarem no teste inicial, pois eles teriam positivado fora da janela temporal do estudo. Truncamento a direita ocorreria se o estudo analisasse apenas os casos de pacientes que positivaram durante a janela temporal.</p></li>
+</ol>
+</div>
+<div id="exercício-2.7" class="section level2">
+<h2>Exercício 2.7</h2>
+<p>Para se familiarizar com o R e com o banco de dados do Ipec (ipec.csv, veja o Apêndice, seção Aids - clássico) que será utilizado nos próximos capítulos, inicie a análise de sobrevivência observando os dados dos pacientes:</p>
+<ol style="list-style-type: lower-alpha">
+<li>No formato clássico.</li>
+</ol>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1">(ipec &lt;-<span class="st"> </span><span class="kw">read_csv2</span>(<span class="st">&quot;ipec.csv&quot;</span>))</a></code></pre></div>
+<pre><code>## # A tibble: 193 x 15
+##       id   ini   fim tempo status sexo  escola idade risco acompan obito
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;
+##  1     1  1243  2095   852      1 M          3    34     0       1 S    
+##  2     2  2800  2923   123      1 M          2    38     6       1 S    
+##  3     3  1250  2395  1145      1 M         NA    32     0       1 S    
+##  4     4  1915  4670  2755      0 M         NA    43     6       0 N    
+##  5     5  2653  4770  2117      0 M         NA    40     0       1 N    
+##  6     6     3   332   329      0 M         NA    34     0       1 I    
+##  7     7    36    96    60      1 M         NA    27     0       2 S    
+##  8     8     1   152   151      1 M          0    22     6       2 S    
+##  9     9   544  2107  1563      1 M          2    44    NA       0 S    
+## 10    10    71  1318  1247      1 M          2    23     0       2 S    
+## # ... with 183 more rows, and 4 more variables: anotrat &lt;dbl&gt;,
+## #   tratam &lt;dbl&gt;, doenca &lt;dbl&gt;, propcp &lt;dbl&gt;</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1"><span class="kw">with</span>(ipec, <span class="kw">Surv</span>(tempo, status))</a></code></pre></div>
+<pre><code>##   [1]  852   123  1145  2755+ 2117+  329+   60   151  1563  1247    84 
+##  [12]  214    25+ 1348   158   555   408  1116   998  1125   944+   54 
+##  [23]  151   855   116    80+ 1757+  194   183    37   237+ 1506   168+
+##  [34]  134   803+   18   371   173   688   163  3178+   29    50+  887 
+##  [45]  516   645   310   204  1344+ 1261   285    83   150  1307+ 1076+
+##  [56] 1226   865+  811  2898    80   967   618   235  2236+  152   892 
+##  [67]   81+ 1085  1073+ 1615+   35   290  1780+ 3228+   52   733  3213+
+##  [78] 1983  2304+  572    21  1272+ 1646+  304   418   854  2973+   40 
+##  [89]  850  1139   323  1507+ 2717+ 1735+  388+  145   905   927  1027+
+## [100]  631  2495+ 1331+  623  2568+ 2013+  721  1952+  397   254  1630+
+## [111] 1523+  146+  108  1835+  499   333   202+ 2437+ 1015  2138+   22 
+## [122] 2090+  179  2439+ 1063+   85+  343+ 2215+  259  2258+ 1371    39 
+## [133] 2371+  975+  952  2492+ 1478+  295+  992  1011+  644   426   537+
+## [144] 1454+ 1869+  714+ 1310+ 2084+ 1918+ 1649+  290+ 1685+ 1348+  652+
+## [155] 1384+ 1471+ 1512+  378+ 1352+  419  1426+ 1488+ 1315+  643+ 1197+
+## [166] 1343+ 1176+  944   340   881+  915+  948+  985+ 1242+  955+  987+
+## [177]  899+ 1056+  775   785+  731+   16   680+   21+  444+  524+  217+
+## [188]  440+  470+  390+  344+  578+  504+</code></pre>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>No formato de processo de contagem.</li>
+</ol>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1"><span class="kw">with</span>(ipec, <span class="kw">Surv</span>(ini, fim, status))</a></code></pre></div>
+<pre><code>##   [1] (1243,2095]  (2800,2923]  (1250,2395]  (1915,4670+] (2653,4770+]
+##   [6] (   3, 332+] (  36,  96]  (   1, 152]  ( 544,2107]  (  71,1318] 
+##  [11] ( 946,1030]  ( 802,1016]  ( 266, 291+] (1544,2892]  (  57, 215] 
+##  [16] (1270,1825]  (2753,3161]  ( 940,2056]  ( 393,1391]  (1000,2125] 
+##  [21] ( 238,1182+] ( 423, 477]  ( 206, 357]  ( 480,1335]  ( 226, 342] 
+##  [26] ( 249, 329+] (3052,4809+] (1802,1996]  (1395,1578]  ( 354, 391] 
+##  [31] ( 493, 730+] (1113,2619]  ( 638, 806+] ( 655, 789]  (1189,1992+]
+##  [36] ( 943, 961]  (1715,2086]  ( 792, 965]  (1037,1725]  ( 820, 983] 
+##  [41] ( 884,4062+] (2262,2291]  (1121,1171+] (1131,2018]  ( 878,1394] 
+##  [46] (1316,1961]  (1107,1417]  (1190,1394]  ( 393,1737+] (1274,2535] 
+##  [51] (1172,1457]  (2360,2443]  (2074,2224]  (1019,2326+] ( 605,1681+]
+##  [56] (1915,3141]  (3948,4813+] (1314,2125]  (1502,4400]  (1347,1427] 
+##  [61] (1379,2346]  (2352,2970]  (2625,2860]  (2586,4822+] (1406,1558] 
+##  [66] (1466,2358]  (3314,3395+] (3413,4498]  (3712,4785+] (3207,4822+]
+##  [71] (1592,1627]  (1537,1827]  (3018,4798+] (1555,4783+] (1541,1593] 
+##  [76] (1589,2322]  (1609,4822+] (1682,3665]  (2465,4769+] (1243,1815] 
+##  [81] (1667,1688]  (1605,2877+] (3157,4803+] (2066,2370]  (1929,2347] 
+##  [86] (2216,3070]  (1809,4782+] (1670,1710]  (1983,2833]  (2883,4022] 
+##  [91] (1766,2089]  (3313,4820+] (1977,4694+] (3087,4822+] (2286,2674+]
+##  [96] (1877,2022]  (1852,2757]  (1549,2476]  (3795,4822+] (2475,3106] 
+## [101] (2310,4805+] (2870,4201+] (1935,2558]  (2199,4767+] (2800,4813+]
+## [106] (2990,3711]  (2857,4809+] (3586,3983]  (2143,2397]  (3124,4754+]
+## [111] (3276,4799+] (2208,2354+] (2209,2317]  (2976,4811+] (2626,3125] 
+## [116] (3838,4171]  (2314,2516+] (2311,4748+] (2280,3295]  (2684,4822+]
+## [121] (2454,2476]  (2713,4803+] (2311,2490]  (2370,4809+] (3756,4819+]
+## [126] (2565,2650+] (2599,2942+] (2553,4768+] (2601,2860]  (2553,4811+]
+## [131] (2726,4097]  (2739,2778]  (2447,4818+] (3830,4805+] (2429,3381] 
+## [136] (2311,4803+] (3299,4777+] (4510,4805+] (2384,3376]  (3749,4760+]
+## [141] (2676,3320]  (2985,3411]  (4192,4729+] (3159,4613+] (2921,4790+]
+## [146] (4078,4792+] (2934,4244+] (2645,4729+] (2857,4775+] (3173,4822+]
+## [151] (4509,4799+] (3082,4767+] (3465,4813+] (3188,3840+] (3271,4655+]
+## [156] (3276,4747+] (3287,4799+] (4439,4817+] (3446,4798+] (3305,3724] 
+## [161] (3391,4817+] (3307,4795+] (3425,4740+] (4117,4760+] (3612,4809+]
+## [166] (3479,4822+] (3572,4748+] (3796,4740]  (3527,3867]  (3921,4802+]
+## [171] (3798,4713+] (3808,4756+] (3772,4757+] (3557,4799+] (3867,4822+]
+## [176] (3594,4581+] (3923,4822+] (3733,4789+] (4019,4794]  (4033,4818+]
+## [181] (4040,4771+] (4053,4069]  (4137,4817+] (4208,4229+] (4362,4806+]
+## [186] (4279,4803+] (4593,4810+] (4320,4760+] (4343,4813+] (4419,4809+]
+## [191] (4406,4750+] (4199,4777+] (4301,4805+]</code></pre>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Observe a saída nos dois formatos. Quais os tempos e status do 1º e 79º pacientes em cada um dos formatos?</li>
+</ol>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1"><span class="kw">with</span>(ipec, <span class="kw">Surv</span>(tempo, status))[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">79</span>)]</a></code></pre></div>
+<pre><code>## [1]  852  2304+</code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1"><span class="kw">with</span>(ipec, <span class="kw">Surv</span>(ini, fim, status))[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">79</span>)]</a></code></pre></div>
+<pre><code>## [1] (1243,2095]  (2465,4769+]</code></pre>
+<pre><code>No formato clássico, o primeiro paciente foi observado por período de 852
+dias, ao fim do qual sofreu o desfecho. O segundo paciente foi observado por
+2304 dias, ao fim do qual foi censurado.
+
+No formato de processo de contagem, o primeiro paciente começou a ser 
+observado no dia 1243 e deixou de ser observado no dia 2095 em razão de ter
+sofrido o desfecho. O segundo paciente começou a ser observado no dia 2465 e
+deixou de ser observado no dia 4769 em razão de ter sofrido censura.</code></pre>
+</div>
+<div id="exercício-2.8" class="section level2">
+<h2>Exercício 2.8</h2>
+<p>Ainda com os dados do Ipec, organize o banco de dados e faça uma análise exploratória das variáveis de interesse.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Verifique as dimensões dos dados.</li>
+</ol>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1"><span class="kw">dim</span>(ipec)</a></code></pre></div>
+<pre><code>## [1] 193  15</code></pre>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Veja quais são as variáveis que constam nos dados</li>
+</ol>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1"><span class="kw">names</span>(ipec)</a></code></pre></div>
+<pre><code>##  [1] &quot;id&quot;      &quot;ini&quot;     &quot;fim&quot;     &quot;tempo&quot;   &quot;status&quot;  &quot;sexo&quot;    &quot;escola&quot; 
+##  [8] &quot;idade&quot;   &quot;risco&quot;   &quot;acompan&quot; &quot;obito&quot;   &quot;anotrat&quot; &quot;tratam&quot;  &quot;doenca&quot; 
+## [15] &quot;propcp&quot;</code></pre>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Substitua os dados faltantes (codificados com 9, 99 ou I) por <em>NA</em> (padrão do R).</li>
+</ol>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1">ipec<span class="op">$</span>anotrat[ipec<span class="op">$</span>anotrat <span class="op">==</span><span class="st"> </span><span class="dv">9</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></a>
+<a class="sourceLine" id="cb60-2" title="2">ipec<span class="op">$</span>obito[ipec<span class="op">$</span>obito <span class="op">==</span><span class="st"> &quot;I&quot;</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></a></code></pre></div>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Indique ao R quais são as variáveis categóricas que estão erroneamente classificadas como numéricas pelo R (isso acontece quando números são utilizados para codificar as categorias).</li>
+</ol>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1">ipec<span class="op">$</span>escola &lt;-<span class="st"> </span><span class="kw">factor</span>(</a>
+<a class="sourceLine" id="cb61-2" title="2">  ipec<span class="op">$</span>escola,</a>
+<a class="sourceLine" id="cb61-3" title="3">  <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;sem&quot;</span>, <span class="st">&quot;fundam&quot;</span>, <span class="st">&quot;medio&quot;</span>, <span class="st">&quot;sup&quot;</span>)</a>
+<a class="sourceLine" id="cb61-4" title="4">)</a>
+<a class="sourceLine" id="cb61-5" title="5"></a>
+<a class="sourceLine" id="cb61-6" title="6">ipec<span class="op">$</span>risco &lt;-<span class="st"> </span><span class="kw">factor</span>(</a>
+<a class="sourceLine" id="cb61-7" title="7">  ipec<span class="op">$</span>risco,</a>
+<a class="sourceLine" id="cb61-8" title="8">  <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Homo&quot;</span>, <span class="st">&quot;UDI&quot;</span>, <span class="st">&quot;Transf&quot;</span>, <span class="st">&quot;Cont hetero&quot;</span>, <span class="st">&quot;Mut parc&quot;</span>, <span class="st">&quot;2 fat&quot;</span>)</a>
+<a class="sourceLine" id="cb61-9" title="9">)</a>
+<a class="sourceLine" id="cb61-10" title="10"></a>
+<a class="sourceLine" id="cb61-11" title="11">ipec<span class="op">$</span>acompan &lt;-<span class="st"> </span><span class="kw">factor</span>(</a>
+<a class="sourceLine" id="cb61-12" title="12">  ipec<span class="op">$</span>acompan,</a>
+<a class="sourceLine" id="cb61-13" title="13">  <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Amb&quot;</span>, <span class="st">&quot;Int.Post&quot;</span>, <span class="st">&quot;Int.Imed&quot;</span>)</a>
+<a class="sourceLine" id="cb61-14" title="14">)</a>
+<a class="sourceLine" id="cb61-15" title="15"></a>
+<a class="sourceLine" id="cb61-16" title="16">ipec<span class="op">$</span>anotrat &lt;-<span class="st"> </span><span class="kw">factor</span>(ipec<span class="op">$</span>anotrat)</a>
+<a class="sourceLine" id="cb61-17" title="17"></a>
+<a class="sourceLine" id="cb61-18" title="18">ipec<span class="op">$</span>tratam &lt;-<span class="st"> </span><span class="kw">factor</span>(</a>
+<a class="sourceLine" id="cb61-19" title="19">  ipec<span class="op">$</span>tratam,</a>
+<a class="sourceLine" id="cb61-20" title="20">  <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Nenhum&quot;</span>, <span class="st">&quot;Mono&quot;</span>, <span class="st">&quot;Combinada&quot;</span>, <span class="st">&quot;Potente&quot;</span>)</a>
+<a class="sourceLine" id="cb61-21" title="21">)</a>
+<a class="sourceLine" id="cb61-22" title="22"></a>
+<a class="sourceLine" id="cb61-23" title="23">ipec<span class="op">$</span>doenca &lt;-<span class="st"> </span><span class="kw">factor</span>(</a>
+<a class="sourceLine" id="cb61-24" title="24">  ipec<span class="op">$</span>doenca,</a>
+<a class="sourceLine" id="cb61-25" title="25">  <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;PCP&quot;</span>, <span class="st">&quot;TB pulm&quot;</span>, <span class="st">&quot;TB diss&quot;</span>, <span class="st">&quot;Toxo&quot;</span>, <span class="st">&quot;SK&quot;</span>,</a>
+<a class="sourceLine" id="cb61-26" title="26">             <span class="st">&quot;Outra&quot;</span>, <span class="st">&quot;Cand&quot;</span>, <span class="st">&quot;Herpes&quot;</span>, <span class="st">&quot;Duas&quot;</span>, <span class="st">&quot;Def CD4&quot;</span>)</a>
+<a class="sourceLine" id="cb61-27" title="27">  )</a>
+<a class="sourceLine" id="cb61-28" title="28"></a>
+<a class="sourceLine" id="cb61-29" title="29">ipec<span class="op">$</span>propcp &lt;-<span class="st"> </span><span class="kw">factor</span>(</a>
+<a class="sourceLine" id="cb61-30" title="30">  ipec<span class="op">$</span>propcp,</a>
+<a class="sourceLine" id="cb61-31" title="31">  <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Sem&quot;</span>, <span class="st">&quot;Prim&quot;</span>, <span class="st">&quot;Secund&quot;</span>, <span class="st">&quot;Ambas&quot;</span>)</a>
+<a class="sourceLine" id="cb61-32" title="32">)</a></code></pre></div>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>Calcule as medidas resumo das variáveis presentes no banco.</li>
+</ol>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1"><span class="kw">summary</span>(ipec)</a></code></pre></div>
+<pre><code>##        id           ini            fim           tempo       
+##  Min.   :  1   Min.   :   1   Min.   :  96   Min.   :  16.0  
+##  1st Qu.: 49   1st Qu.:1406   1st Qu.:2095   1st Qu.: 290.0  
+##  Median : 97   Median :2454   Median :3711   Median : 852.0  
+##  Mean   : 97   Mean   :2397   Mean   :3335   Mean   : 938.2  
+##  3rd Qu.:145   3rd Qu.:3314   3rd Qu.:4790   3rd Qu.:1348.0  
+##  Max.   :193   Max.   :4593   Max.   :4822   Max.   :3228.0  
+##                                                              
+##      status           sexo              escola       idade      
+##  Min.   :0.0000   Length:193         sem   :59   Min.   :20.00  
+##  1st Qu.:0.0000   Class :character   fundam:44   1st Qu.:30.00  
+##  Median :0.0000   Mode  :character   medio :55   Median :35.00  
+##  Mean   :0.4663                      sup   :24   Mean   :36.55  
+##  3rd Qu.:1.0000                      NA&#39;s  :11   3rd Qu.:43.00  
+##  Max.   :1.0000                                  Max.   :68.00  
+##                                                                 
+##          risco        acompan      obito              anotrat  
+##  Homo       :87   Amb     :57   Length:193         1992   :22  
+##  UDI        : 9   Int.Post:99   Class :character   1995   :20  
+##  Transf     : 7   Int.Imed:37   Mode  :character   1993   :19  
+##  Cont hetero:30                                    1996   :18  
+##  Mut parc   :16                                    1994   :16  
+##  2 fat      : 7                                    (Other):54  
+##  NA&#39;s       :37                                    NA&#39;s   :44  
+##        tratam        doenca      propcp   
+##  Nenhum   : 44   Def CD4:67   Sem   : 38  
+##  Mono     :100   TB diss:31   Prim  : 24  
+##  Combinada: 35   Duas   :25   Secund:  3  
+##  Potente  : 14   Outra  :17   Ambas :128  
+##                  PCP    :12               
+##                  Cand   :12               
+##                  (Other):29</code></pre>
+<ol start="6" style="list-style-type: lower-alpha">
+<li>Construa tabelas de frequência para as variáveis de maior interesse.</li>
+</ol>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" title="1"><span class="kw">table</span>(ipec<span class="op">$</span>status)</a></code></pre></div>
+<pre><code>## 
+##   0   1 
+## 103  90</code></pre>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" title="1"><span class="kw">table</span>(ipec<span class="op">$</span>sexo)</a></code></pre></div>
+<pre><code>## 
+##   F   M 
+##  49 144</code></pre>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1"><span class="kw">table</span>(ipec<span class="op">$</span>escola)</a></code></pre></div>
+<pre><code>## 
+##    sem fundam  medio    sup 
+##     59     44     55     24</code></pre>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" title="1"><span class="kw">table</span>(ipec<span class="op">$</span>risco)</a></code></pre></div>
+<pre><code>## 
+##        Homo         UDI      Transf Cont hetero    Mut parc       2 fat 
+##          87           9           7          30          16           7</code></pre>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" title="1"><span class="kw">table</span>(ipec<span class="op">$</span>acompan)</a></code></pre></div>
+<pre><code>## 
+##      Amb Int.Post Int.Imed 
+##       57       99       37</code></pre>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" title="1"><span class="kw">table</span>(ipec<span class="op">$</span>anotrat)</a></code></pre></div>
+<pre><code>## 
+## 1990 1991 1992 1993 1994 1995 1996 1997 1998 1999 2000 
+##    6    8   22   19   16   20   18   14   16    6    4</code></pre>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" title="1"><span class="kw">table</span>(ipec<span class="op">$</span>tratam)</a></code></pre></div>
+<pre><code>## 
+##    Nenhum      Mono Combinada   Potente 
+##        44       100        35        14</code></pre>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" title="1"><span class="kw">table</span>(ipec<span class="op">$</span>doenca)</a></code></pre></div>
+<pre><code>## 
+##     PCP TB pulm TB diss    Toxo      SK   Outra    Cand  Herpes    Duas 
+##      12      10      31       8       7      17      12       4      25 
+## Def CD4 
+##      67</code></pre>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" title="1"><span class="kw">table</span>(ipec<span class="op">$</span>propcp)</a></code></pre></div>
+<pre><code>## 
+##    Sem   Prim Secund  Ambas 
+##     38     24      3    128</code></pre>
+<ol start="7" style="list-style-type: lower-alpha">
+<li>Construa gráficos para o tempo de sobrevivência e para outras variáveis de interesse.</li>
+</ol>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" title="1"><span class="kw">boxplot</span>(</a>
+<a class="sourceLine" id="cb82-2" title="2">  tempo <span class="op">~</span><span class="st"> </span>status,</a>
+<a class="sourceLine" id="cb82-3" title="3">  <span class="dt">data =</span> ipec,</a>
+<a class="sourceLine" id="cb82-4" title="4">  <span class="dt">main =</span> <span class="st">&quot;Tempo por status&quot;</span>,</a>
+<a class="sourceLine" id="cb82-5" title="5">  <span class="dt">ylab =</span> <span class="st">&quot;Tempo(dias)&quot;</span>,</a>
+<a class="sourceLine" id="cb82-6" title="6">  <span class="dt">xlab =</span> <span class="st">&quot;Desfecho&quot;</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-2_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" title="1"><span class="kw">boxplot</span>(</a>
+<a class="sourceLine" id="cb83-2" title="2">  tempo <span class="op">~</span><span class="st"> </span>sexo,</a>
+<a class="sourceLine" id="cb83-3" title="3">  <span class="dt">data =</span> ipec,</a>
+<a class="sourceLine" id="cb83-4" title="4">  <span class="dt">main =</span> <span class="st">&quot;Tempo por sexo&quot;</span>,</a>
+<a class="sourceLine" id="cb83-5" title="5">  <span class="dt">ylab =</span> <span class="st">&quot;Tempo(dias)&quot;</span>,</a>
+<a class="sourceLine" id="cb83-6" title="6">  <span class="dt">xlab =</span> <span class="st">&quot;Sexo&quot;</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-2_files/figure-html/unnamed-chunk-24-2.png" width="672" /></p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" title="1"><span class="kw">boxplot</span>(</a>
+<a class="sourceLine" id="cb84-2" title="2">  tempo <span class="op">~</span><span class="st"> </span>escola,</a>
+<a class="sourceLine" id="cb84-3" title="3">  <span class="dt">data =</span> ipec,</a>
+<a class="sourceLine" id="cb84-4" title="4">  <span class="dt">main =</span> <span class="st">&quot;Tempo por escolaridade&quot;</span>,</a>
+<a class="sourceLine" id="cb84-5" title="5">  <span class="dt">ylab =</span> <span class="st">&quot;Tempo(dias)&quot;</span>,</a>
+<a class="sourceLine" id="cb84-6" title="6">  <span class="dt">xlab =</span> <span class="st">&quot;Escolaridade&quot;</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-2_files/figure-html/unnamed-chunk-24-3.png" width="672" /></p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" title="1"><span class="kw">boxplot</span>(</a>
+<a class="sourceLine" id="cb85-2" title="2">  tempo <span class="op">~</span><span class="st"> </span>risco,</a>
+<a class="sourceLine" id="cb85-3" title="3">  <span class="dt">data =</span> ipec,</a>
+<a class="sourceLine" id="cb85-4" title="4">  <span class="dt">main =</span> <span class="st">&quot;Tempo por risco&quot;</span>,</a>
+<a class="sourceLine" id="cb85-5" title="5">  <span class="dt">ylab =</span> <span class="st">&quot;Tempo(dias)&quot;</span>,</a>
+<a class="sourceLine" id="cb85-6" title="6">  <span class="dt">xlab =</span> <span class="st">&quot;Risco&quot;</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-2_files/figure-html/unnamed-chunk-24-4.png" width="672" /></p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" title="1"><span class="kw">boxplot</span>(</a>
+<a class="sourceLine" id="cb86-2" title="2">  tempo <span class="op">~</span><span class="st"> </span>acompan,</a>
+<a class="sourceLine" id="cb86-3" title="3">  <span class="dt">data =</span> ipec,</a>
+<a class="sourceLine" id="cb86-4" title="4">  <span class="dt">main =</span> <span class="st">&quot;Tempo por acompanhamento&quot;</span>,</a>
+<a class="sourceLine" id="cb86-5" title="5">  <span class="dt">ylab =</span> <span class="st">&quot;Tempo(dias)&quot;</span>,</a>
+<a class="sourceLine" id="cb86-6" title="6">  <span class="dt">xlab =</span> <span class="st">&quot;Risco&quot;</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-2_files/figure-html/unnamed-chunk-24-5.png" width="672" /></p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" title="1"><span class="kw">boxplot</span>(</a>
+<a class="sourceLine" id="cb87-2" title="2">  tempo <span class="op">~</span><span class="st"> </span>tratam,</a>
+<a class="sourceLine" id="cb87-3" title="3">  <span class="dt">data =</span> ipec,</a>
+<a class="sourceLine" id="cb87-4" title="4">  <span class="dt">main =</span> <span class="st">&quot;Tempo por tratamento&quot;</span>,</a>
+<a class="sourceLine" id="cb87-5" title="5">  <span class="dt">ylab =</span> <span class="st">&quot;Tempo(dias)&quot;</span>,</a>
+<a class="sourceLine" id="cb87-6" title="6">  <span class="dt">xlab =</span> <span class="st">&quot;Tratamento&quot;</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-2_files/figure-html/unnamed-chunk-24-6.png" width="672" /></p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" title="1"><span class="kw">boxplot</span>(</a>
+<a class="sourceLine" id="cb88-2" title="2">  tempo <span class="op">~</span><span class="st"> </span>doenca,</a>
+<a class="sourceLine" id="cb88-3" title="3">  <span class="dt">data =</span> ipec,</a>
+<a class="sourceLine" id="cb88-4" title="4">  <span class="dt">main =</span> <span class="st">&quot;Tempo por doença&quot;</span>,</a>
+<a class="sourceLine" id="cb88-5" title="5">  <span class="dt">ylab =</span> <span class="st">&quot;Tempo(dias)&quot;</span>,</a>
+<a class="sourceLine" id="cb88-6" title="6">  <span class="dt">xlab =</span> <span class="st">&quot;Doença&quot;</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-2_files/figure-html/unnamed-chunk-24-7.png" width="672" /></p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" title="1"><span class="kw">boxplot</span>(</a>
+<a class="sourceLine" id="cb89-2" title="2">  tempo <span class="op">~</span><span class="st"> </span>propcp,</a>
+<a class="sourceLine" id="cb89-3" title="3">  <span class="dt">data =</span> ipec,</a>
+<a class="sourceLine" id="cb89-4" title="4">  <span class="dt">main =</span> <span class="st">&quot;Tempo por propcp&quot;</span>,</a>
+<a class="sourceLine" id="cb89-5" title="5">  <span class="dt">ylab =</span> <span class="st">&quot;Tempo(dias)&quot;</span>,</a>
+<a class="sourceLine" id="cb89-6" title="6">  <span class="dt">xlab =</span> <span class="st">&quot;Propcp&quot;</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-2_files/figure-html/unnamed-chunk-24-8.png" width="672" /></p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" title="1"><span class="kw">hist</span>(</a>
+<a class="sourceLine" id="cb90-2" title="2">  ipec<span class="op">$</span>tempo,</a>
+<a class="sourceLine" id="cb90-3" title="3">  <span class="dt">main =</span> <span class="st">&quot;Sobrevivência&quot;,</span></a>
+<a class="sourceLine" id="cb90-4" title="4"><span class="st">  ylab = &quot;</span>Freqüência&quot;,</a>
+<a class="sourceLine" id="cb90-5" title="5">  <span class="dt">xlab =</span> <span class="st">&quot;Dias&quot;</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-2_files/figure-html/unnamed-chunk-24-9.png" width="672" /></p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" title="1"><span class="kw">hist</span>(</a>
+<a class="sourceLine" id="cb91-2" title="2">  ipec<span class="op">$</span>tempo<span class="op">/</span><span class="dv">30</span>,</a>
+<a class="sourceLine" id="cb91-3" title="3">  <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">120</span>, <span class="dv">6</span>),</a>
+<a class="sourceLine" id="cb91-4" title="4">  <span class="dt">at     =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">120</span>, <span class="dv">12</span>),</a>
+<a class="sourceLine" id="cb91-5" title="5">  <span class="dt">main   =</span> <span class="st">&quot;Sobrevivência&quot;,</span></a>
+<a class="sourceLine" id="cb91-6" title="6"><span class="st">  ylab   = &quot;</span>Freqüência&quot;,</a>
+<a class="sourceLine" id="cb91-7" title="7">  <span class="dt">xlab   =</span> <span class="st">&quot;Meses&quot;</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-2_files/figure-html/unnamed-chunk-24-10.png" width="672" /></p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" title="1"><span class="kw">hist</span>(</a>
+<a class="sourceLine" id="cb92-2" title="2">  ipec<span class="op">$</span>idade,</a>
+<a class="sourceLine" id="cb92-3" title="3">  <span class="dt">main =</span> <span class="st">&quot;Idade&quot;</span>,</a>
+<a class="sourceLine" id="cb92-4" title="4">  <span class="dt">ylab =</span> <span class="st">&quot;Frequência&quot;,</span></a>
+<a class="sourceLine" id="cb92-5" title="5"><span class="st">  xlab = &quot;</span>Idade<span class="st">&quot;)</span></a></code></pre></div>
+<p><img src="exercicio-cap-2_files/figure-html/unnamed-chunk-24-11.png" width="672" /></p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

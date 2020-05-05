@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Exercícios Capítulo 3</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; } /* Alert */
+code span.an { color: #008000; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #0000ff; } /* ControlFlow */
+code span.ch { color: #008080; } /* Char */
+code span.cn { } /* Constant */
+code span.co { color: #008000; } /* Comment */
+code span.cv { color: #008000; } /* CommentVar */
+code span.do { color: #008000; } /* Documentation */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.im { } /* Import */
+code span.in { color: #008000; } /* Information */
+code span.kw { color: #0000ff; } /* Keyword */
+code span.op { } /* Operator */
+code span.ot { color: #ff4000; } /* Other */
+code span.pp { color: #ff4000; } /* Preprocessor */
+code span.sc { color: #008080; } /* SpecialChar */
+code span.ss { color: #008080; } /* SpecialString */
+code span.st { color: #008080; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #008080; } /* VerbatimString */
+code span.wa { color: #008000; font-weight: bold; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Análise de sobrevivência</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="exercicio-cap-2.html">Exercícios Capítulo 2</a>
+</li>
+<li>
+  <a href="exercicios-cap-3.html">Exercícios Capítulo 3</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Exercícios Capítulo 3</h1>
+
+</div>
+
+
+<p>Exercícios do terceiro capítulo do livro “Análise de sobrevivência: teoria e aplicações em saúde”.</p>
+<div id="pacotes-e-funções" class="section level2">
+<h2>Pacotes e funções</h2>
+<p>Esta parte inicial é dedicada ao carregamento de pacotes e definição de funções utilizadas posteriormente.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span>(survival)</a></code></pre></div>
+</div>
+<div id="exercício-3.1" class="section level2">
+<h2>Exercício 3.1</h2>
+<p>A figura a seguir mostra uma curva de sobrevivência. Com base nesta curva, identifique.</p>
+<p><img src="questao_3_1.png" /></p>
+<p>(a). A probabilidade de sobreviver por mais de 10 dias.</p>
+<pre><code>Observando a curva, o valor do $S(t)$ correspondente a $t = 10$ seria 
+$\approx 0.1$ .</code></pre>
+<p>(b). A sobrevivência mediana e o tempo mediano de sobrevivência.</p>
+<pre><code>A sobrevivência mediana é o momento em que a função atinge 0.5, ou 
+$t \approx 6$.</code></pre>
+<p>(c). O tempo em que 80% dos pacientes ainda estavam vivos.</p>
+<pre><code>Corresponde ao tempo em que $y = 0.8$, ou seja, $t \approx 4$.</code></pre>
+</div>
+<div id="exercício-3.2" class="section level2">
+<h2>Exercício 3.2</h2>
+<p>Sabendo-se que a probabilidade de sobreviver por mais de 100 dias após o transplante de coração é igual a 0.7, calcule:</p>
+<p>(a). A probabilidade de sobreviver por, no máximo, 100 dias (inclusive).</p>
+<pre><code>Considerando que a probabilidade de sobreviver por mais de 100 dias 
+corresponde a função de sobrevivência $S(t) = 0.7$, sabemos que a 
+probabilidade de sobreviver até 100 dias é dada pela função
+$F(t) = 1 - S(t)$. Ou seja, $F(t) = 0.3$.</code></pre>
+<p>(b). O risco acumulado do óbito ocorrer em até 100 dias (ou seja, em no máximo 100 dias).</p>
+<pre><code>Sabemos que o risco acumulado $\Lambda$ de um evento ocorrer até o tempo $t$
+pode ser estimado por $\Lambda = -\ln(S(t))$, ou seja 0.3567.</code></pre>
+<p>(c). O risco acumulado do óbito ocorrer após 100 dias (ou seja, no mínimo em 100 dias).</p>
+<pre><code>O risco acumulado do óbito após o centésimo dia seria dado por 
+$\Lambda = -ln(F(t))$, ou seja: 1.204.</code></pre>
+</div>
+<div id="exercício-3.3" class="section level2">
+<h2>Exercício 3.3</h2>
+<p>A tabela a seguir mostra o tempo até o óbito de todos os pacientes de uma coorte de 32 indivíduos vivendo com Aids, não havendo tempos censurados. Complete as lacunas em branco na tabela usando as definições e relações entre as funções básicas de sobrevivência, onde T é o tempo até o óbito, R(t) é o número de pessoas sob risco no início do intervalo de tempo e N(t) é o número de óbitos ocorridos no intervalo de tempo.</p>
+<p><img src="questao_3_3.png" /></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="co"># Inicializar o banco com os valores conhecidos</span></a>
+<a class="sourceLine" id="cb8-2" title="2">aids &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb8-3" title="3">    <span class="dt">t =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">18</span>, <span class="dv">29</span>, <span class="dv">54</span>, <span class="dv">60</span>, <span class="dv">84</span>, <span class="dv">110</span>, <span class="dv">112</span>, <span class="dv">116</span>, <span class="dv">123</span>,</a>
+<a class="sourceLine" id="cb8-4" title="4">          <span class="dv">134</span>, <span class="dv">145</span>, <span class="dv">151</span>, <span class="dv">158</span>, <span class="dv">173</span>, <span class="dv">194</span>, <span class="dv">214</span>, <span class="dv">329</span>, <span class="dv">331</span>, <span class="dv">371</span>),</a>
+<a class="sourceLine" id="cb8-5" title="5">    <span class="dt">Rt =</span> <span class="kw">c</span>(<span class="dv">32</span><span class="op">:</span><span class="dv">12</span>),</a>
+<a class="sourceLine" id="cb8-6" title="6">    <span class="dt">Nt =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">13</span>), <span class="dv">2</span>, <span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">7</span>))</a>
+<a class="sourceLine" id="cb8-7" title="7">)</a>
+<a class="sourceLine" id="cb8-8" title="8"></a>
+<a class="sourceLine" id="cb8-9" title="9"><span class="co"># Calcular as outras variáveis a partir das funções</span></a>
+<a class="sourceLine" id="cb8-10" title="10">tabela &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb8-11" title="11"><span class="st">    </span>aids <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb8-12" title="12"><span class="st">    </span><span class="kw">mutate</span>(</a>
+<a class="sourceLine" id="cb8-13" title="13">        <span class="dt">inter    =</span> <span class="kw">lead</span>(<span class="kw">cut</span>(t, <span class="dt">breaks =</span> t)), </a>
+<a class="sourceLine" id="cb8-14" title="14">        <span class="dt">delta    =</span> <span class="kw">lead</span>(t, <span class="dt">default =</span> ) <span class="op">-</span><span class="st"> </span>t,</a>
+<a class="sourceLine" id="cb8-15" title="15">        <span class="dt">acum     =</span> <span class="kw">cumsum</span>(Nt),</a>
+<a class="sourceLine" id="cb8-16" title="16">        <span class="dt">ft       =</span> Nt <span class="op">/</span><span class="st"> </span>(Rt[<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span>delta),</a>
+<a class="sourceLine" id="cb8-17" title="17">        <span class="dt">Ft       =</span> acum <span class="op">/</span><span class="st"> </span>Rt[<span class="dv">1</span>], </a>
+<a class="sourceLine" id="cb8-18" title="18">        <span class="dt">St       =</span> <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>Ft,</a>
+<a class="sourceLine" id="cb8-19" title="19">        <span class="dt">lambda_t =</span> Nt <span class="op">/</span><span class="st"> </span>(Rt <span class="op">*</span><span class="st"> </span>delta),</a>
+<a class="sourceLine" id="cb8-20" title="20">        <span class="dt">Lambda_t_discreta =</span> </a>
+<a class="sourceLine" id="cb8-21" title="21">            <span class="kw">cumsum</span>(<span class="kw">lag</span>(lambda_t, <span class="dt">default =</span> <span class="dv">0</span>) <span class="op">*</span><span class="st"> </span><span class="kw">lag</span>(delta, <span class="dt">default =</span> <span class="dv">0</span>)),</a>
+<a class="sourceLine" id="cb8-22" title="22">        <span class="dt">Lambda_t_continua =</span> <span class="kw">ifelse</span>(t <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="dv">0</span>, <span class="op">-</span><span class="kw">log</span>(<span class="kw">lag</span>(St)))</a>
+<a class="sourceLine" id="cb8-23" title="23">    ) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb8-24" title="24"><span class="st">    </span><span class="kw">filter</span>(t <span class="op">!=</span><span class="st"> </span><span class="kw">last</span>(t))</a>
+<a class="sourceLine" id="cb8-25" title="25"></a>
+<a class="sourceLine" id="cb8-26" title="26">names &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;$t$&quot;</span>, <span class="st">&quot;$R(t)$&quot;</span>, <span class="st">&quot;$N(t)$&quot;</span>, <span class="st">&quot;Intervalo&quot;</span>, <span class="st">&quot;$</span><span class="ch">\\</span><span class="st">Delta_x(t)$&quot;</span>, </a>
+<a class="sourceLine" id="cb8-27" title="27">           <span class="st">&quot;Eventos Acumulados&quot;</span>, <span class="st">&quot;$</span><span class="ch">\\</span><span class="st">hat{f}(t)$&quot;</span>, <span class="st">&quot;$</span><span class="ch">\\</span><span class="st">hat{F}(t)$&quot;</span>, </a>
+<a class="sourceLine" id="cb8-28" title="28">           <span class="st">&quot;$</span><span class="ch">\\</span><span class="st">hat{S}(t)$&quot;</span>, <span class="st">&quot;$</span><span class="ch">\\</span><span class="st">hat{</span><span class="ch">\\</span><span class="st">lambda}(t)$&quot;</span>, <span class="st">&quot;$</span><span class="ch">\\</span><span class="st">hat{</span><span class="ch">\\</span><span class="st">Lambda}(t)$&quot;</span>,</a>
+<a class="sourceLine" id="cb8-29" title="29">           <span class="st">&quot;${</span><span class="ch">\\</span><span class="st">Lambda}(t)$&quot;</span>)</a>
+<a class="sourceLine" id="cb8-30" title="30"></a>
+<a class="sourceLine" id="cb8-31" title="31">knitr<span class="op">::</span><span class="kw">kable</span>(</a>
+<a class="sourceLine" id="cb8-32" title="32">    tabela,</a>
+<a class="sourceLine" id="cb8-33" title="33">    <span class="dt">format =</span> <span class="st">&quot;markdown&quot;</span>,</a>
+<a class="sourceLine" id="cb8-34" title="34">    <span class="dt">digits =</span> <span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb8-35" title="35">    <span class="dt">col.names =</span> names,</a>
+<a class="sourceLine" id="cb8-36" title="36">    <span class="dt">align =</span> <span class="st">&quot;c&quot;</span></a>
+<a class="sourceLine" id="cb8-37" title="37">)</a></code></pre></div>
+<table>
+<colgroup>
+<col width="3%" />
+<col width="4%" />
+<col width="4%" />
+<col width="6%" />
+<col width="9%" />
+<col width="12%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="12%" />
+<col width="12%" />
+<col width="9%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"><span class="math inline">\(t\)</span></th>
+<th align="center"><span class="math inline">\(R(t)\)</span></th>
+<th align="center"><span class="math inline">\(N(t)\)</span></th>
+<th align="center">Intervalo</th>
+<th align="center"><span class="math inline">\(\Delta_x(t)\)</span></th>
+<th align="center">Eventos Acumulados</th>
+<th align="center"><span class="math inline">\(\hat{f}(t)\)</span></th>
+<th align="center"><span class="math inline">\(\hat{F}(t)\)</span></th>
+<th align="center"><span class="math inline">\(\hat{S}(t)\)</span></th>
+<th align="center"><span class="math inline">\(\hat{\lambda}(t)\)</span></th>
+<th align="center"><span class="math inline">\(\hat{\Lambda}(t)\)</span></th>
+<th align="center"><span class="math inline">\({\Lambda}(t)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">0</td>
+<td align="center">32</td>
+<td align="center">1</td>
+<td align="center">(0,3]</td>
+<td align="center">3</td>
+<td align="center">1</td>
+<td align="center">0.0104</td>
+<td align="center">0.0312</td>
+<td align="center">0.9688</td>
+<td align="center">0.0104</td>
+<td align="center">0.0000</td>
+<td align="center">0.0000</td>
+</tr>
+<tr class="even">
+<td align="center">3</td>
+<td align="center">31</td>
+<td align="center">1</td>
+<td align="center">(3,18]</td>
+<td align="center">15</td>
+<td align="center">2</td>
+<td align="center">0.0021</td>
+<td align="center">0.0625</td>
+<td align="center">0.9375</td>
+<td align="center">0.0022</td>
+<td align="center">0.0312</td>
+<td align="center">0.0317</td>
+</tr>
+<tr class="odd">
+<td align="center">18</td>
+<td align="center">30</td>
+<td align="center">1</td>
+<td align="center">(18,29]</td>
+<td align="center">11</td>
+<td align="center">3</td>
+<td align="center">0.0028</td>
+<td align="center">0.0938</td>
+<td align="center">0.9062</td>
+<td align="center">0.0030</td>
+<td align="center">0.0635</td>
+<td align="center">0.0645</td>
+</tr>
+<tr class="even">
+<td align="center">29</td>
+<td align="center">29</td>
+<td align="center">1</td>
+<td align="center">(29,54]</td>
+<td align="center">25</td>
+<td align="center">4</td>
+<td align="center">0.0012</td>
+<td align="center">0.1250</td>
+<td align="center">0.8750</td>
+<td align="center">0.0014</td>
+<td align="center">0.0968</td>
+<td align="center">0.0984</td>
+</tr>
+<tr class="odd">
+<td align="center">54</td>
+<td align="center">28</td>
+<td align="center">1</td>
+<td align="center">(54,60]</td>
+<td align="center">6</td>
+<td align="center">5</td>
+<td align="center">0.0052</td>
+<td align="center">0.1562</td>
+<td align="center">0.8438</td>
+<td align="center">0.0060</td>
+<td align="center">0.1313</td>
+<td align="center">0.1335</td>
+</tr>
+<tr class="even">
+<td align="center">60</td>
+<td align="center">27</td>
+<td align="center">1</td>
+<td align="center">(60,84]</td>
+<td align="center">24</td>
+<td align="center">6</td>
+<td align="center">0.0013</td>
+<td align="center">0.1875</td>
+<td align="center">0.8125</td>
+<td align="center">0.0015</td>
+<td align="center">0.1670</td>
+<td align="center">0.1699</td>
+</tr>
+<tr class="odd">
+<td align="center">84</td>
+<td align="center">26</td>
+<td align="center">1</td>
+<td align="center">(84,110]</td>
+<td align="center">26</td>
+<td align="center">7</td>
+<td align="center">0.0012</td>
+<td align="center">0.2188</td>
+<td align="center">0.7812</td>
+<td align="center">0.0015</td>
+<td align="center">0.2041</td>
+<td align="center">0.2076</td>
+</tr>
+<tr class="even">
+<td align="center">110</td>
+<td align="center">25</td>
+<td align="center">1</td>
+<td align="center">(110,112]</td>
+<td align="center">2</td>
+<td align="center">8</td>
+<td align="center">0.0156</td>
+<td align="center">0.2500</td>
+<td align="center">0.7500</td>
+<td align="center">0.0200</td>
+<td align="center">0.2425</td>
+<td align="center">0.2469</td>
+</tr>
+<tr class="odd">
+<td align="center">112</td>
+<td align="center">24</td>
+<td align="center">1</td>
+<td align="center">(112,116]</td>
+<td align="center">4</td>
+<td align="center">9</td>
+<td align="center">0.0078</td>
+<td align="center">0.2812</td>
+<td align="center">0.7188</td>
+<td align="center">0.0104</td>
+<td align="center">0.2825</td>
+<td align="center">0.2877</td>
+</tr>
+<tr class="even">
+<td align="center">116</td>
+<td align="center">23</td>
+<td align="center">1</td>
+<td align="center">(116,123]</td>
+<td align="center">7</td>
+<td align="center">10</td>
+<td align="center">0.0045</td>
+<td align="center">0.3125</td>
+<td align="center">0.6875</td>
+<td align="center">0.0062</td>
+<td align="center">0.3242</td>
+<td align="center">0.3302</td>
+</tr>
+<tr class="odd">
+<td align="center">123</td>
+<td align="center">22</td>
+<td align="center">1</td>
+<td align="center">(123,134]</td>
+<td align="center">11</td>
+<td align="center">11</td>
+<td align="center">0.0028</td>
+<td align="center">0.3438</td>
+<td align="center">0.6562</td>
+<td align="center">0.0041</td>
+<td align="center">0.3677</td>
+<td align="center">0.3747</td>
+</tr>
+<tr class="even">
+<td align="center">134</td>
+<td align="center">21</td>
+<td align="center">1</td>
+<td align="center">(134,145]</td>
+<td align="center">11</td>
+<td align="center">12</td>
+<td align="center">0.0028</td>
+<td align="center">0.3750</td>
+<td align="center">0.6250</td>
+<td align="center">0.0043</td>
+<td align="center">0.4131</td>
+<td align="center">0.4212</td>
+</tr>
+<tr class="odd">
+<td align="center">145</td>
+<td align="center">20</td>
+<td align="center">1</td>
+<td align="center">(145,151]</td>
+<td align="center">6</td>
+<td align="center">13</td>
+<td align="center">0.0052</td>
+<td align="center">0.4062</td>
+<td align="center">0.5938</td>
+<td align="center">0.0083</td>
+<td align="center">0.4608</td>
+<td align="center">0.4700</td>
+</tr>
+<tr class="even">
+<td align="center">151</td>
+<td align="center">19</td>
+<td align="center">2</td>
+<td align="center">(151,158]</td>
+<td align="center">7</td>
+<td align="center">15</td>
+<td align="center">0.0089</td>
+<td align="center">0.4688</td>
+<td align="center">0.5312</td>
+<td align="center">0.0150</td>
+<td align="center">0.5108</td>
+<td align="center">0.5213</td>
+</tr>
+<tr class="odd">
+<td align="center">158</td>
+<td align="center">18</td>
+<td align="center">1</td>
+<td align="center">(158,173]</td>
+<td align="center">15</td>
+<td align="center">16</td>
+<td align="center">0.0021</td>
+<td align="center">0.5000</td>
+<td align="center">0.5000</td>
+<td align="center">0.0037</td>
+<td align="center">0.6160</td>
+<td align="center">0.6325</td>
+</tr>
+<tr class="even">
+<td align="center">173</td>
+<td align="center">17</td>
+<td align="center">1</td>
+<td align="center">(173,194]</td>
+<td align="center">21</td>
+<td align="center">17</td>
+<td align="center">0.0015</td>
+<td align="center">0.5312</td>
+<td align="center">0.4688</td>
+<td align="center">0.0028</td>
+<td align="center">0.6716</td>
+<td align="center">0.6931</td>
+</tr>
+<tr class="odd">
+<td align="center">194</td>
+<td align="center">16</td>
+<td align="center">1</td>
+<td align="center">(194,214]</td>
+<td align="center">20</td>
+<td align="center">18</td>
+<td align="center">0.0016</td>
+<td align="center">0.5625</td>
+<td align="center">0.4375</td>
+<td align="center">0.0031</td>
+<td align="center">0.7304</td>
+<td align="center">0.7577</td>
+</tr>
+<tr class="even">
+<td align="center">214</td>
+<td align="center">15</td>
+<td align="center">1</td>
+<td align="center">(214,329]</td>
+<td align="center">115</td>
+<td align="center">19</td>
+<td align="center">0.0003</td>
+<td align="center">0.5938</td>
+<td align="center">0.4062</td>
+<td align="center">0.0006</td>
+<td align="center">0.7929</td>
+<td align="center">0.8267</td>
+</tr>
+<tr class="odd">
+<td align="center">329</td>
+<td align="center">14</td>
+<td align="center">1</td>
+<td align="center">(329,331]</td>
+<td align="center">2</td>
+<td align="center">20</td>
+<td align="center">0.0156</td>
+<td align="center">0.6250</td>
+<td align="center">0.3750</td>
+<td align="center">0.0357</td>
+<td align="center">0.8596</td>
+<td align="center">0.9008</td>
+</tr>
+<tr class="even">
+<td align="center">331</td>
+<td align="center">13</td>
+<td align="center">1</td>
+<td align="center">(331,371]</td>
+<td align="center">40</td>
+<td align="center">21</td>
+<td align="center">0.0008</td>
+<td align="center">0.6562</td>
+<td align="center">0.3438</td>
+<td align="center">0.0019</td>
+<td align="center">0.9310</td>
+<td align="center">0.9808</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="exercício-3.4" class="section level2">
+<h2>Exercício 3.4</h2>
+<p>Lembrando que o evento é óbito em pacientes vivendo com Aids, e interpretando a tabela do exercício anterior, responda:</p>
+<p>(a). Qual o tempo mediano de sobrevivência desta coorte?<br />
+- O tempo mediano de sobrevivência é o ponto onde a função de sobrevivência é 0.5, ou seja:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">tabela <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(St <span class="op">==</span><span class="st"> </span><span class="fl">0.5</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(t)</a></code></pre></div>
+<pre><code>## # A tibble: 1 x 1
+##       t
+##   &lt;dbl&gt;
+## 1   158</code></pre>
+<p>(b). O que significa o valor atribuído a <span class="math inline">\(\hat{S}(214)\)</span>?<br />
+- O valor atribuído a <span class="math inline">\(\hat{S}(214)\)</span> é a probabilidade de sobreviver a um tempo superior a 214 unidades.</p>
+<p>(c). O que significa o valor atribuído a <span class="math inline">\(\hat{F}(214)\)</span>?<br />
+- Da forma análoga a anterior, é a probabilidade de sobreviver até 214 unidades de tempo.</p>
+<p>(d). O que significa o valor atribuído a <span class="math inline">\(\hat{\lambda}(214)\)</span>?<br />
+- Trata-se do risco de óbito após sobreviver 214 unidades de tempo.</p>
+<p>(e). O que significa o valor atribuído a <span class="math inline">\(\hat{\Lambda}(214)\)</span>?<br />
+- Trata-se do risco de óbito do paciente até as 214 unidades de tempo.</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

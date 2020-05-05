@@ -5,8 +5,11 @@ navbar:
   left:
     - text: "Home"
       href: index.html
-    - text: "Exercícios Aula 1"
-      href: exercicio-aula-1.html
+    - text: "Exercícios Capítulo 2"
+      href: exercicio-cap-2.html
+    - text: "Exercícios Capítulo 3"
+      href: exercicios-cap-3.html
 output:
  html_document:
   theme: cosmo
+  highlight: haddock
