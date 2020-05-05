@@ -1,7 +1,5 @@
 ---
-title: "Exercício Aula 1 - Análise de Sobrevivência"
-author: "Vinícius de Souza Maia"
-date: "01/05/2020"
+title: "Exercício Capítulo 2"
 ---
 
 ```{r setup, include=FALSE}
