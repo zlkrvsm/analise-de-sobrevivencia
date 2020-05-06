@@ -8,7 +8,7 @@ navbar:
     - text: "Exercícios Capítulo 2"
       href: exercicio-cap-2.html
     - text: "Exercícios Capítulo 3"
-      href: exercicios-cap-3.html
+      href: exercicio-cap-3.html
 output:
  html_document:
   theme: cosmo
