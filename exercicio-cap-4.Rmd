@@ -1,0 +1,43 @@
+---
+title: "Exercícios Capítulo 4 - Estimador de Kaplan Meier"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Pacotes e opções
+
+```{r}
+library(dplyr)
+```
+
+
+## Exercício 4.1
+
+Considere os dados de tempo de aleitamento de 15 crianças, descrito no exercício 2.1.
+
+    6 12 10 3 5 1 6 8 1 5 2 2 5 8 1
+
+a. Complete a tabela Kaplan-Meier abaixo com esses dados
+
+![](questao_4_4.png)
+
+```{r}
+x = c(6L, 12L, 10L, 3L, 5L, 1L, 6L, 8L, 1L, 5L, 2L, 2L, 5L, 8L, 1L)
+
+t = sort(unique(x))
+inter = lead(cut(c(0,t), breaks = c(0,t)))[1:length(t)]
+Nt = as.numeric(table(x))
+Rt = rev(cumsum(rev(Nt)))
+Skm = cumprod((Rt - Nt)/Rt)
+Lambda = -log(Skm)
+
+aleit <- data.frame(t, inter, Nt, Rt, Lambda, Skm)
+
+names <- c("$t$", "Intervalo", "$N(t)$", "$R(t)$",
+           "$\\hat{\\Lambda}(t)$", "$\\hat{S}_{km}(t)$")
+
+knitr::kable(aleit, digits = 4, col.names = names)
+```
+
