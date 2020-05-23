@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
@@ -301,6 +300,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -348,6 +348,9 @@ $(document).ready(function () {
 </li>
 <li>
   <a href="exercicio-cap-3.html">Exercícios Capítulo 3</a>
+</li>
+<li>
+  <a href="exercicio-cap-4.html">Exercícios Capítulo 4</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -768,39 +771,38 @@ $(document).ready(function () {
 </ol>
 <div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1">(ipec &lt;-<span class="st"> </span><span class="kw">read_csv2</span>(<span class="st">&quot;ipec.csv&quot;</span>))</a></code></pre></div>
 <pre><code>## # A tibble: 193 x 15
-##       id   ini   fim tempo status sexo  escola idade risco acompan obito
-##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;
-##  1     1  1243  2095   852      1 M          3    34     0       1 S    
-##  2     2  2800  2923   123      1 M          2    38     6       1 S    
-##  3     3  1250  2395  1145      1 M         NA    32     0       1 S    
-##  4     4  1915  4670  2755      0 M         NA    43     6       0 N    
-##  5     5  2653  4770  2117      0 M         NA    40     0       1 N    
-##  6     6     3   332   329      0 M         NA    34     0       1 I    
-##  7     7    36    96    60      1 M         NA    27     0       2 S    
-##  8     8     1   152   151      1 M          0    22     6       2 S    
-##  9     9   544  2107  1563      1 M          2    44    NA       0 S    
-## 10    10    71  1318  1247      1 M          2    23     0       2 S    
-## # ... with 183 more rows, and 4 more variables: anotrat &lt;dbl&gt;,
-## #   tratam &lt;dbl&gt;, doenca &lt;dbl&gt;, propcp &lt;dbl&gt;</code></pre>
+##       id   ini   fim tempo status sexo  escola idade risco acompan obito anotrat
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;
+##  1     1  1243  2095   852      1 M          3    34     0       1 S        1991
+##  2     2  2800  2923   123      1 M          2    38     6       1 S           9
+##  3     3  1250  2395  1145      1 M         NA    32     0       1 S        1992
+##  4     4  1915  4670  2755      0 M         NA    43     6       0 N        1992
+##  5     5  2653  4770  2117      0 M         NA    40     0       1 N        1992
+##  6     6     3   332   329      0 M         NA    34     0       1 I           9
+##  7     7    36    96    60      1 M         NA    27     0       2 S           9
+##  8     8     1   152   151      1 M          0    22     6       2 S           9
+##  9     9   544  2107  1563      1 M          2    44    NA       0 S           9
+## 10    10    71  1318  1247      1 M          2    23     0       2 S           9
+## # ... with 183 more rows, and 3 more variables: tratam &lt;dbl&gt;, doenca &lt;dbl&gt;,
+## #   propcp &lt;dbl&gt;</code></pre>
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1"><span class="kw">with</span>(ipec, <span class="kw">Surv</span>(tempo, status))</a></code></pre></div>
-<pre><code>##   [1]  852   123  1145  2755+ 2117+  329+   60   151  1563  1247    84 
-##  [12]  214    25+ 1348   158   555   408  1116   998  1125   944+   54 
-##  [23]  151   855   116    80+ 1757+  194   183    37   237+ 1506   168+
-##  [34]  134   803+   18   371   173   688   163  3178+   29    50+  887 
-##  [45]  516   645   310   204  1344+ 1261   285    83   150  1307+ 1076+
-##  [56] 1226   865+  811  2898    80   967   618   235  2236+  152   892 
-##  [67]   81+ 1085  1073+ 1615+   35   290  1780+ 3228+   52   733  3213+
-##  [78] 1983  2304+  572    21  1272+ 1646+  304   418   854  2973+   40 
-##  [89]  850  1139   323  1507+ 2717+ 1735+  388+  145   905   927  1027+
-## [100]  631  2495+ 1331+  623  2568+ 2013+  721  1952+  397   254  1630+
-## [111] 1523+  146+  108  1835+  499   333   202+ 2437+ 1015  2138+   22 
-## [122] 2090+  179  2439+ 1063+   85+  343+ 2215+  259  2258+ 1371    39 
-## [133] 2371+  975+  952  2492+ 1478+  295+  992  1011+  644   426   537+
-## [144] 1454+ 1869+  714+ 1310+ 2084+ 1918+ 1649+  290+ 1685+ 1348+  652+
-## [155] 1384+ 1471+ 1512+  378+ 1352+  419  1426+ 1488+ 1315+  643+ 1197+
-## [166] 1343+ 1176+  944   340   881+  915+  948+  985+ 1242+  955+  987+
-## [177]  899+ 1056+  775   785+  731+   16   680+   21+  444+  524+  217+
-## [188]  440+  470+  390+  344+  578+  504+</code></pre>
+<pre><code>##   [1]  852   123  1145  2755+ 2117+  329+   60   151  1563  1247    84   214 
+##  [13]   25+ 1348   158   555   408  1116   998  1125   944+   54   151   855 
+##  [25]  116    80+ 1757+  194   183    37   237+ 1506   168+  134   803+   18 
+##  [37]  371   173   688   163  3178+   29    50+  887   516   645   310   204 
+##  [49] 1344+ 1261   285    83   150  1307+ 1076+ 1226   865+  811  2898    80 
+##  [61]  967   618   235  2236+  152   892    81+ 1085  1073+ 1615+   35   290 
+##  [73] 1780+ 3228+   52   733  3213+ 1983  2304+  572    21  1272+ 1646+  304 
+##  [85]  418   854  2973+   40   850  1139   323  1507+ 2717+ 1735+  388+  145 
+##  [97]  905   927  1027+  631  2495+ 1331+  623  2568+ 2013+  721  1952+  397 
+## [109]  254  1630+ 1523+  146+  108  1835+  499   333   202+ 2437+ 1015  2138+
+## [121]   22  2090+  179  2439+ 1063+   85+  343+ 2215+  259  2258+ 1371    39 
+## [133] 2371+  975+  952  2492+ 1478+  295+  992  1011+  644   426   537+ 1454+
+## [145] 1869+  714+ 1310+ 2084+ 1918+ 1649+  290+ 1685+ 1348+  652+ 1384+ 1471+
+## [157] 1512+  378+ 1352+  419  1426+ 1488+ 1315+  643+ 1197+ 1343+ 1176+  944 
+## [169]  340   881+  915+  948+  985+ 1242+  955+  987+  899+ 1056+  775   785+
+## [181]  731+   16   680+   21+  444+  524+  217+  440+  470+  390+  344+  578+
+## [193]  504+</code></pre>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>No formato de processo de contagem.</li>
 </ol>
@@ -919,38 +921,30 @@ deixou de ser observado no dia 4769 em razão de ter sofrido censura.</code></pr
 <li>Calcule as medidas resumo das variáveis presentes no banco.</li>
 </ol>
 <div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1"><span class="kw">summary</span>(ipec)</a></code></pre></div>
-<pre><code>##        id           ini            fim           tempo       
-##  Min.   :  1   Min.   :   1   Min.   :  96   Min.   :  16.0  
-##  1st Qu.: 49   1st Qu.:1406   1st Qu.:2095   1st Qu.: 290.0  
-##  Median : 97   Median :2454   Median :3711   Median : 852.0  
-##  Mean   : 97   Mean   :2397   Mean   :3335   Mean   : 938.2  
-##  3rd Qu.:145   3rd Qu.:3314   3rd Qu.:4790   3rd Qu.:1348.0  
-##  Max.   :193   Max.   :4593   Max.   :4822   Max.   :3228.0  
-##                                                              
-##      status           sexo              escola       idade      
-##  Min.   :0.0000   Length:193         sem   :59   Min.   :20.00  
-##  1st Qu.:0.0000   Class :character   fundam:44   1st Qu.:30.00  
-##  Median :0.0000   Mode  :character   medio :55   Median :35.00  
-##  Mean   :0.4663                      sup   :24   Mean   :36.55  
-##  3rd Qu.:1.0000                      NA&#39;s  :11   3rd Qu.:43.00  
-##  Max.   :1.0000                                  Max.   :68.00  
-##                                                                 
-##          risco        acompan      obito              anotrat  
-##  Homo       :87   Amb     :57   Length:193         1992   :22  
-##  UDI        : 9   Int.Post:99   Class :character   1995   :20  
-##  Transf     : 7   Int.Imed:37   Mode  :character   1993   :19  
-##  Cont hetero:30                                    1996   :18  
-##  Mut parc   :16                                    1994   :16  
-##  2 fat      : 7                                    (Other):54  
-##  NA&#39;s       :37                                    NA&#39;s   :44  
-##        tratam        doenca      propcp   
-##  Nenhum   : 44   Def CD4:67   Sem   : 38  
-##  Mono     :100   TB diss:31   Prim  : 24  
-##  Combinada: 35   Duas   :25   Secund:  3  
-##  Potente  : 14   Outra  :17   Ambas :128  
-##                  PCP    :12               
-##                  Cand   :12               
-##                  (Other):29</code></pre>
+<pre><code>##        id           ini            fim           tempo            status      
+##  Min.   :  1   Min.   :   1   Min.   :  96   Min.   :  16.0   Min.   :0.0000  
+##  1st Qu.: 49   1st Qu.:1406   1st Qu.:2095   1st Qu.: 290.0   1st Qu.:0.0000  
+##  Median : 97   Median :2454   Median :3711   Median : 852.0   Median :0.0000  
+##  Mean   : 97   Mean   :2397   Mean   :3335   Mean   : 938.2   Mean   :0.4663  
+##  3rd Qu.:145   3rd Qu.:3314   3rd Qu.:4790   3rd Qu.:1348.0   3rd Qu.:1.0000  
+##  Max.   :193   Max.   :4593   Max.   :4822   Max.   :3228.0   Max.   :1.0000  
+##                                                                               
+##      sexo              escola       idade               risco        acompan  
+##  Length:193         sem   :59   Min.   :20.00   Homo       :87   Amb     :57  
+##  Class :character   fundam:44   1st Qu.:30.00   UDI        : 9   Int.Post:99  
+##  Mode  :character   medio :55   Median :35.00   Transf     : 7   Int.Imed:37  
+##                     sup   :24   Mean   :36.55   Cont hetero:30                
+##                     NA&#39;s  :11   3rd Qu.:43.00   Mut parc   :16                
+##                                 Max.   :68.00   2 fat      : 7                
+##                                                 NA&#39;s       :37                
+##     obito              anotrat         tratam        doenca      propcp   
+##  Length:193         1992   :22   Nenhum   : 44   Def CD4:67   Sem   : 38  
+##  Class :character   1995   :20   Mono     :100   TB diss:31   Prim  : 24  
+##  Mode  :character   1993   :19   Combinada: 35   Duas   :25   Secund:  3  
+##                     1996   :18   Potente  : 14   Outra  :17   Ambas :128  
+##                     1994   :16                   PCP    :12               
+##                     (Other):54                   Cand   :12               
+##                     NA&#39;s   :44                   (Other):29</code></pre>
 <ol start="6" style="list-style-type: lower-alpha">
 <li>Construa tabelas de frequência para as variáveis de maior interesse.</li>
 </ol>
@@ -984,10 +978,8 @@ deixou de ser observado no dia 4769 em razão de ter sofrido censura.</code></pr
 ##        44       100        35        14</code></pre>
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" title="1"><span class="kw">table</span>(ipec<span class="op">$</span>doenca)</a></code></pre></div>
 <pre><code>## 
-##     PCP TB pulm TB diss    Toxo      SK   Outra    Cand  Herpes    Duas 
-##      12      10      31       8       7      17      12       4      25 
-## Def CD4 
-##      67</code></pre>
+##     PCP TB pulm TB diss    Toxo      SK   Outra    Cand  Herpes    Duas Def CD4 
+##      12      10      31       8       7      17      12       4      25      67</code></pre>
 <div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" title="1"><span class="kw">table</span>(ipec<span class="op">$</span>propcp)</a></code></pre></div>
 <pre><code>## 
 ##    Sem   Prim Secund  Ambas 

@@ -371,39 +371,34 @@ $(document).ready(function () {
 
 <div id="pacotes-e-opções" class="section level2">
 <h2>Pacotes e opções</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(dplyr)</a></code></pre></div>
-<pre><code>## 
-## Attaching package: &#39;dplyr&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     intersect, setdiff, setequal, union</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span>(survival)</a></code></pre></div>
 </div>
-<div id="exercício-4.1" class="section level2">
-<h2>Exercício 4.1</h2>
+<div id="exercícios" class="section level2">
+<h2>Exercícios</h2>
+<div id="q4_1" class="section level3">
+<h3>4.1</h3>
 <p>Considere os dados de tempo de aleitamento de 15 crianças, descrito no exercício 2.1.</p>
 <pre><code>6 12 10 3 5 1 6 8 1 5 2 2 5 8 1</code></pre>
 <ol style="list-style-type: lower-alpha">
 <li>Complete a tabela Kaplan-Meier abaixo com esses dados</li>
 </ol>
-<p><img src="questao_4_4.png" /></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">x =<span class="st"> </span><span class="kw">c</span>(6L, 12L, 10L, 3L, 5L, 1L, 6L, 8L, 1L, 5L, 2L, 2L, 5L, 8L, 1L)</a>
-<a class="sourceLine" id="cb6-2" title="2"></a>
-<a class="sourceLine" id="cb6-3" title="3">t =<span class="st"> </span><span class="kw">sort</span>(<span class="kw">unique</span>(x))</a>
-<a class="sourceLine" id="cb6-4" title="4">inter =<span class="st"> </span><span class="kw">lead</span>(<span class="kw">cut</span>(<span class="kw">c</span>(<span class="dv">0</span>,t), <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">0</span>,t)))[<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(t)]</a>
-<a class="sourceLine" id="cb6-5" title="5">Nt =<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">table</span>(x))</a>
-<a class="sourceLine" id="cb6-6" title="6">Rt =<span class="st"> </span><span class="kw">rev</span>(<span class="kw">cumsum</span>(<span class="kw">rev</span>(Nt)))</a>
-<a class="sourceLine" id="cb6-7" title="7">Skm =<span class="st"> </span><span class="kw">cumprod</span>((Rt <span class="op">-</span><span class="st"> </span>Nt)<span class="op">/</span>Rt)</a>
-<a class="sourceLine" id="cb6-8" title="8">Lambda =<span class="st"> </span><span class="op">-</span><span class="kw">log</span>(Skm)</a>
-<a class="sourceLine" id="cb6-9" title="9"></a>
-<a class="sourceLine" id="cb6-10" title="10">aleit &lt;-<span class="st"> </span><span class="kw">data.frame</span>(t, inter, Nt, Rt, Lambda, Skm)</a>
-<a class="sourceLine" id="cb6-11" title="11"></a>
-<a class="sourceLine" id="cb6-12" title="12">names &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;$t$&quot;</span>, <span class="st">&quot;Intervalo&quot;</span>, <span class="st">&quot;$N(t)$&quot;</span>, <span class="st">&quot;$R(t)$&quot;</span>,</a>
-<a class="sourceLine" id="cb6-13" title="13">           <span class="st">&quot;$</span><span class="ch">\\</span><span class="st">hat{</span><span class="ch">\\</span><span class="st">Lambda}(t)$&quot;</span>, <span class="st">&quot;$</span><span class="ch">\\</span><span class="st">hat{S}_{km}(t)$&quot;</span>)</a>
-<a class="sourceLine" id="cb6-14" title="14"></a>
-<a class="sourceLine" id="cb6-15" title="15">knitr<span class="op">::</span><span class="kw">kable</span>(aleit, <span class="dt">digits =</span> <span class="dv">4</span>, <span class="dt">col.names =</span> names)</a></code></pre></div>
+<p><img src="questao_4_1.png" /></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">x =<span class="st"> </span><span class="kw">c</span>(6L, 12L, 10L, 3L, 5L, 1L, 6L, 8L, 1L, 5L, 2L, 2L, 5L, 8L, 1L)</a>
+<a class="sourceLine" id="cb3-2" title="2"></a>
+<a class="sourceLine" id="cb3-3" title="3">t =<span class="st"> </span><span class="kw">sort</span>(<span class="kw">unique</span>(x))</a>
+<a class="sourceLine" id="cb3-4" title="4">inter =<span class="st"> </span><span class="kw">lead</span>(<span class="kw">cut</span>(<span class="kw">c</span>(<span class="dv">0</span>,t), <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">0</span>,t)))[<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(t)]</a>
+<a class="sourceLine" id="cb3-5" title="5">Nt =<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">table</span>(x))</a>
+<a class="sourceLine" id="cb3-6" title="6">Rt =<span class="st"> </span><span class="kw">rev</span>(<span class="kw">cumsum</span>(<span class="kw">rev</span>(Nt)))</a>
+<a class="sourceLine" id="cb3-7" title="7">Skm =<span class="st"> </span><span class="kw">cumprod</span>((Rt <span class="op">-</span><span class="st"> </span>Nt)<span class="op">/</span>Rt)</a>
+<a class="sourceLine" id="cb3-8" title="8">Lambda =<span class="st"> </span><span class="op">-</span><span class="kw">log</span>(Skm)</a>
+<a class="sourceLine" id="cb3-9" title="9"></a>
+<a class="sourceLine" id="cb3-10" title="10">aleit &lt;-<span class="st"> </span><span class="kw">data.frame</span>(t, inter, Nt, Rt, Lambda, Skm)</a>
+<a class="sourceLine" id="cb3-11" title="11"></a>
+<a class="sourceLine" id="cb3-12" title="12">names &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;$t$&quot;</span>, <span class="st">&quot;Intervalo&quot;</span>, <span class="st">&quot;$N(t)$&quot;</span>, <span class="st">&quot;$R(t)$&quot;</span>,</a>
+<a class="sourceLine" id="cb3-13" title="13">           <span class="st">&quot;$</span><span class="ch">\\</span><span class="st">hat{</span><span class="ch">\\</span><span class="st">Lambda}(t)$&quot;</span>, <span class="st">&quot;$</span><span class="ch">\\</span><span class="st">hat{S}_{km}(t)$&quot;</span>)</a>
+<a class="sourceLine" id="cb3-14" title="14"></a>
+<a class="sourceLine" id="cb3-15" title="15">knitr<span class="op">::</span><span class="kw">kable</span>(aleit, <span class="dt">digits =</span> <span class="dv">4</span>, <span class="dt">col.names =</span> names)</a></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -482,6 +477,588 @@ $(document).ready(function () {
 </tr>
 </tbody>
 </table>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Desenhe a curva de Kaplan Meier correspondente aos dados.</li>
+</ol>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">y &lt;-<span class="st"> </span><span class="kw">Surv</span>(x, <span class="kw">rep</span>(<span class="dv">1</span>, <span class="kw">length</span>(x)))</a>
+<a class="sourceLine" id="cb4-2" title="2">y_fit &lt;-<span class="st"> </span><span class="kw">survfit</span>(y <span class="op">~</span><span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="kw">plot</span>(</a>
+<a class="sourceLine" id="cb4-4" title="4">  y_fit,</a>
+<a class="sourceLine" id="cb4-5" title="5">  <span class="dt">conf.int =</span> F,</a>
+<a class="sourceLine" id="cb4-6" title="6">  <span class="dt">main =</span> <span class="st">&quot;Tempo de aleitamento&quot;</span>,</a>
+<a class="sourceLine" id="cb4-7" title="7">  <span class="dt">xlab =</span> <span class="st">&quot;Meses&quot;</span>,</a>
+<a class="sourceLine" id="cb4-8" title="8">  <span class="dt">ylab =</span> <span class="kw">expression</span>(<span class="kw">hat</span>(S)[km](t))</a>
+<a class="sourceLine" id="cb4-9" title="9">)</a></code></pre></div>
+<p><img src="exercicio-cap-4_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Qual a probabilidade de uma criança ser amamentada pelo menos até o sexto mês de vida?</li>
+</ol>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">plot</span>(</a>
+<a class="sourceLine" id="cb5-2" title="2">  y_fit,</a>
+<a class="sourceLine" id="cb5-3" title="3">  <span class="dt">conf.int =</span> F,</a>
+<a class="sourceLine" id="cb5-4" title="4">  <span class="dt">main =</span> <span class="st">&quot;Tempo de aleitamento&quot;</span>,</a>
+<a class="sourceLine" id="cb5-5" title="5">  <span class="dt">xlab =</span> <span class="st">&quot;Meses&quot;</span>,</a>
+<a class="sourceLine" id="cb5-6" title="6">  <span class="dt">ylab =</span> <span class="kw">expression</span>(<span class="kw">hat</span>(S)[km](t))</a>
+<a class="sourceLine" id="cb5-7" title="7">)</a>
+<a class="sourceLine" id="cb5-8" title="8"><span class="kw">abline</span>(<span class="dt">h =</span> <span class="fl">0.2667</span>, <span class="dt">v =</span> <span class="dv">6</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-4_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>A probabilidade é de <span class="math inline">\(S(6) = 0,2667\)</span>.</p>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Qual a probabilidade de ser amamentada por mais de 3 meses?</li>
+</ol>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">plot</span>(</a>
+<a class="sourceLine" id="cb6-2" title="2">  y_fit,</a>
+<a class="sourceLine" id="cb6-3" title="3">  <span class="dt">conf.int =</span> F,</a>
+<a class="sourceLine" id="cb6-4" title="4">  <span class="dt">main =</span> <span class="st">&quot;Tempo de aleitamento&quot;</span>,</a>
+<a class="sourceLine" id="cb6-5" title="5">  <span class="dt">xlab =</span> <span class="st">&quot;Meses&quot;</span>,</a>
+<a class="sourceLine" id="cb6-6" title="6">  <span class="dt">ylab =</span> <span class="kw">expression</span>(<span class="kw">hat</span>(S)[km](t))</a>
+<a class="sourceLine" id="cb6-7" title="7">)</a>
+<a class="sourceLine" id="cb6-8" title="8"><span class="kw">abline</span>(<span class="dt">h =</span> <span class="fl">0.6</span>, <span class="dt">v =</span> <span class="dv">3</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-4_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>A probabilidade é de <span class="math inline">\(S(3) = 0,6\)</span>.</p>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>Qual a probabilidade de ser amamentada por mais de 10 meses?</li>
+</ol>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">plot</span>(</a>
+<a class="sourceLine" id="cb7-2" title="2">  y_fit,</a>
+<a class="sourceLine" id="cb7-3" title="3">  <span class="dt">conf.int =</span> F,</a>
+<a class="sourceLine" id="cb7-4" title="4">  <span class="dt">main =</span> <span class="st">&quot;Tempo de aleitamento&quot;</span>,</a>
+<a class="sourceLine" id="cb7-5" title="5">  <span class="dt">xlab =</span> <span class="st">&quot;Meses&quot;</span>,</a>
+<a class="sourceLine" id="cb7-6" title="6">  <span class="dt">ylab =</span> <span class="kw">expression</span>(<span class="kw">hat</span>(S)[km](t))</a>
+<a class="sourceLine" id="cb7-7" title="7">)</a>
+<a class="sourceLine" id="cb7-8" title="8"><span class="kw">abline</span>(<span class="dt">h =</span> <span class="fl">0.0667</span>, <span class="dt">v =</span> <span class="dv">10</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-4_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>A probabilidade é de <span class="math inline">\(S(10) = 0,0667\)</span>.</p>
+<ol start="6" style="list-style-type: lower-alpha">
+<li>Qual o tempo mediano de aleitamento?</li>
+</ol>
+<p>O tempo mediano de aleitamento é dado pela valor de <span class="math inline">\(S(t)\le 0,5\)</span>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">plot</span>(</a>
+<a class="sourceLine" id="cb8-2" title="2">  y_fit,</a>
+<a class="sourceLine" id="cb8-3" title="3">  <span class="dt">conf.int =</span> F,</a>
+<a class="sourceLine" id="cb8-4" title="4">  <span class="dt">main =</span> <span class="st">&quot;Tempo de aleitamento&quot;</span>,</a>
+<a class="sourceLine" id="cb8-5" title="5">  <span class="dt">xlab =</span> <span class="st">&quot;Meses&quot;</span>,</a>
+<a class="sourceLine" id="cb8-6" title="6">  <span class="dt">ylab =</span> <span class="kw">expression</span>(<span class="kw">hat</span>(S)[km](t))</a>
+<a class="sourceLine" id="cb8-7" title="7">)</a>
+<a class="sourceLine" id="cb8-8" title="8"><span class="kw">abline</span>(<span class="dt">h =</span> <span class="fl">0.5</span>, <span class="dt">v =</span> <span class="dv">5</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-4_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>No caso, o valor mais próximo que satisfaz esta condição é <span class="math inline">\(t = 5\)</span>, para o qual o valor de <span class="math inline">\(S(t)\)</span> é <span class="math inline">\(0,4\)</span>. Ou seja: <span class="math display">\[\hat{S}_{km}(5) = 0,4\]</span></p>
+</div>
+<div id="section" class="section level3">
+<h3>4.2</h3>
+<p>Ainda com os dados do aleitamento construa a tabela de risco usando os estimadores Kaplan Meier e Nelson-Aalen.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">t =<span class="st"> </span><span class="kw">sort</span>(<span class="kw">unique</span>(x))</a>
+<a class="sourceLine" id="cb9-2" title="2">inter =<span class="st"> </span><span class="kw">lead</span>(<span class="kw">cut</span>(<span class="kw">c</span>(<span class="dv">0</span>,t), <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">0</span>,t)))[<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(t)]</a>
+<a class="sourceLine" id="cb9-3" title="3">Nt =<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">table</span>(x))</a>
+<a class="sourceLine" id="cb9-4" title="4">Rt =<span class="st"> </span><span class="kw">rev</span>(<span class="kw">cumsum</span>(<span class="kw">rev</span>(Nt)))</a>
+<a class="sourceLine" id="cb9-5" title="5">Skm =<span class="st"> </span><span class="kw">cumprod</span>((Rt <span class="op">-</span><span class="st"> </span>Nt)<span class="op">/</span>Rt)</a>
+<a class="sourceLine" id="cb9-6" title="6">Lkm =<span class="st"> </span><span class="op">-</span><span class="kw">log</span>(Skm)</a>
+<a class="sourceLine" id="cb9-7" title="7">Lna =<span class="st"> </span><span class="kw">cumsum</span>(Nt<span class="op">/</span>Rt)</a>
+<a class="sourceLine" id="cb9-8" title="8"></a>
+<a class="sourceLine" id="cb9-9" title="9">aleit_na &lt;-<span class="st"> </span><span class="kw">data.frame</span>(t, inter, Nt, Rt, Lkm, Lna)</a>
+<a class="sourceLine" id="cb9-10" title="10"></a>
+<a class="sourceLine" id="cb9-11" title="11">names &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;$t$&quot;</span>, <span class="st">&quot;Intervalo&quot;</span>, <span class="st">&quot;$N(t)$&quot;</span>, <span class="st">&quot;$R(t)$&quot;</span>,</a>
+<a class="sourceLine" id="cb9-12" title="12">           <span class="st">&quot;$</span><span class="ch">\\</span><span class="st">hat{</span><span class="ch">\\</span><span class="st">Lambda}_{km}(t)$&quot;</span>, <span class="st">&quot;$</span><span class="ch">\\</span><span class="st">hat{</span><span class="ch">\\</span><span class="st">Lambda}_{na}(t)$&quot;</span>)</a>
+<a class="sourceLine" id="cb9-13" title="13"></a>
+<a class="sourceLine" id="cb9-14" title="14">knitr<span class="op">::</span><span class="kw">kable</span>(aleit_na, <span class="dt">digits =</span> <span class="dv">4</span>, <span class="dt">col.names =</span> names)</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right"><span class="math inline">\(t\)</span></th>
+<th align="left">Intervalo</th>
+<th align="right"><span class="math inline">\(N(t)\)</span></th>
+<th align="right"><span class="math inline">\(R(t)\)</span></th>
+<th align="right"><span class="math inline">\(\hat{\Lambda}_{km}(t)\)</span></th>
+<th align="right"><span class="math inline">\(\hat{\Lambda}_{na}(t)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">(0,1]</td>
+<td align="right">3</td>
+<td align="right">15</td>
+<td align="right">0.2231</td>
+<td align="right">0.2000</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">(1,2]</td>
+<td align="right">2</td>
+<td align="right">12</td>
+<td align="right">0.4055</td>
+<td align="right">0.3667</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="left">(2,3]</td>
+<td align="right">1</td>
+<td align="right">10</td>
+<td align="right">0.5108</td>
+<td align="right">0.4667</td>
+</tr>
+<tr class="even">
+<td align="right">5</td>
+<td align="left">(3,5]</td>
+<td align="right">3</td>
+<td align="right">9</td>
+<td align="right">0.9163</td>
+<td align="right">0.8000</td>
+</tr>
+<tr class="odd">
+<td align="right">6</td>
+<td align="left">(5,6]</td>
+<td align="right">2</td>
+<td align="right">6</td>
+<td align="right">1.3218</td>
+<td align="right">1.1333</td>
+</tr>
+<tr class="even">
+<td align="right">8</td>
+<td align="left">(6,8]</td>
+<td align="right">2</td>
+<td align="right">4</td>
+<td align="right">2.0149</td>
+<td align="right">1.6333</td>
+</tr>
+<tr class="odd">
+<td align="right">10</td>
+<td align="left">(8,10]</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">2.7081</td>
+<td align="right">2.1333</td>
+</tr>
+<tr class="even">
+<td align="right">12</td>
+<td align="left">(10,12]</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">Inf</td>
+<td align="right">3.1333</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="section-1" class="section level3">
+<h3>4.3</h3>
+<p>Os dados completos de tempo de aleitamento (estudo fictício) estão presentes no arquivo <em>leite.txt</em>, Apêndice 12.4. Abra este banco de dados no R e:</p>
+<ol style="list-style-type: lower-alpha">
+<li>Costrua a tabela Kaplan-Meier. Verifique qual o tempo mediano de aleitamento na saída do R.
+<ul>
+<li>Como não foi possível importar o arquivo <em>leite.txt</em>, construímos o banco “manualmente” <a href="#q4_1">acima</a>.</li>
+</ul></li>
+</ol>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">aleit_fit &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(x) <span class="op">~</span><span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="kw">summary</span>(aleit_fit)</a></code></pre></div>
+<pre><code>## Call: survfit(formula = Surv(x) ~ 1)
+## 
+##  time n.risk n.event survival std.err lower 95% CI upper 95% CI
+##     1     15       3   0.8000  0.1033       0.6212        1.000
+##     2     12       2   0.6667  0.1217       0.4661        0.953
+##     3     10       1   0.6000  0.1265       0.3969        0.907
+##     5      9       3   0.4000  0.1265       0.2152        0.743
+##     6      6       2   0.2667  0.1142       0.1152        0.617
+##     8      4       2   0.1333  0.0878       0.0367        0.484
+##    10      2       1   0.0667  0.0644       0.0100        0.443
+##    12      1       1   0.0000     NaN           NA           NA</code></pre>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Construa a curva de sobrevivência do aleitamento indicando seu ponto mediano.</li>
+</ol>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">plot</span>(</a>
+<a class="sourceLine" id="cb12-2" title="2">  aleit_fit,</a>
+<a class="sourceLine" id="cb12-3" title="3">  <span class="dt">conf.int =</span> F,</a>
+<a class="sourceLine" id="cb12-4" title="4">  <span class="dt">main =</span> <span class="st">&quot;Tempo de aleitamento&quot;</span>,</a>
+<a class="sourceLine" id="cb12-5" title="5">  <span class="dt">xlab =</span> <span class="st">&quot;Meses&quot;</span>,</a>
+<a class="sourceLine" id="cb12-6" title="6">  <span class="dt">ylab =</span> <span class="kw">expression</span>(<span class="kw">hat</span>(S)[km](t))</a>
+<a class="sourceLine" id="cb12-7" title="7">)</a>
+<a class="sourceLine" id="cb12-8" title="8"></a>
+<a class="sourceLine" id="cb12-9" title="9"><span class="kw">lines</span>(<span class="kw">list</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.5</span>,   <span class="dv">5</span>,    <span class="dv">5</span>),</a>
+<a class="sourceLine" id="cb12-10" title="10">           <span class="dt">y =</span> <span class="kw">c</span>(<span class="fl">0.4</span>, <span class="fl">0.4</span>, <span class="fl">-0.5</span>)),</a>
+<a class="sourceLine" id="cb12-11" title="11">      <span class="dt">lty =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb12-12" title="12"><span class="kw">points</span>(<span class="dv">5</span>, <span class="fl">0.4</span>, <span class="dt">pch =</span> <span class="dv">16</span>)</a>
+<a class="sourceLine" id="cb12-13" title="13"></a>
+<a class="sourceLine" id="cb12-14" title="14"><span class="kw">text</span>(<span class="dv">5</span>, <span class="fl">0.4</span>, <span class="st">&quot;Mediana&quot;</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.05</span>, <span class="fl">-0.2</span>))</a></code></pre></div>
+<p><img src="exercicio-cap-4_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Calcule as estimativas de Nelson-Aalen usando a função <code>coxph()</code>.</li>
+</ol>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">al_fit_na &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">coxph</span>(<span class="kw">Surv</span>(x) <span class="op">~</span><span class="st"> </span><span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb13-2" title="2">al_fit_na</a></code></pre></div>
+<pre><code>## Call: survfit(formula = coxph(Surv(x) ~ 1))
+## 
+##       n  events  median 0.95LCL 0.95UCL 
+##      15      15       5       2      10</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">summary</span>(al_fit_na)</a></code></pre></div>
+<pre><code>## Call: survfit(formula = coxph(Surv(x) ~ 1))
+## 
+##  time n.risk n.event survival std.err lower 95% CI upper 95% CI
+##     1     15       3   0.8065  0.1003      0.63208        1.000
+##     2     12       2   0.6776  0.1187      0.48070        0.955
+##     3     10       1   0.6131  0.1236      0.41291        0.910
+##     5      9       3   0.4197  0.1252      0.23384        0.753
+##     6      6       2   0.2909  0.1152      0.13384        0.632
+##     8      4       2   0.1623  0.0933      0.05261        0.501
+##    10      2       1   0.0984  0.0750      0.02212        0.438
+##    12      1       1   0.0362  0.0455      0.00308        0.426</code></pre>
+</div>
+<div id="section-2" class="section level3">
+<h3>4.4</h3>
+<p>Em que situação se deve dar preferência as estimativas de Nelson-Aalen?</p>
+<div class="line-block">     Para amostras maiores, os resultados das estimativas de Kaplan-Meier e Nelson-Aalen tendem a convergir, porém, para pequenas amostras (n<br />
+     &lt; 100), Nelson-Aalen é mais indicado por ter propriedades estatísticas vantajosas, além de produzir estatísticas mais conservadoras,<br />
+     especialmente no final do período.</div>
+</div>
+<div id="section-3" class="section level3">
+<h3>4.5</h3>
+<p>Suponha que os tempos de aleitamento de 60 bebês estejam agrupados em quatro comunidades diferentes:</p>
+<pre><code>Comunidade 1: 6 12 10 3 5 1 6 8 1 5 2 2 5 8 1
+Comunidade 2: 5 12 10 4 4 3 6 9 2 6 4 1 7 10 1
+Comunidade 3: 13 14 20 3 5 1 8 15 2 5 3 2 6 15 1
+Comunidade 4: 1 16 20 1 1 1 1 2 2 13 3 1 1 14 2</code></pre>
+<div class="line-block">    Construímos o banco leite2 abaixo, manualmente.</div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1">leite2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">id =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">60</span>,</a>
+<a class="sourceLine" id="cb18-2" title="2">           <span class="dt">tempo =</span> <span class="kw">c</span>(6L, 12L, 10L, 3L, 5L, 1L, 6L, 8L, 1L, 5L, 2L, 2L,</a>
+<a class="sourceLine" id="cb18-3" title="3">                     5L, 8L, 1L, 5L, 12L, 10L, 4L, 4L, 3L, 6L, 9L, 2L,</a>
+<a class="sourceLine" id="cb18-4" title="4">                     6L, 4L, 1L, 7L, 10L, 1L, 13L, 14L, 20L, 3L, 5L, 1L,</a>
+<a class="sourceLine" id="cb18-5" title="5">                     8L, 15L, 2L, 5L, 3L, 2L, 6L, 15L, 1L, 1L, 16L, 20L,</a>
+<a class="sourceLine" id="cb18-6" title="6">                     1L, 1L, 1L, 1L, 2L, 2L, 13L, 3L, 1L, 1L, 14L, 2L),</a>
+<a class="sourceLine" id="cb18-7" title="7">           <span class="dt">status =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb18-8" title="8">           <span class="dt">grupo =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">each =</span> <span class="dv">15</span>))</a>
+<a class="sourceLine" id="cb18-9" title="9">leite2</a></code></pre></div>
+<pre><code>##    id tempo status grupo
+## 1   1     6      1     1
+## 2   2    12      1     1
+## 3   3    10      1     1
+## 4   4     3      1     1
+## 5   5     5      1     1
+## 6   6     1      1     1
+## 7   7     6      1     1
+## 8   8     8      1     1
+## 9   9     1      1     1
+## 10 10     5      1     1
+## 11 11     2      1     1
+## 12 12     2      1     1
+## 13 13     5      1     1
+## 14 14     8      1     1
+## 15 15     1      1     1
+## 16 16     5      1     2
+## 17 17    12      1     2
+## 18 18    10      1     2
+## 19 19     4      1     2
+## 20 20     4      1     2
+## 21 21     3      1     2
+## 22 22     6      1     2
+## 23 23     9      1     2
+## 24 24     2      1     2
+## 25 25     6      1     2
+## 26 26     4      1     2
+## 27 27     1      1     2
+## 28 28     7      1     2
+## 29 29    10      1     2
+## 30 30     1      1     2
+## 31 31    13      1     3
+## 32 32    14      1     3
+## 33 33    20      1     3
+## 34 34     3      1     3
+## 35 35     5      1     3
+## 36 36     1      1     3
+## 37 37     8      1     3
+## 38 38    15      1     3
+## 39 39     2      1     3
+## 40 40     5      1     3
+## 41 41     3      1     3
+## 42 42     2      1     3
+## 43 43     6      1     3
+## 44 44    15      1     3
+## 45 45     1      1     3
+## 46 46     1      1     4
+## 47 47    16      1     4
+## 48 48    20      1     4
+## 49 49     1      1     4
+## 50 50     1      1     4
+## 51 51     1      1     4
+## 52 52     1      1     4
+## 53 53     2      1     4
+## 54 54     2      1     4
+## 55 55    13      1     4
+## 56 56     3      1     4
+## 57 57     1      1     4
+## 58 58     1      1     4
+## 59 59    14      1     4
+## 60 60     2      1     4</code></pre>
+<ol style="list-style-type: lower-alpha">
+<li>Ajuste um modelo de Kaplan-Meier estratificado por comunidade e compare o tempo mediano de aleitamento em cada comunidade.</li>
+</ol>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">survfit</span>(<span class="kw">Surv</span>(tempo, status) <span class="op">~</span><span class="st"> </span>grupo, <span class="dt">data =</span> leite2)</a></code></pre></div>
+<pre><code>## Call: survfit(formula = Surv(tempo, status) ~ grupo, data = leite2)
+## 
+##          n events median 0.95LCL 0.95UCL
+## grupo=1 15     15      5       2       8
+## grupo=2 15     15      5       4      10
+## grupo=3 15     15      5       3      15
+## grupo=4 15     15      2       1      14</code></pre>
+<p>O tempo mediano de sobrevivência estimado é similar nos primeiros 3 grupos, porém, é bastante inferior no grupo 4.</p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Desenhe, no mesmo gráfico, as curvas de Kaplan-Meier, estratificadas por grupo. Como se comporta a curva de sobrevivência das outras comunidades quando comparadas a comunidade 1?</li>
+</ol>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="kw">plot</span>(<span class="kw">survfit</span>(<span class="kw">Surv</span>(tempo, status) <span class="op">~</span><span class="st"> </span>grupo, <span class="dt">data =</span> leite2),</a>
+<a class="sourceLine" id="cb22-2" title="2">     <span class="dt">col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">lty =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb22-3" title="3"><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;Com. 1&quot;</span>, <span class="st">&quot;Com. 2&quot;</span>, <span class="st">&quot;Com. 3&quot;</span>, <span class="st">&quot;Com. 4&quot;</span>), <span class="dt">fill =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-4_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<div class="line-block">     A comunidade 2 tem uma sobrevivência parecida com a 1, estimativas levemente melhores em alguns pontos.</div>
+<div class="line-block">     A comunidade 3 tem uma sobrevivência parecida com a comunidade 1 no ínicio do período, mas para o final do período, tem uma sobrevivência bem melhor.</div>
+<div class="line-block">     A comunidade 4 tem uma sobrevivência pior que a 1 no início do período, mas no final do período, apresenta uma sobrevivência maior e comparável a comunidade 3.</div>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Use os testes log-rank e Peto para a variável <code>grupo</code>. Analise as funções de sobrevivência das quatro comunidades. A que conclusões você chega com esta análise? Existe diferença entre as comunidades quanto ao tempo de aleitamento?</li>
+</ol>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">survdiff</span>(<span class="kw">Surv</span>(tempo, status) <span class="op">~</span><span class="st"> </span>grupo, <span class="dt">data =</span> leite2)</a></code></pre></div>
+<pre><code>## Call:
+## survdiff(formula = Surv(tempo, status) ~ grupo, data = leite2)
+## 
+##          N Observed Expected (O-E)^2/E (O-E)^2/V
+## grupo=1 15       15     12.4    0.5489    0.8735
+## grupo=2 15       15     13.4    0.1862    0.3028
+## grupo=3 15       15     19.7    1.1220    2.1534
+## grupo=4 15       15     14.5    0.0182    0.0323
+## 
+##  Chisq= 2.5  on 3 degrees of freedom, p= 0.5</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="kw">survdiff</span>(<span class="kw">Surv</span>(tempo, status) <span class="op">~</span><span class="st"> </span>grupo, <span class="dt">rho =</span> <span class="dv">1</span>, <span class="dt">data =</span> leite2)</a></code></pre></div>
+<pre><code>## Call:
+## survdiff(formula = Surv(tempo, status) ~ grupo, data = leite2, 
+##     rho = 1)
+## 
+##          N Observed Expected (O-E)^2/E (O-E)^2/V
+## grupo=1 15     8.48     8.22   0.00865    0.0187
+## grupo=2 15     7.57     8.70   0.14764    0.3287
+## grupo=3 15     6.97     9.43   0.64499    1.5446
+## grupo=4 15    10.28     6.95   1.59872    3.3897
+## 
+##  Chisq= 4.1  on 3 degrees of freedom, p= 0.3</code></pre>
+<p>Em ambos os casos observamos diferenças entre os valores observados e esperados nos grupos, porém, os p-valores são muito altos (0.5 e 0.3), o que sugere que os resultados podem ser resultado de variações amostrais e não necessariamente de diferenças entre as comunidades. Então, as diferenças entre os grupos não são estatisticamente significativas.</p>
+</div>
+<div id="section-4" class="section level3">
+<h3>4.6</h3>
+<p>O banco de dados <code>ipec.csv</code> contém os dados de uma coorte de pacientes com Aids atendidos no Ipec e descritos no apêndice 12.4. Para este estudo foi definido, como tempo de sobrevivência, o tempo entre o diagnóstico de Aids (critério CDC-1993) e o óbito.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1"><span class="co"># Leitura-limpeza do banco ipec.csv</span></a>
+<a class="sourceLine" id="cb27-2" title="2">ipec &lt;-<span class="st"> </span><span class="kw">read.csv2</span>(<span class="st">&quot;ipec.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb27-3" title="3"></a>
+<a class="sourceLine" id="cb27-4" title="4">ipec<span class="op">$</span>anotrat[ipec<span class="op">$</span>anotrat <span class="op">==</span><span class="st"> </span><span class="dv">9</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></a>
+<a class="sourceLine" id="cb27-5" title="5">ipec<span class="op">$</span>obito[ipec<span class="op">$</span>obito <span class="op">==</span><span class="st"> &quot;I&quot;</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></a>
+<a class="sourceLine" id="cb27-6" title="6"></a>
+<a class="sourceLine" id="cb27-7" title="7">ipec<span class="op">$</span>escola &lt;-<span class="st"> </span><span class="kw">factor</span>(</a>
+<a class="sourceLine" id="cb27-8" title="8">  ipec<span class="op">$</span>escola,</a>
+<a class="sourceLine" id="cb27-9" title="9">  <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;sem&quot;</span>, <span class="st">&quot;fundam&quot;</span>, <span class="st">&quot;medio&quot;</span>, <span class="st">&quot;sup&quot;</span>)</a>
+<a class="sourceLine" id="cb27-10" title="10">)</a>
+<a class="sourceLine" id="cb27-11" title="11"></a>
+<a class="sourceLine" id="cb27-12" title="12">ipec<span class="op">$</span>risco &lt;-<span class="st"> </span><span class="kw">factor</span>(</a>
+<a class="sourceLine" id="cb27-13" title="13">  ipec<span class="op">$</span>risco,</a>
+<a class="sourceLine" id="cb27-14" title="14">  <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Homo&quot;</span>, <span class="st">&quot;UDI&quot;</span>, <span class="st">&quot;Transf&quot;</span>, <span class="st">&quot;Cont hetero&quot;</span>, <span class="st">&quot;Mut parc&quot;</span>, <span class="st">&quot;2 fat&quot;</span>)</a>
+<a class="sourceLine" id="cb27-15" title="15">)</a>
+<a class="sourceLine" id="cb27-16" title="16"></a>
+<a class="sourceLine" id="cb27-17" title="17">ipec<span class="op">$</span>acompan &lt;-<span class="st"> </span><span class="kw">factor</span>(</a>
+<a class="sourceLine" id="cb27-18" title="18">  ipec<span class="op">$</span>acompan,</a>
+<a class="sourceLine" id="cb27-19" title="19">  <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Amb&quot;</span>, <span class="st">&quot;Int.Post&quot;</span>, <span class="st">&quot;Int.Imed&quot;</span>)</a>
+<a class="sourceLine" id="cb27-20" title="20">)</a>
+<a class="sourceLine" id="cb27-21" title="21"></a>
+<a class="sourceLine" id="cb27-22" title="22">ipec<span class="op">$</span>anotrat &lt;-<span class="st"> </span><span class="kw">factor</span>(ipec<span class="op">$</span>anotrat)</a>
+<a class="sourceLine" id="cb27-23" title="23"></a>
+<a class="sourceLine" id="cb27-24" title="24">ipec<span class="op">$</span>tratam &lt;-<span class="st"> </span><span class="kw">factor</span>(</a>
+<a class="sourceLine" id="cb27-25" title="25">  ipec<span class="op">$</span>tratam,</a>
+<a class="sourceLine" id="cb27-26" title="26">  <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Nenhum&quot;</span>, <span class="st">&quot;Mono&quot;</span>, <span class="st">&quot;Combinada&quot;</span>, <span class="st">&quot;Potente&quot;</span>)</a>
+<a class="sourceLine" id="cb27-27" title="27">)</a>
+<a class="sourceLine" id="cb27-28" title="28"></a>
+<a class="sourceLine" id="cb27-29" title="29">ipec<span class="op">$</span>doenca &lt;-<span class="st"> </span><span class="kw">factor</span>(</a>
+<a class="sourceLine" id="cb27-30" title="30">  ipec<span class="op">$</span>doenca,</a>
+<a class="sourceLine" id="cb27-31" title="31">  <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;PCP&quot;</span>, <span class="st">&quot;TB pulm&quot;</span>, <span class="st">&quot;TB diss&quot;</span>, <span class="st">&quot;Toxo&quot;</span>, <span class="st">&quot;SK&quot;</span>,</a>
+<a class="sourceLine" id="cb27-32" title="32">             <span class="st">&quot;Outra&quot;</span>, <span class="st">&quot;Cand&quot;</span>, <span class="st">&quot;Herpes&quot;</span>, <span class="st">&quot;Duas&quot;</span>, <span class="st">&quot;Def CD4&quot;</span>)</a>
+<a class="sourceLine" id="cb27-33" title="33">  )</a>
+<a class="sourceLine" id="cb27-34" title="34"></a>
+<a class="sourceLine" id="cb27-35" title="35">ipec<span class="op">$</span>propcp &lt;-<span class="st"> </span><span class="kw">factor</span>(</a>
+<a class="sourceLine" id="cb27-36" title="36">  ipec<span class="op">$</span>propcp,</a>
+<a class="sourceLine" id="cb27-37" title="37">  <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Sem&quot;</span>, <span class="st">&quot;Prim&quot;</span>, <span class="st">&quot;Secund&quot;</span>, <span class="st">&quot;Ambas&quot;</span>))</a></code></pre></div>
+<ol style="list-style-type: lower-alpha">
+<li>Amplie a análise exploratória desses dados usando o R:
+<ol style="list-style-type: decimal">
+<li>Qual é a idade média desses pacientes?<br />
+</li>
+<li>Qual a razão homens:mulheres nessa coorte?</li>
+<li>Quantos receberam tratamento?</li>
+<li>Quantos foram a óbito e quantos foram censurados?</li>
+<li>Os óbitos e as censuras se concentraram no final do estudo ou ocorreram durante todo o período?</li>
+<li>Qual o tempo de sobrevivência mediano?</li>
+</ol></li>
+</ol>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="co"># Idade média dos pacientes</span></a>
+<a class="sourceLine" id="cb28-2" title="2"><span class="kw">mean</span>(ipec<span class="op">$</span>idade)</a></code></pre></div>
+<pre><code>## [1] 36.55</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1"><span class="co"># Razão entre homens e mulheres</span></a>
+<a class="sourceLine" id="cb30-2" title="2">x &lt;-<span class="st"> </span><span class="kw">table</span>(ipec<span class="op">$</span>sexo)</a>
+<a class="sourceLine" id="cb30-3" title="3"><span class="kw">as.numeric</span>(x[<span class="dv">2</span>]<span class="op">/</span>x[<span class="dv">1</span>])</a></code></pre></div>
+<pre><code>## [1] 2.939</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1"><span class="co"># Quantos receberam tratamento?</span></a>
+<a class="sourceLine" id="cb32-2" title="2">x &lt;-<span class="st"> </span><span class="kw">table</span>(ipec<span class="op">$</span>tratam)</a>
+<a class="sourceLine" id="cb32-3" title="3"><span class="kw">sum</span>(x[<span class="dv">2</span><span class="op">:</span><span class="dv">4</span>])</a></code></pre></div>
+<pre><code>## [1] 149</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1"><span class="co"># Nº de óbitos e censuras</span></a>
+<a class="sourceLine" id="cb34-2" title="2">x &lt;-<span class="st"> </span><span class="kw">table</span>(ipec<span class="op">$</span>status)</a>
+<a class="sourceLine" id="cb34-3" title="3"><span class="kw">paste0</span>(x[<span class="dv">1</span>], <span class="st">&quot; foram censurados.&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;103 foram censurados.&quot;</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1"><span class="kw">paste0</span>(x[<span class="dv">2</span>], <span class="st">&quot; foram a óbito.&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;90 foram a óbito.&quot;</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="co"># Dispersão temporal de óbitos e censuras</span></a>
+<a class="sourceLine" id="cb38-2" title="2"><span class="kw">hist</span>(ipec<span class="op">$</span>tempo[ipec<span class="op">$</span>status <span class="op">==</span><span class="st"> </span><span class="dv">1</span>], <span class="dt">main =</span> <span class="st">&quot;Óbitos&quot;</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-4_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1"><span class="kw">hist</span>(ipec<span class="op">$</span>tempo[ipec<span class="op">$</span>status <span class="op">==</span><span class="st"> </span><span class="dv">0</span>], <span class="dt">main =</span> <span class="st">&quot;Censuras&quot;</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-4_files/figure-html/unnamed-chunk-14-2.png" width="672" /></p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1"><span class="co"># Os óbitos concentraram-se principalmente no início do período, enquanto as censuras se distribuíram mais ao longo do período de estudo.</span></a>
+<a class="sourceLine" id="cb40-2" title="2"></a>
+<a class="sourceLine" id="cb40-3" title="3"><span class="co"># Tempo de sobrevivência mediano </span></a>
+<a class="sourceLine" id="cb40-4" title="4">km &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(tempo, status) <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> ipec)</a>
+<a class="sourceLine" id="cb40-5" title="5">km<span class="op">$</span>surv[km<span class="op">$</span>surv <span class="op">&lt;=</span><span class="st"> </span><span class="fl">0.5</span>][<span class="dv">1</span>]</a></code></pre></div>
+<pre><code>## [1] 0.4955</code></pre>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Existe diferença entre homens e mulheres quanto ao tempo de sobrevivência pós-diagnóstico de Aids?</li>
+</ol>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1">sexo &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(tempo, status) <span class="op">~</span><span class="st"> </span>sexo, <span class="dt">data =</span> ipec)</a>
+<a class="sourceLine" id="cb42-2" title="2">sexo</a></code></pre></div>
+<pre><code>## Call: survfit(formula = Surv(tempo, status) ~ sexo, data = ipec)
+## 
+##          n events median 0.95LCL 0.95UCL
+## sexo=F  49     16     NA    1371      NA
+## sexo=M 144     74   1116     887    1563</code></pre>
+<p>Existe uma diferença bastante expressiva entre homens e mulheres considerando que o tempo mediano de sobrevivência dos homens é de 1116 dias enquanto as mulheres sequer chegaram a esse patamar de sobrevivência, sendo que o menor valor da função de sobrevivência foi <span class="math inline">\(S(t) = 0.521\)</span>.</p>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Compare homens e mulheres segundo tempos de sobrevivência mediano e percentis 75 e 90.</li>
+</ol>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="kw">summary</span>(sexo)</a></code></pre></div>
+<pre><code>## Call: survfit(formula = Surv(tempo, status) ~ sexo, data = ipec)
+## 
+##                 sexo=F 
+##  time n.risk n.event survival std.err lower 95% CI upper 95% CI
+##    22     49       1    0.980  0.0202        0.941        1.000
+##   116     47       1    0.959  0.0286        0.904        1.000
+##   134     46       1    0.938  0.0347        0.872        1.000
+##   145     45       1    0.917  0.0397        0.842        0.998
+##   151     44       1    0.896  0.0439        0.814        0.987
+##   163     43       1    0.875  0.0476        0.787        0.974
+##   173     42       1    0.855  0.0508        0.760        0.960
+##   235     40       1    0.833  0.0539        0.734        0.946
+##   333     38       1    0.811  0.0567        0.707        0.930
+##   418     36       1    0.789  0.0595        0.680        0.914
+##   721     30       1    0.762  0.0630        0.648        0.897
+##   854     28       1    0.735  0.0664        0.616        0.878
+##   905     24       1    0.705  0.0703        0.579        0.857
+##   944     23       1    0.674  0.0737        0.544        0.835
+##  1371     14       1    0.626  0.0826        0.483        0.811
+##  1983      6       1    0.521  0.1175        0.335        0.811
+## 
+##                 sexo=M 
+##  time n.risk n.event survival std.err lower 95% CI upper 95% CI
+##    16    144       1    0.993 0.00692        0.980        1.000
+##    18    143       1    0.986 0.00975        0.967        1.000
+##    21    142       1    0.979 0.01190        0.956        1.000
+##    29    139       1    0.972 0.01374        0.946        0.999
+##    35    138       1    0.965 0.01534        0.935        0.996
+##    37    137       1    0.958 0.01677        0.926        0.991
+##    39    136       1    0.951 0.01807        0.916        0.987
+##    40    135       1    0.944 0.01926        0.907        0.982
+##    52    133       1    0.937 0.02038        0.898        0.978
+##    54    132       1    0.930 0.02142        0.889        0.973
+##    60    131       1    0.923 0.02241        0.880        0.968
+##    80    130       1    0.916 0.02333        0.871        0.962
+##    83    128       1    0.908 0.02422        0.862        0.957
+##    84    127       1    0.901 0.02506        0.853        0.952
+##   108    125       1    0.894 0.02588        0.845        0.946
+##   123    124       1    0.887 0.02666        0.836        0.941
+##   150    122       1    0.880 0.02741        0.827        0.935
+##   151    121       1    0.872 0.02813        0.819        0.929
+##   152    120       1    0.865 0.02882        0.810        0.923
+##   158    119       1    0.858 0.02948        0.802        0.918
+##   179    117       1    0.850 0.03013        0.793        0.912
+##   183    116       1    0.843 0.03075        0.785        0.906
+##   194    115       1    0.836 0.03134        0.777        0.899
+##   204    113       1    0.828 0.03192        0.768        0.893
+##   214    112       1    0.821 0.03248        0.760        0.887
+##   254    110       1    0.814 0.03304        0.751        0.881
+##   259    109       1    0.806 0.03356        0.743        0.875
+##   285    108       1    0.799 0.03407        0.735        0.868
+##   290    107       1    0.791 0.03456        0.726        0.862
+##   304    105       1    0.784 0.03505        0.718        0.855
+##   310    104       1    0.776 0.03551        0.709        0.849
+##   323    103       1    0.769 0.03595        0.701        0.842
+##   340    101       1    0.761 0.03639        0.693        0.836
+##   371     98       1    0.753 0.03684        0.684        0.829
+##   397     95       1    0.745 0.03730        0.676        0.822
+##   408     94       1    0.737 0.03773        0.667        0.815
+##   419     93       1    0.729 0.03815        0.658        0.808
+##   426     92       1    0.721 0.03855        0.650        0.801
+##   499     89       1    0.713 0.03896        0.641        0.794
+##   516     87       1    0.705 0.03937        0.632        0.787
+##   555     86       1    0.697 0.03975        0.623        0.779
+##   572     85       1    0.689 0.04012        0.614        0.772
+##   618     83       1    0.680 0.04049        0.606        0.765
+##   623     82       1    0.672 0.04084        0.597        0.757
+##   631     81       1    0.664 0.04117        0.588        0.750
+##   644     80       1    0.656 0.04148        0.579        0.742
+##   645     79       1    0.647 0.04178        0.570        0.735
+##   688     76       1    0.639 0.04209        0.561        0.727
+##   733     74       1    0.630 0.04239        0.552        0.719
+##   775     73       1    0.621 0.04268        0.543        0.711
+##   811     71       1    0.613 0.04297        0.534        0.703
+##   850     70       1    0.604 0.04324        0.525        0.695
+##   852     69       1    0.595 0.04349        0.516        0.687
+##   855     68       1    0.586 0.04372        0.507        0.679
+##   887     67       1    0.578 0.04394        0.498        0.671
+##   892     66       1    0.569 0.04413        0.489        0.662
+##   927     64       1    0.560 0.04433        0.480        0.654
+##   952     61       1    0.551 0.04454        0.470        0.645
+##   967     59       1    0.542 0.04476        0.461        0.637
+##   992     56       1    0.532 0.04499        0.451        0.628
+##   998     55       1    0.522 0.04520        0.441        0.619
+##  1015     53       1    0.512 0.04541        0.431        0.610
+##  1085     50       1    0.502 0.04564        0.420        0.600
+##  1116     49       1    0.492 0.04584        0.410        0.590
+##  1125     48       1    0.482 0.04602        0.399        0.581
+##  1139     47       1    0.471 0.04617        0.389        0.571
+##  1145     46       1    0.461 0.04629        0.379        0.561
+##  1226     45       1    0.451 0.04638        0.369        0.552
+##  1247     43       1    0.440 0.04647        0.358        0.542
+##  1261     42       1    0.430 0.04653        0.348        0.531
+##  1348     35       1    0.418 0.04680        0.335        0.520
+##  1506     31       1    0.404 0.04719        0.321        0.508
+##  1563     28       1    0.390 0.04766        0.307        0.495
+##  2898      3       1    0.260 0.11072        0.113        0.599</code></pre>
+<p>O valor da sobrevivência mediana dos homens é de 1116 dias, enquanto para as mulheres, não foi possível calcular este percentil, já que o estudo foi encerrado antes que a função de sobrevivência atingisse 0.5.</p>
+<p>O valor do percentil 0.75 para os homens foi de 397 dias, enquanto para as mulheres foi de 854. Já o percentil 0.9 para os homens foi de 108 dias, enquanto as mulheres atingiram este marca em 151 dias.</p>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Existe diferença na sobrevivência dos pacientes submetidos aos diferentes tipos de tratamento (variável <code>tratam</code>)?</li>
+</ol>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1">tratam &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(tempo, status) <span class="op">~</span><span class="st"> </span>tratam, <span class="dt">data =</span> ipec)</a>
+<a class="sourceLine" id="cb46-2" title="2">tratam</a></code></pre></div>
+<pre><code>## Call: survfit(formula = Surv(tempo, status) ~ tratam, data = ipec)
+## 
+##                    n events median 0.95LCL 0.95UCL
+## tratam=Nenhum     44     32    173     151     516
+## tratam=Mono      100     51   1226     967      NA
+## tratam=Combinada  35      6   2898    2898      NA
+## tratam=Potente    14      1     NA      NA      NA</code></pre>
+<p>Há uma diferença considerável entre as sobrevivências de pacientes de acordo com o tratamento recebido. Os pacientes que não receberam nenhum tratamento têm mediana de 173 dias, enquanto os pacientes tratados com um medicamento têm mediana de 1226 dias, já os que receberam o tratamento combinado têm mediana de 2898 dias. Os que receberam o tratamento “Potente” têm mediana desconhecida, provavelmente devido ao pequeno número de eventos observados (apenas 1).</p>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>Existe diferença na sobrevivência de pacientes com diferentes graus de escolaridade?</li>
+</ol>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1">escola &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(tempo, status) <span class="op">~</span><span class="st"> </span>escola, <span class="dt">data =</span> ipec)</a>
+<a class="sourceLine" id="cb48-2" title="2">escola</a></code></pre></div>
+<pre><code>## Call: survfit(formula = Surv(tempo, status) ~ escola, data = ipec)
+## 
+##    11 observations deleted due to missingness 
+##                n events median 0.95LCL 0.95UCL
+## escola=sem    59     26   1371     850      NA
+## escola=fundam 44     20   1116     733      NA
+## escola=medio  55     27   1563    1085      NA
+## escola=sup    24     11    855     644      NA</code></pre>
+<p>Sim, existe diferença na sobrevivência segundo escolaridade. Os pacientes com escolaridade média tem maior sobrevivência, enquanto as pessoas com nível superior de escolaridade de menor sobrevivência.</p>
+</div>
 </div>
 
 
