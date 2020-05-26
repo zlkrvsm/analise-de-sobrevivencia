@@ -644,7 +644,7 @@ $(document).ready(function () {
 <h3>4.3</h3>
 <p>Os dados completos de tempo de aleitamento (estudo fictício) estão presentes no arquivo <em>leite.txt</em>, Apêndice 12.4. Abra este banco de dados no R e:</p>
 <ol style="list-style-type: lower-alpha">
-<li>Costrua a tabela Kaplan-Meier. Verifique qual o tempo mediano de aleitamento na saída do R.
+<li>Construa a tabela Kaplan-Meier. Verifique qual o tempo mediano de aleitamento na saída do R.
 <ul>
 <li>Como não foi possível importar o arquivo <em>leite.txt</em>, construímos o banco “manualmente” <a href="#q4_1">acima</a>.</li>
 </ul></li>
@@ -807,7 +807,7 @@ Comunidade 4: 1 16 20 1 1 1 1 2 2 13 3 1 1 14 2</code></pre>
 <a class="sourceLine" id="cb22-3" title="3"><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;Com. 1&quot;</span>, <span class="st">&quot;Com. 2&quot;</span>, <span class="st">&quot;Com. 3&quot;</span>, <span class="st">&quot;Com. 4&quot;</span>), <span class="dt">fill =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)</a></code></pre></div>
 <p><img src="exercicio-cap-4_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <div class="line-block">     A comunidade 2 tem uma sobrevivência parecida com a 1, estimativas levemente melhores em alguns pontos.</div>
-<div class="line-block">     A comunidade 3 tem uma sobrevivência parecida com a comunidade 1 no ínicio do período, mas para o final do período, tem uma sobrevivência bem melhor.</div>
+<div class="line-block">     A comunidade 3 tem uma sobrevivência parecida com a comunidade 1 no inicio do período, mas para o final do período, tem uma sobrevivência bem melhor.</div>
 <div class="line-block">     A comunidade 4 tem uma sobrevivência pior que a 1 no início do período, mas no final do período, apresenta uma sobrevivência maior e comparável a comunidade 3.</div>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>Use os testes log-rank e Peto para a variável <code>grupo</code>. Analise as funções de sobrevivência das quatro comunidades. A que conclusões você chega com esta análise? Existe diferença entre as comunidades quanto ao tempo de aleitamento?</li>
@@ -888,7 +888,14 @@ Comunidade 4: 1 16 20 1 1 1 1 2 2 13 3 1 1 14 2</code></pre>
 <li>Os óbitos e as censuras se concentraram no final do estudo ou ocorreram durante todo o período?</li>
 <li>Qual o tempo de sobrevivência mediano?</li>
 </ol></li>
+<li>Existe diferença entre homens e mulheres quanto ao tempo de sobrevivência pós-diagnóstico de Aids?</li>
+<li>Compare homens e mulheres segundo tempos de sobrevivência mediano e percentis 75 e 90.</li>
+<li>Existe diferença na sobrevivência dos pacientes submetidos aos diferentes tipos de tratamento (variável <code>tratam</code>)?</li>
+<li>Existe diferença na sobrevivência de pacientes com diferentes graus de escolaridade?</li>
+<li>Faça os gráficos de sobrevivência e risco e aplique os testes log-rank e Peto.</li>
 </ol>
+<div id="análise-exploratória" class="section level4">
+<h4>Análise exploratória</h4>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="co"># Idade média dos pacientes</span></a>
 <a class="sourceLine" id="cb28-2" title="2"><span class="kw">mean</span>(ipec<span class="op">$</span>idade)</a></code></pre></div>
 <pre><code>## [1] 36.55</code></pre>
@@ -917,147 +924,233 @@ Comunidade 4: 1 16 20 1 1 1 1 2 2 13 3 1 1 14 2</code></pre>
 <a class="sourceLine" id="cb40-4" title="4">km &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(tempo, status) <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> ipec)</a>
 <a class="sourceLine" id="cb40-5" title="5">km<span class="op">$</span>surv[km<span class="op">$</span>surv <span class="op">&lt;=</span><span class="st"> </span><span class="fl">0.5</span>][<span class="dv">1</span>]</a></code></pre></div>
 <pre><code>## [1] 0.4955</code></pre>
-<ol start="2" style="list-style-type: lower-alpha">
-<li>Existe diferença entre homens e mulheres quanto ao tempo de sobrevivência pós-diagnóstico de Aids?</li>
-</ol>
+</div>
+<div id="diferenças-entre-homens-e-mulheres" class="section level4">
+<h4>Diferenças entre homens e mulheres</h4>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1">sexo &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(tempo, status) <span class="op">~</span><span class="st"> </span>sexo, <span class="dt">data =</span> ipec)</a>
-<a class="sourceLine" id="cb42-2" title="2">sexo</a></code></pre></div>
-<pre><code>## Call: survfit(formula = Surv(tempo, status) ~ sexo, data = ipec)
+<a class="sourceLine" id="cb42-2" title="2"><span class="kw">plot</span>(</a>
+<a class="sourceLine" id="cb42-3" title="3">  sexo,</a>
+<a class="sourceLine" id="cb42-4" title="4">  <span class="dt">col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb42-5" title="5">  <span class="dt">conf.int =</span> T,</a>
+<a class="sourceLine" id="cb42-6" title="6">  <span class="dt">main =</span> <span class="st">&quot;Sobrevivência por sexo&quot;</span>,</a>
+<a class="sourceLine" id="cb42-7" title="7">  <span class="dt">xlab =</span> <span class="st">&quot;Dias&quot;</span>,</a>
+<a class="sourceLine" id="cb42-8" title="8">  <span class="dt">ylab =</span> <span class="kw">expression</span>(<span class="kw">S</span>(t))</a>
+<a class="sourceLine" id="cb42-9" title="9">)</a>
+<a class="sourceLine" id="cb42-10" title="10"><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="dt">legend =</span> <span class="kw">levels</span>(ipec<span class="op">$</span>sexo), <span class="dt">fill =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-4_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1"><span class="kw">plot</span>(</a>
+<a class="sourceLine" id="cb43-2" title="2">  sexo,</a>
+<a class="sourceLine" id="cb43-3" title="3">  <span class="dt">col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb43-4" title="4">  <span class="dt">conf.int =</span> F,</a>
+<a class="sourceLine" id="cb43-5" title="5">  <span class="dt">fun =</span> <span class="st">&quot;cumhaz&quot;</span>,</a>
+<a class="sourceLine" id="cb43-6" title="6">  <span class="dt">main =</span> <span class="st">&quot;Risco por sexo&quot;</span>,</a>
+<a class="sourceLine" id="cb43-7" title="7">  <span class="dt">xlab =</span> <span class="st">&quot;Dias&quot;</span>,</a>
+<a class="sourceLine" id="cb43-8" title="8">  <span class="dt">ylab =</span> <span class="kw">expression</span>(<span class="kw">S</span>(t))</a>
+<a class="sourceLine" id="cb43-9" title="9">)</a>
+<a class="sourceLine" id="cb43-10" title="10"><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend =</span> <span class="kw">levels</span>(ipec<span class="op">$</span>sexo), <span class="dt">fill =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-4_files/figure-html/unnamed-chunk-15-2.png" width="672" /></p>
+<p>Há uma diferença expressiva na sobrevivência de homens e mulheres, algo que pode ser constatado na representação gráfica estratificada do Kaplan-Meier, porém, como há bastante sobreposição nos intervalos de confiança, executamos os testes de significância log-rank e Peto. Quando observamos a função de risco, vemos o mesmo padrão, embora no início do acompanhamento as curvas estejam muito próximas, a curva de risco das mulheres cresce mais lentamente a partir do 500º dia.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1">sx_logr &lt;-<span class="st"> </span><span class="kw">survdiff</span>(<span class="kw">Surv</span>(tempo, status) <span class="op">~</span><span class="st"> </span>sexo, <span class="dt">data =</span> ipec)</a>
+<a class="sourceLine" id="cb44-2" title="2">sx_peto &lt;-<span class="st"> </span><span class="kw">survdiff</span>(<span class="kw">Surv</span>(tempo, status) <span class="op">~</span><span class="st"> </span>sexo, <span class="dt">data =</span> ipec, <span class="dt">rho =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb44-3" title="3">sx_logr</a></code></pre></div>
+<pre><code>## Call:
+## survdiff(formula = Surv(tempo, status) ~ sexo, data = ipec)
 ## 
-##          n events median 0.95LCL 0.95UCL
-## sexo=F  49     16     NA    1371      NA
-## sexo=M 144     74   1116     887    1563</code></pre>
-<p>Existe uma diferença bastante expressiva entre homens e mulheres considerando que o tempo mediano de sobrevivência dos homens é de 1116 dias enquanto as mulheres sequer chegaram a esse patamar de sobrevivência, sendo que o menor valor da função de sobrevivência foi <span class="math inline">\(S(t) = 0.521\)</span>.</p>
-<ol start="3" style="list-style-type: lower-alpha">
-<li>Compare homens e mulheres segundo tempos de sobrevivência mediano e percentis 75 e 90.</li>
-</ol>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="kw">summary</span>(sexo)</a></code></pre></div>
-<pre><code>## Call: survfit(formula = Surv(tempo, status) ~ sexo, data = ipec)
+##          N Observed Expected (O-E)^2/E (O-E)^2/V
+## sexo=F  49       16     24.5      2.93      4.03
+## sexo=M 144       74     65.5      1.09      4.03
 ## 
-##                 sexo=F 
-##  time n.risk n.event survival std.err lower 95% CI upper 95% CI
-##    22     49       1    0.980  0.0202        0.941        1.000
-##   116     47       1    0.959  0.0286        0.904        1.000
-##   134     46       1    0.938  0.0347        0.872        1.000
-##   145     45       1    0.917  0.0397        0.842        0.998
-##   151     44       1    0.896  0.0439        0.814        0.987
-##   163     43       1    0.875  0.0476        0.787        0.974
-##   173     42       1    0.855  0.0508        0.760        0.960
-##   235     40       1    0.833  0.0539        0.734        0.946
-##   333     38       1    0.811  0.0567        0.707        0.930
-##   418     36       1    0.789  0.0595        0.680        0.914
-##   721     30       1    0.762  0.0630        0.648        0.897
-##   854     28       1    0.735  0.0664        0.616        0.878
-##   905     24       1    0.705  0.0703        0.579        0.857
-##   944     23       1    0.674  0.0737        0.544        0.835
-##  1371     14       1    0.626  0.0826        0.483        0.811
-##  1983      6       1    0.521  0.1175        0.335        0.811
+##  Chisq= 4  on 1 degrees of freedom, p= 0.04</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1">sx_peto</a></code></pre></div>
+<pre><code>## Call:
+## survdiff(formula = Surv(tempo, status) ~ sexo, data = ipec, rho = 1)
 ## 
-##                 sexo=M 
-##  time n.risk n.event survival std.err lower 95% CI upper 95% CI
-##    16    144       1    0.993 0.00692        0.980        1.000
-##    18    143       1    0.986 0.00975        0.967        1.000
-##    21    142       1    0.979 0.01190        0.956        1.000
-##    29    139       1    0.972 0.01374        0.946        0.999
-##    35    138       1    0.965 0.01534        0.935        0.996
-##    37    137       1    0.958 0.01677        0.926        0.991
-##    39    136       1    0.951 0.01807        0.916        0.987
-##    40    135       1    0.944 0.01926        0.907        0.982
-##    52    133       1    0.937 0.02038        0.898        0.978
-##    54    132       1    0.930 0.02142        0.889        0.973
-##    60    131       1    0.923 0.02241        0.880        0.968
-##    80    130       1    0.916 0.02333        0.871        0.962
-##    83    128       1    0.908 0.02422        0.862        0.957
-##    84    127       1    0.901 0.02506        0.853        0.952
-##   108    125       1    0.894 0.02588        0.845        0.946
-##   123    124       1    0.887 0.02666        0.836        0.941
-##   150    122       1    0.880 0.02741        0.827        0.935
-##   151    121       1    0.872 0.02813        0.819        0.929
-##   152    120       1    0.865 0.02882        0.810        0.923
-##   158    119       1    0.858 0.02948        0.802        0.918
-##   179    117       1    0.850 0.03013        0.793        0.912
-##   183    116       1    0.843 0.03075        0.785        0.906
-##   194    115       1    0.836 0.03134        0.777        0.899
-##   204    113       1    0.828 0.03192        0.768        0.893
-##   214    112       1    0.821 0.03248        0.760        0.887
-##   254    110       1    0.814 0.03304        0.751        0.881
-##   259    109       1    0.806 0.03356        0.743        0.875
-##   285    108       1    0.799 0.03407        0.735        0.868
-##   290    107       1    0.791 0.03456        0.726        0.862
-##   304    105       1    0.784 0.03505        0.718        0.855
-##   310    104       1    0.776 0.03551        0.709        0.849
-##   323    103       1    0.769 0.03595        0.701        0.842
-##   340    101       1    0.761 0.03639        0.693        0.836
-##   371     98       1    0.753 0.03684        0.684        0.829
-##   397     95       1    0.745 0.03730        0.676        0.822
-##   408     94       1    0.737 0.03773        0.667        0.815
-##   419     93       1    0.729 0.03815        0.658        0.808
-##   426     92       1    0.721 0.03855        0.650        0.801
-##   499     89       1    0.713 0.03896        0.641        0.794
-##   516     87       1    0.705 0.03937        0.632        0.787
-##   555     86       1    0.697 0.03975        0.623        0.779
-##   572     85       1    0.689 0.04012        0.614        0.772
-##   618     83       1    0.680 0.04049        0.606        0.765
-##   623     82       1    0.672 0.04084        0.597        0.757
-##   631     81       1    0.664 0.04117        0.588        0.750
-##   644     80       1    0.656 0.04148        0.579        0.742
-##   645     79       1    0.647 0.04178        0.570        0.735
-##   688     76       1    0.639 0.04209        0.561        0.727
-##   733     74       1    0.630 0.04239        0.552        0.719
-##   775     73       1    0.621 0.04268        0.543        0.711
-##   811     71       1    0.613 0.04297        0.534        0.703
-##   850     70       1    0.604 0.04324        0.525        0.695
-##   852     69       1    0.595 0.04349        0.516        0.687
-##   855     68       1    0.586 0.04372        0.507        0.679
-##   887     67       1    0.578 0.04394        0.498        0.671
-##   892     66       1    0.569 0.04413        0.489        0.662
-##   927     64       1    0.560 0.04433        0.480        0.654
-##   952     61       1    0.551 0.04454        0.470        0.645
-##   967     59       1    0.542 0.04476        0.461        0.637
-##   992     56       1    0.532 0.04499        0.451        0.628
-##   998     55       1    0.522 0.04520        0.441        0.619
-##  1015     53       1    0.512 0.04541        0.431        0.610
-##  1085     50       1    0.502 0.04564        0.420        0.600
-##  1116     49       1    0.492 0.04584        0.410        0.590
-##  1125     48       1    0.482 0.04602        0.399        0.581
-##  1139     47       1    0.471 0.04617        0.389        0.571
-##  1145     46       1    0.461 0.04629        0.379        0.561
-##  1226     45       1    0.451 0.04638        0.369        0.552
-##  1247     43       1    0.440 0.04647        0.358        0.542
-##  1261     42       1    0.430 0.04653        0.348        0.531
-##  1348     35       1    0.418 0.04680        0.335        0.520
-##  1506     31       1    0.404 0.04719        0.321        0.508
-##  1563     28       1    0.390 0.04766        0.307        0.495
-##  2898      3       1    0.260 0.11072        0.113        0.599</code></pre>
-<p>O valor da sobrevivência mediana dos homens é de 1116 dias, enquanto para as mulheres, não foi possível calcular este percentil, já que o estudo foi encerrado antes que a função de sobrevivência atingisse 0.5.</p>
-<p>O valor do percentil 0.75 para os homens foi de 397 dias, enquanto para as mulheres foi de 854. Já o percentil 0.9 para os homens foi de 108 dias, enquanto as mulheres atingiram este marca em 151 dias.</p>
-<ol start="4" style="list-style-type: lower-alpha">
-<li>Existe diferença na sobrevivência dos pacientes submetidos aos diferentes tipos de tratamento (variável <code>tratam</code>)?</li>
-</ol>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1">tratam &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(tempo, status) <span class="op">~</span><span class="st"> </span>tratam, <span class="dt">data =</span> ipec)</a>
-<a class="sourceLine" id="cb46-2" title="2">tratam</a></code></pre></div>
-<pre><code>## Call: survfit(formula = Surv(tempo, status) ~ tratam, data = ipec)
+##          N Observed Expected (O-E)^2/E (O-E)^2/V
+## sexo=F  49     12.1     18.2     2.011      3.54
+## sexo=M 144     55.1     49.0     0.746      3.54
 ## 
-##                    n events median 0.95LCL 0.95UCL
-## tratam=Nenhum     44     32    173     151     516
-## tratam=Mono      100     51   1226     967      NA
-## tratam=Combinada  35      6   2898    2898      NA
-## tratam=Potente    14      1     NA      NA      NA</code></pre>
-<p>Há uma diferença considerável entre as sobrevivências de pacientes de acordo com o tratamento recebido. Os pacientes que não receberam nenhum tratamento têm mediana de 173 dias, enquanto os pacientes tratados com um medicamento têm mediana de 1226 dias, já os que receberam o tratamento combinado têm mediana de 2898 dias. Os que receberam o tratamento “Potente” têm mediana desconhecida, provavelmente devido ao pequeno número de eventos observados (apenas 1).</p>
-<ol start="5" style="list-style-type: lower-alpha">
-<li>Existe diferença na sobrevivência de pacientes com diferentes graus de escolaridade?</li>
-</ol>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1">escola &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(tempo, status) <span class="op">~</span><span class="st"> </span>escola, <span class="dt">data =</span> ipec)</a>
-<a class="sourceLine" id="cb48-2" title="2">escola</a></code></pre></div>
-<pre><code>## Call: survfit(formula = Surv(tempo, status) ~ escola, data = ipec)
+##  Chisq= 3.5  on 1 degrees of freedom, p= 0.06</code></pre>
+<p>Dentro de um intervalo de confiança de 0.05, o teste log-rank considerou as diferenças estatisticamente significantes, mas o teste de Peto não considerou significativa as diferenças (<span class="math inline">\(p = 0.06\)</span>). Considerando a importância da variável sexo nos desfechos de saúde, faz sentido considerar que o resultado é estatisticamente significativo apesar do resultado do teste Peto.</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1"><span class="kw">quantile</span>(sexo, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.1</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>))</a></code></pre></div>
+<pre><code>## $quantile
+##         10  25   50
+## sexo=F 151 854   NA
+## sexo=M 108 397 1116
 ## 
-##    11 observations deleted due to missingness 
-##                n events median 0.95LCL 0.95UCL
-## escola=sem    59     26   1371     850      NA
-## escola=fundam 44     20   1116     733      NA
-## escola=medio  55     27   1563    1085      NA
-## escola=sup    24     11    855     644      NA</code></pre>
-<p>Sim, existe diferença na sobrevivência segundo escolaridade. Os pacientes com escolaridade média tem maior sobrevivência, enquanto as pessoas com nível superior de escolaridade de menor sobrevivência.</p>
+## $lower
+##         10  25   50
+## sexo=F 134 235 1371
+## sexo=M  52 259  887
+## 
+## $upper
+##         10  25   50
+## sexo=F 721  NA   NA
+## sexo=M 194 631 1563</code></pre>
+<p>O valor da sobrevivência mediana dos homens é de 1116 dias [887, 1563], enquanto para as mulheres, não foi possível calcular este percentil, já que o estudo foi encerrado antes que a função de sobrevivência atingisse 0.5, mas o intervalo de confiança inferior foi de 1371 dias.</p>
+<p>O valor do percentil 0.75 para os homens foi de 397 dias [259, 631], enquanto para as mulheres foi de 854 [235, <span class="math inline">\(\infty\)</span>]. Já o percentil 0.9 para os homens foi de 108 dias [52, 194], enquanto as mulheres atingiram este marca em 151 dias [134, 721].</p>
+<p>Tanto analisando as estimativas pontuais quanto os intervalos de confiança, fica claro que as mulheres tem uma sobrevivência significativamente maior que os homens.</p>
+</div>
+<div id="diferenças-de-acordo-com-o-tratamento" class="section level4">
+<h4>Diferenças de acordo com o tratamento</h4>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1">tratam &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(tempo, status) <span class="op">~</span><span class="st"> </span>tratam, <span class="dt">data =</span> ipec)</a>
+<a class="sourceLine" id="cb50-2" title="2"></a>
+<a class="sourceLine" id="cb50-3" title="3"><span class="kw">plot</span>(</a>
+<a class="sourceLine" id="cb50-4" title="4">  tratam,</a>
+<a class="sourceLine" id="cb50-5" title="5">  <span class="dt">col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb50-6" title="6">  <span class="dt">conf.int =</span> F,</a>
+<a class="sourceLine" id="cb50-7" title="7">  <span class="dt">main =</span> <span class="st">&quot;Sobrevivência por tratamento&quot;</span>,</a>
+<a class="sourceLine" id="cb50-8" title="8">  <span class="dt">xlab =</span> <span class="st">&quot;Dias&quot;</span>,</a>
+<a class="sourceLine" id="cb50-9" title="9">  <span class="dt">ylab =</span> <span class="kw">expression</span>(<span class="kw">S</span>(t))</a>
+<a class="sourceLine" id="cb50-10" title="10">)</a>
+<a class="sourceLine" id="cb50-11" title="11"><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="dt">legend =</span> <span class="kw">levels</span>(ipec<span class="op">$</span>tratam), <span class="dt">fill =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-4_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1"><span class="kw">plot</span>(</a>
+<a class="sourceLine" id="cb51-2" title="2">  tratam,</a>
+<a class="sourceLine" id="cb51-3" title="3">  <span class="dt">col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb51-4" title="4">  <span class="dt">conf.int =</span> F,</a>
+<a class="sourceLine" id="cb51-5" title="5">  <span class="dt">fun =</span> <span class="st">&quot;cumhaz&quot;</span>,</a>
+<a class="sourceLine" id="cb51-6" title="6">  <span class="dt">main =</span> <span class="st">&quot;Risco por tratamento&quot;</span>,</a>
+<a class="sourceLine" id="cb51-7" title="7">  <span class="dt">xlab =</span> <span class="st">&quot;Dias&quot;</span>,</a>
+<a class="sourceLine" id="cb51-8" title="8">  <span class="dt">ylab =</span> <span class="kw">expression</span>(<span class="kw">S</span>(t))</a>
+<a class="sourceLine" id="cb51-9" title="9">)</a>
+<a class="sourceLine" id="cb51-10" title="10"><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend =</span> <span class="kw">levels</span>(ipec<span class="op">$</span>tratam), <span class="dt">fill =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-4_files/figure-html/unnamed-chunk-18-2.png" width="672" /></p>
+<p>Há uma diferença considerável entre as sobrevivências de pacientes de acordo com o tratamento recebido. Os pacientes que não receberam nenhum tratamento têm curva de sobrevivência claramente inferior aos que receberam o tratamento mono, enquanto os pacientes que receberam a combinada e potente sobreviveram ainda mais. A função de risco explicita ainda mais a questão quando observamos o agrupamento das curvas dos pacientes tratados em relação aqueles que não receberam tratamento.</p>
+<p>Podemos realizar os testes de significância estatística para nos certificar de que não se trata de resultado causado por variações na amostra.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1">tto_lr &lt;-<span class="st"> </span><span class="kw">survdiff</span>(<span class="kw">Surv</span>(tempo, status) <span class="op">~</span><span class="st"> </span>tratam, <span class="dt">data =</span> ipec)</a>
+<a class="sourceLine" id="cb52-2" title="2">tto_pt &lt;-<span class="st"> </span><span class="kw">survdiff</span>(<span class="kw">Surv</span>(tempo, status) <span class="op">~</span><span class="st"> </span>tratam, <span class="dt">data =</span> ipec, <span class="dt">rho =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb52-3" title="3">tto_lr</a></code></pre></div>
+<pre><code>## Call:
+## survdiff(formula = Surv(tempo, status) ~ tratam, data = ipec)
+## 
+##                    N Observed Expected (O-E)^2/E (O-E)^2/V
+## tratam=Nenhum     44       32     9.51    53.229    61.560
+## tratam=Mono      100       51    54.73     0.254     0.659
+## tratam=Combinada  35        6    20.27    10.050    13.049
+## tratam=Potente    14        1     5.49     3.674     3.950
+## 
+##  Chisq= 69  on 3 degrees of freedom, p= 7e-15</code></pre>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1">tto_pt</a></code></pre></div>
+<pre><code>## Call:
+## survdiff(formula = Surv(tempo, status) ~ tratam, data = ipec, 
+##     rho = 1)
+## 
+##                    N Observed Expected (O-E)^2/E (O-E)^2/V
+## tratam=Nenhum     44    27.03     7.81    47.230     65.78
+## tratam=Mono      100    35.30    40.06     0.565      1.80
+## tratam=Combinada  35     3.89    14.98     8.206     13.70
+## tratam=Potente    14     1.00     4.37     2.597      3.43
+## 
+##  Chisq= 72.2  on 3 degrees of freedom, p= 1e-15</code></pre>
+<p>Os testes demonstram que a significância estatística é fortíssima (<span class="math inline">\(p &lt; 0,000001\)</span>) e que os resultados são precisos. Ou seja, a hipótese nula encontra-se plenamente rejeitada e a sujeição ao tratamento apresenta forte correlação com a sobrevivência.</p>
+<p>De fato, se verificamos os quantis da sobrevivência como no caso anterior,</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1"><span class="kw">quantile</span>(tratam, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.1</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>))</a></code></pre></div>
+<pre><code>## $quantile
+##                   10   25   50
+## tratam=Nenhum     40  116  173
+## tratam=Mono      254  631 1226
+## tratam=Combinada 775 2898 2898
+## tratam=Potente    NA   NA   NA
+## 
+## $lower
+##                   10  25   50
+## tratam=Nenhum     29  54  151
+## tratam=Mono      145 418  967
+## tratam=Combinada 419 944 2898
+## tratam=Potente    16  NA   NA
+## 
+## $upper
+##                   10  25  50
+## tratam=Nenhum    116 158 516
+## tratam=Mono      418 892  NA
+## tratam=Combinada  NA  NA  NA
+## tratam=Potente    NA  NA  NA</code></pre>
+<p>Notamos que os tratamentos melhoram a sobrevivência em todos os estágios, com os tratamentos “combinado” e “potente” sequer apresentando intervalos superiores. Na verdade, o tratamento “potente” nem chegou ao quantil 10%.</p>
+</div>
+<div id="diferenças-de-acordo-com-a-escolaridade" class="section level4">
+<h4>Diferenças de acordo com a escolaridade</h4>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1">escola &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(tempo, status) <span class="op">~</span><span class="st"> </span>escola, <span class="dt">data =</span> ipec)</a>
+<a class="sourceLine" id="cb58-2" title="2"></a>
+<a class="sourceLine" id="cb58-3" title="3"><span class="kw">plot</span>(</a>
+<a class="sourceLine" id="cb58-4" title="4">  escola,</a>
+<a class="sourceLine" id="cb58-5" title="5">  <span class="dt">col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb58-6" title="6">  <span class="dt">conf.int =</span> F,</a>
+<a class="sourceLine" id="cb58-7" title="7">  <span class="dt">main =</span> <span class="st">&quot;Sobrevivência por escolaridade&quot;</span>,</a>
+<a class="sourceLine" id="cb58-8" title="8">  <span class="dt">xlab =</span> <span class="st">&quot;Dias&quot;</span>,</a>
+<a class="sourceLine" id="cb58-9" title="9">  <span class="dt">ylab =</span> <span class="kw">expression</span>(<span class="kw">S</span>(t))</a>
+<a class="sourceLine" id="cb58-10" title="10">)</a>
+<a class="sourceLine" id="cb58-11" title="11"><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="dt">legend =</span> <span class="kw">levels</span>(ipec<span class="op">$</span>escola), <span class="dt">fill =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-4_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" title="1"><span class="kw">plot</span>(</a>
+<a class="sourceLine" id="cb59-2" title="2">  escola,</a>
+<a class="sourceLine" id="cb59-3" title="3">  <span class="dt">col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb59-4" title="4">  <span class="dt">conf.int =</span> F,</a>
+<a class="sourceLine" id="cb59-5" title="5">  <span class="dt">fun =</span> <span class="st">&quot;cumhaz&quot;</span>,</a>
+<a class="sourceLine" id="cb59-6" title="6">  <span class="dt">main =</span> <span class="st">&quot;Risco por escolaridade&quot;</span>,</a>
+<a class="sourceLine" id="cb59-7" title="7">  <span class="dt">xlab =</span> <span class="st">&quot;Dias&quot;</span>,</a>
+<a class="sourceLine" id="cb59-8" title="8">  <span class="dt">ylab =</span> <span class="kw">expression</span>(<span class="kw">S</span>(t))</a>
+<a class="sourceLine" id="cb59-9" title="9">)</a>
+<a class="sourceLine" id="cb59-10" title="10"><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend =</span> <span class="kw">levels</span>(ipec<span class="op">$</span>escola), <span class="dt">fill =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-4_files/figure-html/unnamed-chunk-21-2.png" width="672" /></p>
+<p>A análise do gráfico da sobrevivência aponta diferenças na escolaridade, porém, as curvas estão bastante próximas uma das outras, o que sugere que, se há diferenças na sobrevivência entre os níveis de escolaridade, estas diferenças não são facilmente captadas num banco de dados deste tamanho, já que ocorrerá bastante sobreposição nos intervalos de confiança. O gráfico de risco mostra algo semelhante, já que o risco para os diferentes níveis de escolaridade não se diferenciam significativamente uns dos outros ao longo do acompanhamento. Vejamos,</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1">esc_lr &lt;-<span class="st"> </span><span class="kw">survdiff</span>(<span class="kw">Surv</span>(tempo, status) <span class="op">~</span><span class="st"> </span>escola, <span class="dt">data =</span> ipec)</a>
+<a class="sourceLine" id="cb60-2" title="2">esc_pt &lt;-<span class="st"> </span><span class="kw">survdiff</span>(<span class="kw">Surv</span>(tempo, status) <span class="op">~</span><span class="st"> </span>escola, <span class="dt">data =</span> ipec, <span class="dt">rho =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb60-3" title="3">esc_lr</a></code></pre></div>
+<pre><code>## Call:
+## survdiff(formula = Surv(tempo, status) ~ escola, data = ipec)
+## 
+## n=182, 11 observations deleted due to missingness.
+## 
+##                N Observed Expected (O-E)^2/E (O-E)^2/V
+## escola=sem    59       26     24.2    0.1348    0.1910
+## escola=fundam 44       20     19.2    0.0376    0.0490
+## escola=medio  55       27     30.4    0.3785    0.6111
+## escola=sup    24       11     10.3    0.0529    0.0605
+## 
+##  Chisq= 0.6  on 3 degrees of freedom, p= 0.9</code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1">esc_pt</a></code></pre></div>
+<pre><code>## Call:
+## survdiff(formula = Surv(tempo, status) ~ escola, data = ipec, 
+##     rho = 1)
+## 
+## n=182, 11 observations deleted due to missingness.
+## 
+##                N Observed Expected (O-E)^2/E (O-E)^2/V
+## escola=sem    59    20.50    18.55    0.2048    0.3683
+## escola=fundam 44    15.96    14.56    0.1348    0.2228
+## escola=medio  55    18.42    22.10    0.6112    1.2316
+## escola=sup    24     8.16     7.84    0.0135    0.0195
+## 
+##  Chisq= 1.3  on 3 degrees of freedom, p= 0.7</code></pre>
+<p>Realmente, apesar das diferenças observadas, os <span class="math inline">\(p\)</span>-valores não são suficientes para rejeitar a hipótese nula, seja no teste de log-rank, seja no Peto, já que existe grande probabilidade deste resultado ser produto de uma amostra não representativa da população.</p>
+<p>Se analisamos os quantis,</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" title="1"><span class="kw">quantile</span>(escola, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.1</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>))</a></code></pre></div>
+<pre><code>## $quantile
+##                10  25   50
+## escola=sem    116 310 1371
+## escola=fundam  84 333 1116
+## escola=medio  214 688 1563
+## escola=sup    204 623  855
+## 
+## $lower
+##                10  25   50
+## escola=sem     52 173  850
+## escola=fundam  22 152  733
+## escola=medio  123 371 1085
+## escola=sup     21 204  644
+## 
+## $upper
+##                10   25 50
+## escola=sem    285  887 NA
+## escola=fundam 333  944 NA
+## escola=medio  618 1125 NA
+## escola=sup    811 1261 NA</code></pre>
+<p>Notamos que os intervalos de confiança apresentam bastante sobreposição. No caso do quantil 0.1, por exemplo, as pessoas sem escolaridade tem sobrevivência de 50% daquelas com ensino médio se consideramos a estimativa pontual (116 &lt; 214), porém, quando analisamos os intervalos de confiança (respectivamente, [52, 285], [123, 618]), vemos que esta diferença não é mais tão clara quanto, por exemplo, no caso dos diferentes tipos de tratamento.</p>
+</div>
+<div id="síntese" class="section level4">
+<h4>Síntese</h4>
+<p>Em suma, as análises mostraram que o tratamento foi uma covariável importante para a sobrevivência, estatisticamente robusta e, em menor medida, o sexo também pode ser considerado uma covariável significativa. A educação, embora apesar de conhecida sua relevância para a questão da saúde da população, não apresenta informações suficientes neste banco de dados para fazer afirmações estatisticamente robustas sobre a sua associação com a sobrevivência.</p>
+</div>
 </div>
 </div>
 

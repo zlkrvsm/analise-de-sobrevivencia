@@ -145,7 +145,7 @@ knitr::kable(aleit_na, digits = 4, col.names = names)
 
 Os dados completos de tempo de aleitamento (estudo fictício) estão presentes no arquivo *leite.txt*, Apêndice 12.4. Abra este banco de dados no R e:
 
-a. Costrua a tabela Kaplan-Meier. Verifique qual o tempo mediano de aleitamento na saída do R.
+a. Construa a tabela Kaplan-Meier. Verifique qual o tempo mediano de aleitamento na saída do R.
     - Como não foi possível importar o arquivo *leite.txt*, construímos o banco "manualmente" [acima](#q4_1).
 ```{r}
 aleit_fit <- survfit(Surv(x) ~ 1)
@@ -228,7 +228,7 @@ legend("topright", c("Com. 1", "Com. 2", "Com. 3", "Com. 4"), fill = 1:4)
 
 |      A comunidade 2 tem uma sobrevivência parecida com a 1, estimativas levemente melhores em alguns pontos.
 
-|      A comunidade 3 tem uma sobrevivência parecida com a comunidade 1 no ínicio do período, mas para o final do período, tem uma sobrevivência bem melhor. 
+|      A comunidade 3 tem uma sobrevivência parecida com a comunidade 1 no inicio do período, mas para o final do período, tem uma sobrevivência bem melhor. 
 
 |      A comunidade 4 tem uma sobrevivência pior que a 1 no início do período, mas no final do período, apresenta uma sobrevivência maior e comparável a comunidade 3.
 
@@ -295,6 +295,13 @@ a. Amplie a análise exploratória desses dados usando o R:
     4. Quantos foram a óbito e quantos foram censurados?
     5. Os óbitos e as censuras se concentraram no final do estudo ou ocorreram durante todo o período?
     6. Qual o tempo de sobrevivência mediano?
+b. Existe diferença entre homens e mulheres quanto ao tempo de sobrevivência pós-diagnóstico de Aids?
+c. Compare homens e mulheres segundo tempos de sobrevivência mediano e percentis 75 e 90.
+d. Existe diferença na sobrevivência dos pacientes submetidos aos diferentes tipos de tratamento (variável `tratam`)?
+e. Existe diferença na sobrevivência de pacientes com diferentes graus de escolaridade?
+f. Faça os gráficos de sobrevivência e risco e aplique os testes log-rank e Peto.
+
+#### Análise exploratória
     
 ```{r}
 # Idade média dos pacientes
@@ -323,41 +330,149 @@ hist(ipec$tempo[ipec$status == 0], main = "Censuras")
 km <- survfit(Surv(tempo, status) ~ 1, data = ipec)
 km$surv[km$surv <= 0.5][1]
 ```
-    
-b. Existe diferença entre homens e mulheres quanto ao tempo de sobrevivência pós-diagnóstico de Aids?
+
+#### Diferenças entre homens e mulheres
 
 ```{r}
 sexo <- survfit(Surv(tempo, status) ~ sexo, data = ipec)
-sexo
+plot(
+  sexo,
+  col = 1:2,
+  conf.int = T,
+  main = "Sobrevivência por sexo",
+  xlab = "Dias",
+  ylab = expression(S(t))
+)
+legend("topright", legend = levels(ipec$sexo), fill = 1:2)
+
+plot(
+  sexo,
+  col = 1:2,
+  conf.int = F,
+  fun = "cumhaz",
+  main = "Risco por sexo",
+  xlab = "Dias",
+  ylab = expression(S(t))
+)
+legend("topleft", legend = levels(ipec$sexo), fill = 1:2)
+
 ```
 
-Existe uma diferença bastante expressiva entre homens e mulheres considerando que o tempo mediano de sobrevivência dos homens é de 1116 dias enquanto as mulheres sequer chegaram a esse patamar de sobrevivência, sendo que o menor valor da função de sobrevivência foi $S(t) = 0.521$.
-
-c. Compare homens e mulheres segundo tempos de sobrevivência mediano e percentis 75 e 90.
+Há uma diferença expressiva na sobrevivência de homens e mulheres, algo que pode ser constatado na representação gráfica estratificada do Kaplan-Meier, porém, como há bastante sobreposição nos intervalos de confiança, executamos os testes de significância log-rank e Peto. Quando observamos a função de risco, vemos o mesmo padrão, embora no início do acompanhamento as curvas estejam muito próximas, a curva de risco das mulheres cresce mais lentamente a partir do 500º dia.
 
 ```{r}
-summary(sexo)
+sx_logr <- survdiff(Surv(tempo, status) ~ sexo, data = ipec)
+sx_peto <- survdiff(Surv(tempo, status) ~ sexo, data = ipec, rho = 1)
+sx_logr
+sx_peto
 ```
 
-O valor da sobrevivência mediana dos homens é de 1116 dias, enquanto para as mulheres, não foi possível calcular este percentil, já que o estudo foi encerrado antes que a função de sobrevivência atingisse 0.5.
+Dentro de um intervalo de confiança de 0.05, o teste log-rank considerou as diferenças estatisticamente significantes, mas o teste de Peto não considerou significativa as diferenças ($p = 0.06$). Considerando a importância da variável sexo nos desfechos de saúde, faz sentido considerar que o resultado é estatisticamente significativo apesar do resultado do teste Peto.
 
-O valor do percentil 0.75 para os homens foi de 397 dias, enquanto para as mulheres foi de 854. Já o percentil 0.9 para os homens foi de 108 dias, enquanto as mulheres atingiram este marca em 151 dias.
+```{r}
+quantile(sexo, probs = c(0.1, 0.25, 0.5))
+```
 
-d. Existe diferença na sobrevivência dos pacientes submetidos aos diferentes tipos de tratamento (variável `tratam`)?
+O valor da sobrevivência mediana dos homens é de 1116 dias [887, 1563], enquanto para as mulheres, não foi possível calcular este percentil, já que o estudo foi encerrado antes que a função de sobrevivência atingisse 0.5, mas o intervalo de confiança inferior foi de 1371 dias.
+
+O valor do percentil 0.75 para os homens foi de 397 dias [259, 631], enquanto para as mulheres foi de 854 [235, $\infty$]. Já o percentil 0.9 para os homens foi de 108 dias [52, 194], enquanto as mulheres atingiram este marca em 151 dias [134, 721].
+
+Tanto analisando as estimativas pontuais quanto os intervalos de confiança, fica claro que as mulheres tem uma sobrevivência significativamente maior que os homens.
+
+#### Diferenças de acordo com o tratamento
 
 ```{r}
 tratam <- survfit(Surv(tempo, status) ~ tratam, data = ipec)
-tratam
+
+plot(
+  tratam,
+  col = 1:4,
+  conf.int = F,
+  main = "Sobrevivência por tratamento",
+  xlab = "Dias",
+  ylab = expression(S(t))
+)
+legend("topright", legend = levels(ipec$tratam), fill = 1:4)
+
+plot(
+  tratam,
+  col = 1:4,
+  conf.int = F,
+  fun = "cumhaz",
+  main = "Risco por tratamento",
+  xlab = "Dias",
+  ylab = expression(S(t))
+)
+legend("topleft", legend = levels(ipec$tratam), fill = 1:4)
 ```
 
-Há uma diferença considerável entre as sobrevivências de pacientes de acordo com o tratamento recebido. Os pacientes que não receberam nenhum tratamento têm mediana de 173 dias, enquanto os pacientes tratados com um medicamento têm  mediana de 1226 dias, já os que receberam o tratamento combinado têm mediana de 2898 dias. Os que receberam o tratamento "Potente" têm mediana desconhecida, provavelmente devido ao pequeno número de eventos observados (apenas 1).
+Há uma diferença considerável entre as sobrevivências de pacientes de acordo com o tratamento recebido. Os pacientes que não receberam nenhum tratamento têm curva de sobrevivência claramente inferior aos que receberam o tratamento mono, enquanto os pacientes que receberam a combinada e potente sobreviveram ainda mais. A função de risco explicita ainda mais a questão quando observamos o agrupamento das curvas dos pacientes tratados em relação aqueles que não receberam tratamento.
 
-e. Existe diferença na sobrevivência de pacientes com diferentes graus de escolaridade?
+Podemos realizar os testes de significância estatística para nos certificar de que não se trata de resultado causado por variações na amostra.
+
+```{r}
+tto_lr <- survdiff(Surv(tempo, status) ~ tratam, data = ipec)
+tto_pt <- survdiff(Surv(tempo, status) ~ tratam, data = ipec, rho = 1)
+tto_lr
+tto_pt
+```
+
+Os testes demonstram que a significância estatística é fortíssima ($p < 0,000001$) e que os resultados são precisos. Ou seja, a hipótese nula encontra-se plenamente rejeitada e a sujeição ao tratamento apresenta forte correlação com a sobrevivência.
+
+De fato, se verificamos os quantis da sobrevivência como no caso anterior,
+
+```{r}
+quantile(tratam, probs = c(0.1, 0.25, 0.5))
+```
+
+Notamos que os tratamentos melhoram a sobrevivência em todos os estágios, com os tratamentos "combinado" e "potente" sequer apresentando intervalos superiores. Na verdade, o tratamento "potente" nem chegou ao quantil 10%.
+
+#### Diferenças de acordo com a escolaridade
 
 ```{r}
 escola <- survfit(Surv(tempo, status) ~ escola, data = ipec)
-escola
+
+plot(
+  escola,
+  col = 1:4,
+  conf.int = F,
+  main = "Sobrevivência por escolaridade",
+  xlab = "Dias",
+  ylab = expression(S(t))
+)
+legend("topright", legend = levels(ipec$escola), fill = 1:4)
+
+plot(
+  escola,
+  col = 1:4,
+  conf.int = F,
+  fun = "cumhaz",
+  main = "Risco por escolaridade",
+  xlab = "Dias",
+  ylab = expression(S(t))
+)
+legend("topleft", legend = levels(ipec$escola), fill = 1:4)
 ```
 
-Sim, existe diferença na sobrevivência segundo escolaridade. Os pacientes com escolaridade média tem maior sobrevivência, enquanto as pessoas com nível superior de escolaridade de menor sobrevivência.
+A análise do gráfico da sobrevivência aponta diferenças na escolaridade, porém, as curvas estão bastante próximas uma das outras, o que sugere que, se há diferenças na sobrevivência entre os níveis de escolaridade, estas diferenças não são facilmente captadas num banco de dados deste tamanho, já que ocorrerá bastante sobreposição nos intervalos de confiança. O gráfico de risco mostra algo semelhante, já que o risco para os diferentes níveis de escolaridade não se diferenciam significativamente uns dos outros ao longo do acompanhamento. Vejamos,
 
+```{r}
+esc_lr <- survdiff(Surv(tempo, status) ~ escola, data = ipec)
+esc_pt <- survdiff(Surv(tempo, status) ~ escola, data = ipec, rho = 1)
+esc_lr
+esc_pt
+```
+
+Realmente, apesar das diferenças observadas, os $p$-valores não são suficientes para rejeitar a hipótese nula, seja no teste de log-rank, seja no Peto, já que existe grande probabilidade deste resultado ser produto de uma amostra não representativa da população.
+
+Se analisamos os quantis,
+
+```{r}
+quantile(escola, probs = c(0.1, 0.25, 0.5))
+```
+
+Notamos que os intervalos de confiança apresentam bastante sobreposição. No caso do quantil 0.1, por exemplo, as pessoas sem escolaridade tem sobrevivência de 50% daquelas com ensino médio se consideramos a estimativa pontual (116 < 214), porém, quando analisamos os intervalos de confiança (respectivamente, [52, 285], [123, 618]), vemos que esta diferença não é mais tão clara quanto, por exemplo, no caso dos diferentes tipos de tratamento.
+
+#### Síntese
+
+Em suma, as análises mostraram que o tratamento foi uma covariável importante para a sobrevivência, estatisticamente robusta e, em menor medida, o sexo também pode ser considerado uma covariável significativa. A educação, embora apesar de conhecida sua relevância para a questão da saúde da população, não apresenta informações suficientes neste banco de dados para fazer afirmações estatisticamente robustas sobre a sua associação com a sobrevivência.
