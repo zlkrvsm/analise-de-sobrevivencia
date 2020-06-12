@@ -40,3 +40,6 @@ vignettes/*.pdf
 
 # Mac filesystem
 .DS_Store
+
+# Pdfs
+*.pdf
