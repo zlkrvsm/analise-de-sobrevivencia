@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # History files
 .Rhistory
 .Rapp.history
@@ -41,3 +42,6 @@ vignettes/*.pdf
 # Data folders
 dados/
 
+# Pdfs
+*.pdf
+>>>>>>> 3c5c28afca48d51d118d5055fc3f80555d28746a
