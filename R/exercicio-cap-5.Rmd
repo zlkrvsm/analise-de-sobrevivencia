@@ -434,7 +434,175 @@ curve(
   lty = 2,
   add = TRUE
 )
-
+abs(leite_exp$loglik[1]) - abs(leite_wei$loglik[1])
 ```
 
-A análise visual do modelo em relação ao Kaplan-Meier sugere que o modelo se ajustou bem aos dados, porém, a análise formal de variância não encontrou diferenças estatisticamente significativas entre o modelo Weibull e o modelo exponencial.
+A análise visual do modelo em relação ao Kaplan-Meier sugere que o modelo se ajustou bem aos dados, porém, a análise formal de variância não encontrou diferenças estatisticamente significativas entre o modelo Weibull e o modelo exponencial, apesar de existir uma diferença (`r abs(leite_exp$loglik[1]) - abs(leite_wei$loglik[1])`) na verossimilhança em favor do modelo Weibull.
+
+## 5.8
+
+O banco de dados *leite2.txt* contém dados do tempo de aleitamento de crianças de quatro comunidades. No ajuste não-paramétrico a esses dados, observamos que pertencer a uma comunidade não teve efeito no período de aleitamento. Confirme este achado, ajustando um modelo paramétrico a esses dados. Experimente com as distribuições exponencial e Weibull.
+
+```{r q58}
+leite2 <- data.frame(id = 1:60,
+           tempo = c(6L, 12L, 10L, 3L, 5L, 1L, 6L, 8L, 1L, 5L, 2L, 2L,
+                     5L, 8L, 1L, 5L, 12L, 10L, 4L, 4L, 3L, 6L, 9L, 2L,
+                     6L, 4L, 1L, 7L, 10L, 1L, 13L, 14L, 20L, 3L, 5L, 1L,
+                     8L, 15L, 2L, 5L, 3L, 2L, 6L, 15L, 1L, 1L, 16L, 20L,
+                     1L, 1L, 1L, 1L, 2L, 2L, 13L, 3L, 1L, 1L, 14L, 2L),
+           status = 1,
+           grupo = rep(1:4, each = 15))
+leite2
+
+# Exponencial
+survreg(Surv(tempo, status) ~ factor(grupo),
+        data = leite2,
+        dist = "exp")
+
+# Weibull
+survreg(Surv(tempo, status) ~ factor(grupo),
+        data = leite2,
+        dist = "wei")
+```
+
+Os resultados da estimação não paramétrica se mantém. Os modelos ajustados com o fator grupo não apresentaram resultados significativamente melhores que os resultados do modelo nulo. Os $p$-valores foram não-significativos.
+
+## 5.9
+
+Um estudo foi realizado para estimar o efeito do transplante de medula óssea na sobrevivência de pacientes com lecuemia. As covariáveis analisadas foram: idade, fase da doença, ter ou não desenvolvido doença enxerto crônico e ter ou não desenvolvido doença enxerto aguda (para mais detalhes acerca desse estudo, refira-se ao Apêndice 12.4). Um modelo exponencial ajustado aos dados, apresenta a seguinte saída do R:
+
+```{r q59_img}
+knitr::include_graphics("questao_5_9.png")
+```
+
+Observe a saída do R e responda:
+
+a. O modelo com covariáveis é melhor do que o modelo nulo (sem covariáveis)?
+b. Que covariáveis estão associadas com maior sobrevivência? Quais estão associadas com a redução da sobrevivência?
+c. Escreva a função de risco, $\lambda(t)$, estimada para esta coorte.
+d. Qual seria o risco de óbito de um paciente de 30 anos, em fase intermediária, com doença crônica?
+e. Qual seria o risco de óbito de um paciente de 30 anos, em fase intermediária, com doença aguda?
+f. Um segundo modelo, mais simples, foi ajustado aos dados, contendo apenas a covariável fase. O logaritmo da função de verossimilhança deste modelo simples foi de -363,6. Compare este modelo com o mais completo ajustado anteriormente e indique se este último resultou em melhor ajuste.
+
+O modelo com covariáveis é melhor que o modelo nulo, pois a diferença entre as razões de verossimilhança entre o modelo ajustado e o nulo é estatisticamente significativa.
+
+```{r q59_analise}
+# Coeficientes do modelo
+coef <- c("intercept" = 7.13536,
+          "idade" = -0.00179,
+          "fase interm" = -0.79363,
+          "fase avancad" = -1.29759,
+          "doncacronica" = 0.92521,
+          "doencaaguda" = -1.43654)
+
+# Variáveis associadas a maior/menor sobrevivência
+exp(-coef[-1])
+
+# Risco de óbito de um paciente de 30 anos
+# com doença crônica
+exp(-(coef[1] + coef[2]*30 + coef[3]*1 + coef[4]*0 + coef[5]*1 + coef[6]*0))
+# com doença aguda
+exp(-(coef[1] + coef[2]*30 + coef[3]*1 + coef[4]*0 + coef[5]*0 + coef[6]*1))
+```
+
+As variáveis associadas a uma menor sobrevivência são fase intermediária e avançada e doença aguda, enquanto uma maior sobrevivência está associada a doença crônica. A idade não apresentou resultado significativo ($p > 0.05$).
+
+A função de risco estimada para esta coorte pode ser descrita pela equação, note que o tempo não aparece do lado direito da equação, pois no modelo exponencial, o risco é dado como constante: 
+
+$$\lambda(t|x)=exp(-(7.13536 + -0.00179 \times idade - 0.79363 \times f.interm - 1.29759 \times f.avanç + 0.92521 \times d.cron - 1.43654 \times d.agud))$$
+
+Considerando o ajuste do modelo mais completo ter um loglik de -348.3 e o modelo com apenas fase ter um loglik de 363.6, avalia-se que o modelo mais completo resultou em melhor ajuste.
+
+## 5.10
+
+A Aids passou a ter tratamento apenas 1991. Desde então a terapia antirretroviral evoluiu da monoterapia para a terapia combinada (2 ou mais componentes) e, por fim, para a terapia de alta potência (no mínimo 3 componentes, sendo um inibidor de protease). Espera-se que as terapias mais recentes sejam mais efetivas em aumentar a sobrevivência. Teste esta hipótese ajustando um modelo exponencial aos dados da coorte de Aids (banco *ipec.csv* - Apêndice 12.4).
+
+a. Ajuste um modelo com a variável tratamento apenas. O modelo com a variável tratamento é melhor do que o modelo sem covariáveis? Interprete o efeito dos tratamentos na sobrevivência (lembrando-se que os efeitos dos tratamentos estão sendo estimados em relação à ausência do tratamento).
+b. Faça uma análise gráfica do ajuste do modelo, comparando-o com a curva de Kaplan-Meier estratificada por tratamento. O que você tem a dizer sobre a adequação do modelo exponencial?
+c. Faça a análise de resíduos do modelo estimado. Existe algum ponto influente, sobre a estimativa dos parâmetros (ldcase), sobre os valores preditos (ldresp) ou sobre o parâmetro de forma?
+d. Caso considere algum ponto muito influente, retire-o e refaça a análise.
+e. Ajuste um outro modelo exponencial, adicionando variáveis de controle (sexo, idade e tipo de atendimento). Quais variáveis tiveram efeito significativo? Quais tiveram efeito protetor?
+
+```{r q510}
+# Banco ipec
+ipec <- read.csv("ipec.csv", sep = ";")
+
+ipec$tratam <- factor(ipec$tratam)
+
+ipec
+
+# Modelo com a variável tratamento
+mod_exp <- survreg(Surv(tempo, status) ~ tratam, 
+                   data = ipec, 
+                   dist = "exp")
+mod_exp
+
+# Efeito dos distintos tratamentos (betas)
+exp(-mod_exp$coef[-1]) - 1
+
+# Análise gráfica de ajuste do modelo
+alfa_sem <- exp(-mod_exp$coef[1])
+alfa_mono <- exp(-mod_exp$coef[2]) 
+alfa_comb <- exp(-mod_exp$coef[3])
+alfa_pot <- exp(-mod_exp$coef[4])
+
+km <- survfit(Surv(tempo, status) ~ tratam, data = ipec)
+plot(km,
+     lty = 1:4,
+     ylab = "S(t)", xlab = "Tempo",
+     main = "Modelo X Kaplan-Meier")
+curve(exp(-alfa_sem * x),
+      from = 0, to = 3000,
+      ylim = c(0, 1),
+      lty = 1,
+      add = T)
+curve(exp(-alfa_sem * alfa_mono * x),
+      from = 0, to = 3000,
+      ylim = c(0, 1),
+      lty = 2,
+      add = T)
+curve(exp(-alfa_sem * alfa_comb * x),
+      from = 0, to = 3000,
+      ylim = c(0, 1),
+      lty = 3,
+      add = T)
+curve(exp(-alfa_sem * alfa_pot * x),
+      from = 0, to = 3000,
+      ylim = c(0, 1),
+      lty = 4,
+      add = T)
+legend("bottomright", lty = 1:4, 
+       legend = c("Sem", "mono", "comb", "poten"))
+
+# Análise de Resíduos
+res_case <- residuals(mod_exp, type = "ldcase")
+res_resp <- residuals(mod_exp, type = "ldresp")
+res_shape <- residuals(mod_exp, type = "ldshape")
+
+par(mfrow = c(2, 2))
+plot(res_case, main = "Parâmetros")
+plot(res_resp, main = "Preditos")
+plot(res_shape, main = "Forma")
+
+# Modelo sem alguns outliers
+mod_exp2 <- survreg(Surv(tempo, status) ~ tratam, 
+                   data = ipec, 
+                   dist = "exp",
+                   subset = -c(9, 49, 82))
+mod_exp2
+
+# Outro modelo com covariáveis adicionas
+ipec$sexo <- factor(ipec$sexo)
+ipec$acompan <- factor(ipec$acompan)
+
+mod_exp3 <- survreg(Surv(tempo, status) ~ tratam + sexo + idade + acompan, data = ipec, dist = "exp")
+summary(mod_exp3)
+```
+
+O modelo ajustado é melhor que o modelo sem covariáveis (RV < Nulo, $p < 0.05$). Os tratamentos apresentam efeitos protetores significativos (80, 93 e 95% respectivamente para o mono, o combinado e o potente).
+
+A análise gráfica mostrou que os modelos exponenciais não se ajustam particularmente bem a estimação não-paramétrica de Kaplan-Meier, pois a ausência de parâmetros adicionais limita bastante o formato da curva para representar o fenômeno.
+
+A análise dos resíduos revelou alguns indivíduos não tratados que apresentaram tempos de sobrevivência longos e um indívudo que recebeu terapia potente e faleceu rapidamente, o que dificultava o ajuste do modelo. Optei por remover os pacientes não tratados com altos tempos de sobrevivência, mas preservar o óbito tratado com potente, devido ao pequeno número de casos no banco gerar uma estimativa muito otimista da sobrevivência ao remover o único óbito registrado. O novo modelo se ajusta um pouco melhor aos dados.
+
+Ao ajustar um modelo com covariáveis adicionais, como sexo e idade e tipo de atendimento, verificou-se que sexo e idade não foram significativas ($p>0.05$). Apenas os tratamentos tiveram efeito protetor.
