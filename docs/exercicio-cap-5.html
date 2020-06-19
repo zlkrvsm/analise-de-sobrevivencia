@@ -24,9 +24,9 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -36,16 +36,14 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -54,9 +52,9 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {   }
+  {  }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; } /* Alert */
 code span.an { color: #008000; } /* Annotation */
@@ -354,6 +352,9 @@ $(document).ready(function () {
 <li>
   <a href="exercicio-cap-4.html">Exercícios Capítulo 4</a>
 </li>
+<li>
+  <a href="exercicio-cap-5.html">Exercícios Capítulo 5</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -373,6 +374,7 @@ $(document).ready(function () {
 
 <div id="pacotes-e-opções" class="section level2">
 <h2>Pacotes e opções</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(survival)</a></code></pre></div>
 </div>
 <div id="exercícios" class="section level2">
 <h2>Exercícios</h2>
@@ -387,7 +389,7 @@ $(document).ready(function () {
 <li>Qual foi a sobrevivência média e mediana no grupo controle? E no grupo recebendo tratamento?</li>
 <li>As duas curvas estimadas de sobrevivência são apresentadas na figura a seguir. Localize, nessa figura, o tempo mediano e médio calculado. Analisando o gráfico, você acha que o tratamento teve efeito na sobrevivência desses pacientes?</li>
 </ol>
-<p><img src="questao_5_1.png" /><!-- --></p>
+<p><img src="questao_5_1.png" width="132" /></p>
 <p>O risco instantâneo estimado pode ser obtido através da seguinte expressão:</p>
 <p><span class="math display">\[\lambda(t) = f(t)/S(t)\]</span> Sendo <span class="math inline">\(f(t) = \alpha exp(-\alpha t)\)</span> e <span class="math inline">\(S(t) = exp(-\alpha t)\)</span>, e <span class="math inline">\(\alpha_{c} = 0,07\)</span> e <span class="math inline">\(\alpha_{tr} = 0,04\)</span>, podemos afirmar que:</p>
 <p>O risco instantâneo para o grupo de controle é: <span class="math display">\[\lambda _c(t) = \frac{0,07 exp(-0,07 t)}{exp(-0,07 t)} = 0,07\]</span> E para o grupo de tratamento é: <span class="math display">\[\lambda _{tr}(t) = \frac{0,04 exp(-0,04 t)}{exp(-0,04 t)} = 0,04\]</span></p>
@@ -395,55 +397,403 @@ $(document).ready(function () {
 <p>Ou seja, para o grupo de controle, o tempo médio de sobrevivência é dado por <span class="math display">\[\frac{1}{\alpha_c} = \frac{1}{0,07} = 14,2857\]</span> e o tempo mediano de sobrevivência é dado por <span class="math display">\[0,5 = exp(-0,07t)\]</span> <span class="math display">\[\frac{\ln(2)}{\alpha_c} = \frac{\ln(2)}{0,07} = 9,9\]</span></p>
 <p>Ou seja, para o grupo de tratamento, o tempo médio de sobrevivência é dado por <span class="math display">\[\frac{1}{\alpha_{tr}} = \frac{1}{0,07} = 14,2857\]</span> e o tempo mediano de sobrevivência é dado por <span class="math display">\[0,5 = exp(-0,04t)\]</span> <span class="math display">\[\frac{\ln(2)}{\alpha_{tr}} = \frac{\ln(2)}{0,04} = 17,3\]</span></p>
 <p>Podemos plotar as curvas de sobrevivência com os pontos relevantes para a sobrevivência mediana e média nas duas curvas:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Curve para a plotagem de CONTROLE</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>alfa =<span class="st"> </span><span class="fl">0.07</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">curve</span>(<span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>x), <span class="dt">from =</span> <span class="dv">0</span>, <span class="dt">to =</span> <span class="dv">25</span>, <span class="dt">ylab =</span> <span class="st">&quot;S(t)&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Tempo&quot;</span>)</span>
-<span id="cb1-4"><a href="#cb1-4"></a></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="co"># Mediana do modelo exponencial</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a>p50 &lt;-<span class="st"> </span><span class="kw">log</span>(<span class="dv">1</span><span class="op">/</span><span class="fl">0.5</span>)<span class="op">/</span>alfa</span>
-<span id="cb1-7"><a href="#cb1-7"></a></span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="co"># Média do modelo exponencial</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a>pm &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span>alfa</span>
-<span id="cb1-10"><a href="#cb1-10"></a></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="co"># Segmentos de reta e pontos para a plotagem</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="co"># Mediana</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a><span class="kw">segments</span>(p50, <span class="dv">0</span>, p50, <span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>p50), <span class="dt">lty =</span> <span class="dv">3</span>)</span>
-<span id="cb1-14"><a href="#cb1-14"></a><span class="kw">segments</span>(<span class="op">-</span><span class="dv">1</span>, <span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>p50), p50, <span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>p50), <span class="dt">lty =</span> <span class="dv">3</span>)</span>
-<span id="cb1-15"><a href="#cb1-15"></a><span class="kw">points</span>(p50, <span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>p50), <span class="dt">pch =</span> <span class="dv">16</span>)</span>
-<span id="cb1-16"><a href="#cb1-16"></a></span>
-<span id="cb1-17"><a href="#cb1-17"></a><span class="co"># Media</span></span>
-<span id="cb1-18"><a href="#cb1-18"></a><span class="kw">segments</span>(pm, <span class="dv">0</span>, pm, <span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>pm), <span class="dt">lty =</span> <span class="dv">3</span>)</span>
-<span id="cb1-19"><a href="#cb1-19"></a><span class="kw">segments</span>(<span class="op">-</span><span class="dv">1</span>, <span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>pm), pm, <span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>pm), <span class="dt">lty =</span> <span class="dv">3</span>)</span>
-<span id="cb1-20"><a href="#cb1-20"></a><span class="kw">points</span>(pm, <span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>pm), <span class="dt">pch =</span> <span class="dv">16</span>)</span>
-<span id="cb1-21"><a href="#cb1-21"></a></span>
-<span id="cb1-22"><a href="#cb1-22"></a><span class="co"># Curve para a plotagem de TRATAMENTO</span></span>
-<span id="cb1-23"><a href="#cb1-23"></a>alfa =<span class="st"> </span><span class="fl">0.04</span></span>
-<span id="cb1-24"><a href="#cb1-24"></a><span class="kw">curve</span>(<span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>x), <span class="dt">from =</span> <span class="dv">0</span>, <span class="dt">to =</span> <span class="dv">25</span>, <span class="dt">ylab =</span> <span class="st">&quot;S(t)&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Tempo&quot;</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb1-25"><a href="#cb1-25"></a></span>
-<span id="cb1-26"><a href="#cb1-26"></a><span class="co"># Mediana do modelo exponencial</span></span>
-<span id="cb1-27"><a href="#cb1-27"></a>p50 &lt;-<span class="st"> </span><span class="kw">log</span>(<span class="dv">1</span><span class="op">/</span><span class="fl">0.5</span>)<span class="op">/</span>alfa</span>
-<span id="cb1-28"><a href="#cb1-28"></a></span>
-<span id="cb1-29"><a href="#cb1-29"></a><span class="co"># Média do modelo exponencial</span></span>
-<span id="cb1-30"><a href="#cb1-30"></a>pm &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span>alfa</span>
-<span id="cb1-31"><a href="#cb1-31"></a></span>
-<span id="cb1-32"><a href="#cb1-32"></a><span class="co"># Segmentos de reta e pontos para a plotagem</span></span>
-<span id="cb1-33"><a href="#cb1-33"></a><span class="co"># Mediana</span></span>
-<span id="cb1-34"><a href="#cb1-34"></a><span class="kw">segments</span>(p50, <span class="dv">0</span>, p50, <span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>p50), <span class="dt">lty =</span> <span class="dv">3</span>)</span>
-<span id="cb1-35"><a href="#cb1-35"></a><span class="kw">segments</span>(<span class="op">-</span><span class="dv">1</span>, <span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>p50), p50, <span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>p50), <span class="dt">lty =</span> <span class="dv">3</span>)</span>
-<span id="cb1-36"><a href="#cb1-36"></a><span class="kw">points</span>(p50, <span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>p50), <span class="dt">pch =</span> <span class="dv">16</span>)</span>
-<span id="cb1-37"><a href="#cb1-37"></a><span class="kw">text</span>(p50, <span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>p50), <span class="st">&quot;Mediana&quot;</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="fl">1.5</span>, <span class="fl">-0.25</span>))</span>
-<span id="cb1-38"><a href="#cb1-38"></a></span>
-<span id="cb1-39"><a href="#cb1-39"></a><span class="co"># Media</span></span>
-<span id="cb1-40"><a href="#cb1-40"></a><span class="kw">segments</span>(pm, <span class="dv">0</span>, pm, <span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>pm), <span class="dt">lty =</span> <span class="dv">3</span>)</span>
-<span id="cb1-41"><a href="#cb1-41"></a><span class="kw">segments</span>(<span class="op">-</span><span class="dv">1</span>, <span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>pm), pm, <span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>pm), <span class="dt">lty =</span> <span class="dv">3</span>)</span>
-<span id="cb1-42"><a href="#cb1-42"></a><span class="kw">points</span>(pm, <span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>pm), <span class="dt">pch =</span> <span class="dv">16</span>)</span>
-<span id="cb1-43"><a href="#cb1-43"></a><span class="kw">text</span>(pm, <span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>pm), <span class="st">&quot;Média&quot;</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="fl">1.5</span>, <span class="fl">-0.25</span>))</span>
-<span id="cb1-44"><a href="#cb1-44"></a></span>
-<span id="cb1-45"><a href="#cb1-45"></a><span class="co"># Legendas</span></span>
-<span id="cb1-46"><a href="#cb1-46"></a><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;Controle&quot;</span>, <span class="st">&quot;Tratamento&quot;</span>), <span class="dt">lty =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</span></code></pre></div>
-<p><img src="exercicio-cap-5_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># Curve para a plotagem de CONTROLE</span></a>
+<a class="sourceLine" id="cb2-2" title="2">alfa =<span class="st"> </span><span class="fl">0.07</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="kw">curve</span>(<span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>x), <span class="dt">from =</span> <span class="dv">0</span>, <span class="dt">to =</span> <span class="dv">25</span>, <span class="dt">ylab =</span> <span class="st">&quot;S(t)&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Tempo&quot;</span>)</a>
+<a class="sourceLine" id="cb2-4" title="4"></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="co"># Mediana do modelo exponencial</span></a>
+<a class="sourceLine" id="cb2-6" title="6">p50 &lt;-<span class="st"> </span><span class="kw">log</span>(<span class="dv">1</span><span class="op">/</span><span class="fl">0.5</span>)<span class="op">/</span>alfa</a>
+<a class="sourceLine" id="cb2-7" title="7"></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="co"># Média do modelo exponencial</span></a>
+<a class="sourceLine" id="cb2-9" title="9">pm &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span>alfa</a>
+<a class="sourceLine" id="cb2-10" title="10"></a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="co"># Segmentos de reta e pontos para a plotagem</span></a>
+<a class="sourceLine" id="cb2-12" title="12"><span class="co"># Mediana</span></a>
+<a class="sourceLine" id="cb2-13" title="13"><span class="kw">segments</span>(p50, <span class="dv">0</span>, p50, <span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>p50), <span class="dt">lty =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb2-14" title="14"><span class="kw">segments</span>(<span class="op">-</span><span class="dv">1</span>, <span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>p50), p50, <span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>p50), <span class="dt">lty =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb2-15" title="15"><span class="kw">points</span>(p50, <span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>p50), <span class="dt">pch =</span> <span class="dv">16</span>)</a>
+<a class="sourceLine" id="cb2-16" title="16"></a>
+<a class="sourceLine" id="cb2-17" title="17"><span class="co"># Media</span></a>
+<a class="sourceLine" id="cb2-18" title="18"><span class="kw">segments</span>(pm, <span class="dv">0</span>, pm, <span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>pm), <span class="dt">lty =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb2-19" title="19"><span class="kw">segments</span>(<span class="op">-</span><span class="dv">1</span>, <span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>pm), pm, <span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>pm), <span class="dt">lty =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb2-20" title="20"><span class="kw">points</span>(pm, <span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>pm), <span class="dt">pch =</span> <span class="dv">16</span>)</a>
+<a class="sourceLine" id="cb2-21" title="21"></a>
+<a class="sourceLine" id="cb2-22" title="22"><span class="co"># Curve para a plotagem de TRATAMENTO</span></a>
+<a class="sourceLine" id="cb2-23" title="23">alfa =<span class="st"> </span><span class="fl">0.04</span></a>
+<a class="sourceLine" id="cb2-24" title="24"><span class="kw">curve</span>(<span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>x), <span class="dt">from =</span> <span class="dv">0</span>, <span class="dt">to =</span> <span class="dv">25</span>, <span class="dt">ylab =</span> <span class="st">&quot;S(t)&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Tempo&quot;</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb2-25" title="25"></a>
+<a class="sourceLine" id="cb2-26" title="26"><span class="co"># Mediana do modelo exponencial</span></a>
+<a class="sourceLine" id="cb2-27" title="27">p50 &lt;-<span class="st"> </span><span class="kw">log</span>(<span class="dv">1</span><span class="op">/</span><span class="fl">0.5</span>)<span class="op">/</span>alfa</a>
+<a class="sourceLine" id="cb2-28" title="28"></a>
+<a class="sourceLine" id="cb2-29" title="29"><span class="co"># Média do modelo exponencial</span></a>
+<a class="sourceLine" id="cb2-30" title="30">pm &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span>alfa</a>
+<a class="sourceLine" id="cb2-31" title="31"></a>
+<a class="sourceLine" id="cb2-32" title="32"><span class="co"># Segmentos de reta e pontos para a plotagem</span></a>
+<a class="sourceLine" id="cb2-33" title="33"><span class="co"># Mediana</span></a>
+<a class="sourceLine" id="cb2-34" title="34"><span class="kw">segments</span>(p50, <span class="dv">0</span>, p50, <span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>p50), <span class="dt">lty =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb2-35" title="35"><span class="kw">segments</span>(<span class="op">-</span><span class="dv">1</span>, <span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>p50), p50, <span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>p50), <span class="dt">lty =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb2-36" title="36"><span class="kw">points</span>(p50, <span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>p50), <span class="dt">pch =</span> <span class="dv">16</span>)</a>
+<a class="sourceLine" id="cb2-37" title="37"><span class="kw">text</span>(p50, <span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>p50), <span class="st">&quot;Mediana&quot;</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="fl">1.5</span>, <span class="fl">-0.25</span>))</a>
+<a class="sourceLine" id="cb2-38" title="38"></a>
+<a class="sourceLine" id="cb2-39" title="39"><span class="co"># Media</span></a>
+<a class="sourceLine" id="cb2-40" title="40"><span class="kw">segments</span>(pm, <span class="dv">0</span>, pm, <span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>pm), <span class="dt">lty =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb2-41" title="41"><span class="kw">segments</span>(<span class="op">-</span><span class="dv">1</span>, <span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>pm), pm, <span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>pm), <span class="dt">lty =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb2-42" title="42"><span class="kw">points</span>(pm, <span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>pm), <span class="dt">pch =</span> <span class="dv">16</span>)</a>
+<a class="sourceLine" id="cb2-43" title="43"><span class="kw">text</span>(pm, <span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>pm), <span class="st">&quot;Média&quot;</span>, <span class="dt">adj =</span> <span class="kw">c</span>(<span class="fl">1.5</span>, <span class="fl">-0.25</span>))</a>
+<a class="sourceLine" id="cb2-44" title="44"></a>
+<a class="sourceLine" id="cb2-45" title="45"><span class="co"># Legendas</span></a>
+<a class="sourceLine" id="cb2-46" title="46"><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;Controle&quot;</span>, <span class="st">&quot;Tratamento&quot;</span>), <span class="dt">lty =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-5_files/figure-html/q51-1.png" width="672" /></p>
 <p>Tanto pela análise gráfica, quanto pela análise dos tempos, é provável que o tratamento tenha tido efeito na sobrevivência dos pacientes.</p>
 </div>
+</div>
+<div id="section-1" class="section level2">
+<h2>5.2</h2>
+<p>Estude no R o efeito do parâmetro <span class="math inline">\(\alpha\)</span> no modelo paramétrico exponencial.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Construa gráficos da função de sobrevivência utilizando <span class="math inline">\(\alpha = 0,1\)</span>, <span class="math inline">\(\alpha = 0,5\)</span> e <span class="math inline">\(\alpha = 0,7\)</span>.</li>
+<li>Calcule o tempo mediano de sobrevivência para modelos com <span class="math inline">\(\alpha = 0,1\)</span>, <span class="math inline">\(\alpha = 0,5\)</span> e <span class="math inline">\(\alpha = 0,7\)</span>.</li>
+<li>Calcule os percentis 90% (P90) e 10% (P10), isto é, os tempos em que 90% e 10% dos pacientes ainda não tinham sofrido o evento.</li>
+<li>O que você conclui sobre o parâmetro <span class="math inline">\(\alpha\)</span> e seu comportamento no modelo exponencial de sobrevivência?</li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># Funções de sobrevivência</span></a>
+<a class="sourceLine" id="cb3-2" title="2">alfa_<span class="dv">1</span> =<span class="st"> </span><span class="fl">0.1</span></a>
+<a class="sourceLine" id="cb3-3" title="3">alfa_<span class="dv">2</span> =<span class="st"> </span><span class="fl">0.5</span></a>
+<a class="sourceLine" id="cb3-4" title="4">alfa_<span class="dv">3</span> =<span class="st"> </span><span class="fl">0.7</span></a>
+<a class="sourceLine" id="cb3-5" title="5"></a>
+<a class="sourceLine" id="cb3-6" title="6"></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="kw">curve</span>(</a>
+<a class="sourceLine" id="cb3-8" title="8">  <span class="kw">exp</span>(<span class="op">-</span>alfa_<span class="dv">1</span> <span class="op">*</span><span class="st"> </span>x),</a>
+<a class="sourceLine" id="cb3-9" title="9">  <span class="dt">from =</span> <span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb3-10" title="10">  <span class="dt">to =</span> <span class="dv">25</span>,</a>
+<a class="sourceLine" id="cb3-11" title="11">  <span class="dt">ylab =</span> <span class="st">&quot;S(t)&quot;</span>,</a>
+<a class="sourceLine" id="cb3-12" title="12">  <span class="dt">xlab =</span> <span class="st">&quot;Tempo&quot;</span>,</a>
+<a class="sourceLine" id="cb3-13" title="13">  <span class="dt">main =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(Parametro, <span class="st">&quot; &quot;</span>, alpha)),</a>
+<a class="sourceLine" id="cb3-14" title="14">  <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb3-15" title="15">  <span class="dt">lty =</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb3-16" title="16">)</a>
+<a class="sourceLine" id="cb3-17" title="17"><span class="kw">curve</span>(</a>
+<a class="sourceLine" id="cb3-18" title="18">  <span class="kw">exp</span>(<span class="op">-</span>alfa_<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>x),</a>
+<a class="sourceLine" id="cb3-19" title="19">  <span class="dt">from =</span> <span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb3-20" title="20">  <span class="dt">to =</span> <span class="dv">25</span>,</a>
+<a class="sourceLine" id="cb3-21" title="21">  <span class="dt">ylab =</span> <span class="st">&quot;S(t)&quot;</span>,</a>
+<a class="sourceLine" id="cb3-22" title="22">  <span class="dt">xlab =</span> <span class="st">&quot;Tempo&quot;</span>,</a>
+<a class="sourceLine" id="cb3-23" title="23">  <span class="dt">add =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb3-24" title="24">  <span class="dt">lty =</span> <span class="dv">2</span></a>
+<a class="sourceLine" id="cb3-25" title="25">)</a>
+<a class="sourceLine" id="cb3-26" title="26"><span class="kw">curve</span>(</a>
+<a class="sourceLine" id="cb3-27" title="27">  <span class="kw">exp</span>(<span class="op">-</span>alfa_<span class="dv">3</span> <span class="op">*</span><span class="st"> </span>x),</a>
+<a class="sourceLine" id="cb3-28" title="28">  <span class="dt">from =</span> <span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb3-29" title="29">  <span class="dt">to =</span> <span class="dv">25</span>,</a>
+<a class="sourceLine" id="cb3-30" title="30">  <span class="dt">ylab =</span> <span class="st">&quot;S(t)&quot;</span>,</a>
+<a class="sourceLine" id="cb3-31" title="31">  <span class="dt">xlab =</span> <span class="st">&quot;Tempo&quot;</span>,</a>
+<a class="sourceLine" id="cb3-32" title="32">  <span class="dt">add =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb3-33" title="33">  <span class="dt">lty =</span> <span class="dv">3</span></a>
+<a class="sourceLine" id="cb3-34" title="34">)</a>
+<a class="sourceLine" id="cb3-35" title="35"><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>,</a>
+<a class="sourceLine" id="cb3-36" title="36">       <span class="dt">legend =</span> <span class="kw">expression</span>(alpha <span class="op">==</span><span class="st"> </span><span class="fl">0.1</span>, alpha <span class="op">==</span><span class="st"> </span><span class="fl">0.5</span>, alpha <span class="op">==</span><span class="st"> </span><span class="fl">0.7</span>),</a>
+<a class="sourceLine" id="cb3-37" title="37">       <span class="dt">lty =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-5_files/figure-html/q52_graficos-1.png" width="672" /></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># Tempo mediano de sobrevivencia</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="co"># alpha = 0.1</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="kw">log</span>(<span class="dv">1</span><span class="op">/</span><span class="fl">0.5</span>)<span class="op">/</span>alfa_<span class="dv">1</span></a></code></pre></div>
+<pre><code>## [1] 6.931472</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co"># alpha = 0.5</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="kw">log</span>(<span class="dv">1</span><span class="op">/</span><span class="fl">0.5</span>)<span class="op">/</span>alfa_<span class="dv">2</span></a></code></pre></div>
+<pre><code>## [1] 1.386294</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="co"># alpha = 0.7</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="kw">log</span>(<span class="dv">1</span><span class="op">/</span><span class="fl">0.5</span>)<span class="op">/</span>alfa_<span class="dv">3</span></a></code></pre></div>
+<pre><code>## [1] 0.9902103</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="co"># Percentis</span></a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="co"># alpha = 0.1</span></a>
+<a class="sourceLine" id="cb10-3" title="3"><span class="co"># p90</span></a>
+<a class="sourceLine" id="cb10-4" title="4"><span class="kw">log</span>(<span class="dv">1</span><span class="op">/</span><span class="fl">0.9</span>)<span class="op">/</span>alfa_<span class="dv">1</span></a></code></pre></div>
+<pre><code>## [1] 1.053605</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="co"># p10</span></a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="kw">log</span>(<span class="dv">1</span><span class="op">/</span><span class="fl">0.1</span>)<span class="op">/</span>alfa_<span class="dv">1</span></a></code></pre></div>
+<pre><code>## [1] 23.02585</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="co"># alpha = 0.5</span></a>
+<a class="sourceLine" id="cb14-2" title="2"><span class="co"># p90</span></a>
+<a class="sourceLine" id="cb14-3" title="3"><span class="kw">log</span>(<span class="dv">1</span><span class="op">/</span><span class="fl">0.9</span>)<span class="op">/</span>alfa_<span class="dv">2</span></a></code></pre></div>
+<pre><code>## [1] 0.210721</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="co"># p10</span></a>
+<a class="sourceLine" id="cb16-2" title="2"><span class="kw">log</span>(<span class="dv">1</span><span class="op">/</span><span class="fl">0.1</span>)<span class="op">/</span>alfa_<span class="dv">2</span></a></code></pre></div>
+<pre><code>## [1] 4.60517</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="co"># alpha = 0.7</span></a>
+<a class="sourceLine" id="cb18-2" title="2"><span class="co"># p90</span></a>
+<a class="sourceLine" id="cb18-3" title="3"><span class="kw">log</span>(<span class="dv">1</span><span class="op">/</span><span class="fl">0.9</span>)<span class="op">/</span>alfa_<span class="dv">3</span></a></code></pre></div>
+<pre><code>## [1] 0.150515</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="co"># p10</span></a>
+<a class="sourceLine" id="cb20-2" title="2"><span class="kw">log</span>(<span class="dv">1</span><span class="op">/</span><span class="fl">0.1</span>)<span class="op">/</span>alfa_<span class="dv">3</span></a></code></pre></div>
+<pre><code>## [1] 3.289407</code></pre>
+<p>Sendo o único parâmetro da distribuição exponencial, alfa governa o nível ou a intensidade com que a curva de sobrevivência decresce. Em outras palavras, quanto maior o alfa, mais rapidamente os pacientes evoluem para o evento e menores seram as medidas de sobrevivência, como a mediana e a média.</p>
+</div>
+<div id="section-2" class="section level2">
+<h2>5.3</h2>
+<p>Com relação ao modelo paramétrico Weibull, responda:</p>
+<ol style="list-style-type: lower-alpha">
+<li>Por que o modelo Weibull é considerado mais flexível do que o modelo exponencial?</li>
+<li>Em que situação particular o modelo Weibull é equivalente ao exponencial?</li>
+<li>Qual a relação entre o parâmetro de forma <span class="math inline">\(\gamma\)</span> e o comportamento da função de risco?</li>
+<li>Quais das curvas de risco apresentadas na Figura 3.3 não poderiam ser modeladas pela função Weibull, nem mesmo aproximadamente?</li>
+</ol>
+<p>O modelo Weibull agrega um segundo parâmetro de forma <span class="math inline">\(\gamma\)</span> adicional ao parâmetro <span class="math inline">\(\alpha\)</span> de nível e, por isso, consegue alterar o formato da curva de maneira mais substancial e modelar situações em que o risco cresce ou decresce ao longo do período de estudo. No evento em que o risco seja constante ao longo do estudo, o modelo de Weibull torna-se idêntico ao exponencial e o valor de <span class="math inline">\(\gamma\)</span> se iguala a 1. No caso do parâmetro <span class="math inline">\(\gamma &gt; 1\)</span>, o risco é crescente ao longo do tempo, já no caso de <span class="math inline">\(\gamma &lt; 1\)</span> o risco decresce com o tempo. Observando a figura 3.3 reproduzida abaixo, é evidente que não possível utilizar a distribuição de Weibull para as figuras D, E e F, pois o padrão de risco não é uniformemente crescente ou decrescente.</p>
+<p><img src="figura_3_3.png" width="340" /></p>
+</div>
+<div id="section-3" class="section level2">
+<h2>5.4</h2>
+<p>Seja T o tempo de sobrevivência de até a ocorrência de um evento que segue uma distribuição Weibull com parâmetros <span class="math inline">\(\gamma = 1,5\)</span> e <span class="math inline">\(\alpha = 0,13\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Faça gráfico das funções de sobrevivência <span class="math inline">\(S(t)\)</span>, de risco (<span class="math inline">\(\lambda(t)\)</span>) e de risco acumulado (<span class="math inline">\(\Lambda(t)\)</span>).</li>
+<li>Use o R para construir os gráficos das funções acima.</li>
+<li>Calcule o tempo mediano de sobrevivência, e os percentis 80 e 10 dessa distribuição.</li>
+<li>Fixe o valor do parâmetro <span class="math inline">\(\alpha = 0,13\)</span> e faça gráficos da função de risco e da função de sobrevivência para diversos valores do parâmetro de forma <span class="math inline">\(\gamma\)</span>:
+<ol style="list-style-type: lower-roman">
+<li><span class="math inline">\(0 &lt; \gamma &lt; 1\)</span>,</li>
+<li><span class="math inline">\(\gamma = 1\)</span>,</li>
+<li><span class="math inline">\(\gamma &gt; 1\)</span></li>
+</ol></li>
+<li>Interprete como o parâmetro de forma <span class="math inline">\(\gamma\)</span> afeta o comportamento do risco e da sobrevivência.</li>
+</ol>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1">alfa =<span class="st"> </span><span class="fl">0.13</span></a>
+<a class="sourceLine" id="cb22-2" title="2">gama =<span class="st"> </span><span class="fl">1.5</span></a>
+<a class="sourceLine" id="cb22-3" title="3"></a>
+<a class="sourceLine" id="cb22-4" title="4"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb22-5" title="5"><span class="co"># Sobrevivencia</span></a>
+<a class="sourceLine" id="cb22-6" title="6"><span class="kw">curve</span>(</a>
+<a class="sourceLine" id="cb22-7" title="7">  <span class="kw">exp</span>(<span class="op">-</span>(alfa <span class="op">*</span><span class="st"> </span>x) <span class="op">^</span><span class="st"> </span>gama),</a>
+<a class="sourceLine" id="cb22-8" title="8">  <span class="dt">from =</span> <span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb22-9" title="9">  <span class="dt">to =</span> <span class="dv">20</span>,</a>
+<a class="sourceLine" id="cb22-10" title="10">  <span class="dt">ylab =</span> <span class="st">&quot;S(t)&quot;</span>,</a>
+<a class="sourceLine" id="cb22-11" title="11">  <span class="dt">xlab =</span> <span class="st">&quot;t&quot;</span>,</a>
+<a class="sourceLine" id="cb22-12" title="12">  <span class="dt">main =</span> <span class="st">&quot;Sobrevivência&quot;</span></a>
+<a class="sourceLine" id="cb22-13" title="13"><span class="st">)</span></a>
+<a class="sourceLine" id="cb22-14" title="14"><span class="st"># Risco</span></a>
+<a class="sourceLine" id="cb22-15" title="15"><span class="st">curve(</span></a>
+<a class="sourceLine" id="cb22-16" title="16"><span class="st">  alfa * gama * (alfa * x) ^ (gama - 1),</span></a>
+<a class="sourceLine" id="cb22-17" title="17"><span class="st">  from = 0,</span></a>
+<a class="sourceLine" id="cb22-18" title="18"><span class="st">  to = 20,</span></a>
+<a class="sourceLine" id="cb22-19" title="19"><span class="st">  ylab = expression(lambda(t)),</span></a>
+<a class="sourceLine" id="cb22-20" title="20"><span class="st">  xlab = &quot;</span>t<span class="st">&quot;,</span></a>
+<a class="sourceLine" id="cb22-21" title="21"><span class="st">  main = &quot;</span>Risco<span class="st">&quot;</span></a>
+<a class="sourceLine" id="cb22-22" title="22"><span class="st">)</span></a>
+<a class="sourceLine" id="cb22-23" title="23"><span class="st"># Risco acumulado</span></a>
+<a class="sourceLine" id="cb22-24" title="24"><span class="st">curve((alfa * x) ^ gama,</span></a>
+<a class="sourceLine" id="cb22-25" title="25"><span class="st">      from = 0,</span></a>
+<a class="sourceLine" id="cb22-26" title="26"><span class="st">      to = 20,</span></a>
+<a class="sourceLine" id="cb22-27" title="27"><span class="st">      ylab = expression(Lambda(t)),</span></a>
+<a class="sourceLine" id="cb22-28" title="28"><span class="st">      xlab = &quot;</span>t<span class="st">&quot;,</span></a>
+<a class="sourceLine" id="cb22-29" title="29"><span class="st">      main = &quot;</span>Risco acumulado<span class="st">&quot;</span></a>
+<a class="sourceLine" id="cb22-30" title="30"><span class="st">)</span></a></code></pre></div>
+<p><img src="exercicio-cap-5_files/figure-html/q54_grafico-1.png" width="672" /></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="co"># Tempo mediano de sobrevivencia</span></a>
+<a class="sourceLine" id="cb23-2" title="2"><span class="kw">log</span>(<span class="dv">1</span><span class="op">/</span><span class="fl">0.5</span>)<span class="op">^</span>(<span class="dv">1</span><span class="op">/</span>gama)<span class="op">/</span>alfa</a></code></pre></div>
+<pre><code>## [1] 6.024767</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="co"># P80</span></a>
+<a class="sourceLine" id="cb25-2" title="2"><span class="kw">log</span>(<span class="dv">1</span><span class="op">/</span><span class="fl">0.8</span>)<span class="op">^</span>(<span class="dv">1</span><span class="op">/</span>gama)<span class="op">/</span>alfa</a></code></pre></div>
+<pre><code>## [1] 2.829955</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1"><span class="co"># P10</span></a>
+<a class="sourceLine" id="cb27-2" title="2"><span class="kw">log</span>(<span class="dv">1</span><span class="op">/</span><span class="fl">0.1</span>)<span class="op">^</span>(<span class="dv">1</span><span class="op">/</span>gama)<span class="op">/</span>alfa</a></code></pre></div>
+<pre><code>## [1] 13.41324</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1">gama_<span class="dv">1</span> =<span class="st"> </span><span class="fl">0.25</span></a>
+<a class="sourceLine" id="cb29-2" title="2">gama_<span class="dv">2</span> =<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb29-3" title="3">gama_<span class="dv">3</span> =<span class="st"> </span><span class="fl">1.75</span></a>
+<a class="sourceLine" id="cb29-4" title="4"></a>
+<a class="sourceLine" id="cb29-5" title="5"><span class="co"># Gama = 0.25</span></a>
+<a class="sourceLine" id="cb29-6" title="6"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb29-7" title="7"><span class="co"># Sobrevivência</span></a>
+<a class="sourceLine" id="cb29-8" title="8"><span class="kw">curve</span>(</a>
+<a class="sourceLine" id="cb29-9" title="9">  <span class="kw">exp</span>(<span class="op">-</span>(alfa <span class="op">*</span><span class="st"> </span>x) <span class="op">^</span><span class="st"> </span>gama_<span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb29-10" title="10">  <span class="dt">from =</span> <span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb29-11" title="11">  <span class="dt">to =</span> <span class="dv">20</span>,</a>
+<a class="sourceLine" id="cb29-12" title="12">  <span class="dt">ylab =</span> <span class="st">&quot;S(t)&quot;</span>,</a>
+<a class="sourceLine" id="cb29-13" title="13">  <span class="dt">xlab =</span> <span class="st">&quot;t&quot;</span>,</a>
+<a class="sourceLine" id="cb29-14" title="14">  <span class="dt">main =</span> <span class="kw">expression</span>(gamma <span class="op">==</span><span class="st"> </span><span class="fl">0.25</span>)</a>
+<a class="sourceLine" id="cb29-15" title="15">)</a>
+<a class="sourceLine" id="cb29-16" title="16"><span class="co"># Risco</span></a>
+<a class="sourceLine" id="cb29-17" title="17"><span class="kw">curve</span>(</a>
+<a class="sourceLine" id="cb29-18" title="18">  alfa <span class="op">*</span><span class="st"> </span>gama_<span class="dv">1</span> <span class="op">*</span><span class="st"> </span>(alfa <span class="op">*</span><span class="st"> </span>x) <span class="op">^</span><span class="st"> </span>(gama_<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb29-19" title="19">  <span class="dt">from =</span> <span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb29-20" title="20">  <span class="dt">to =</span> <span class="dv">20</span>,</a>
+<a class="sourceLine" id="cb29-21" title="21">  <span class="dt">ylab =</span> <span class="kw">expression</span>(<span class="kw">lambda</span>(t)),</a>
+<a class="sourceLine" id="cb29-22" title="22">  <span class="dt">xlab =</span> <span class="st">&quot;t&quot;</span>,</a>
+<a class="sourceLine" id="cb29-23" title="23">  <span class="dt">main =</span> <span class="kw">expression</span>(gamma <span class="op">==</span><span class="st"> </span><span class="fl">0.25</span>)</a>
+<a class="sourceLine" id="cb29-24" title="24">)</a></code></pre></div>
+<p><img src="exercicio-cap-5_files/figure-html/q54_alfa_var-1.png" width="672" /></p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1"><span class="co"># Gama = 1</span></a>
+<a class="sourceLine" id="cb30-2" title="2"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb30-3" title="3"><span class="co"># Sobrevivência</span></a>
+<a class="sourceLine" id="cb30-4" title="4"><span class="kw">curve</span>(</a>
+<a class="sourceLine" id="cb30-5" title="5">  <span class="kw">exp</span>(<span class="op">-</span>(alfa <span class="op">*</span><span class="st"> </span>x) <span class="op">^</span><span class="st"> </span>gama_<span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb30-6" title="6">  <span class="dt">from =</span> <span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb30-7" title="7">  <span class="dt">to =</span> <span class="dv">20</span>,</a>
+<a class="sourceLine" id="cb30-8" title="8">  <span class="dt">ylab =</span> <span class="st">&quot;S(t)&quot;</span>,</a>
+<a class="sourceLine" id="cb30-9" title="9">  <span class="dt">xlab =</span> <span class="st">&quot;t&quot;</span>,</a>
+<a class="sourceLine" id="cb30-10" title="10">  <span class="dt">main =</span> <span class="kw">expression</span>(gamma <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb30-11" title="11">)</a>
+<a class="sourceLine" id="cb30-12" title="12"><span class="co"># Risco</span></a>
+<a class="sourceLine" id="cb30-13" title="13"><span class="kw">curve</span>(</a>
+<a class="sourceLine" id="cb30-14" title="14">  alfa <span class="op">*</span><span class="st"> </span>gama_<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>(alfa <span class="op">*</span><span class="st"> </span>x) <span class="op">^</span><span class="st"> </span>(gama_<span class="dv">2</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb30-15" title="15">  <span class="dt">from =</span> <span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb30-16" title="16">  <span class="dt">to =</span> <span class="dv">20</span>,</a>
+<a class="sourceLine" id="cb30-17" title="17">  <span class="dt">ylab =</span> <span class="kw">expression</span>(<span class="kw">lambda</span>(t)),</a>
+<a class="sourceLine" id="cb30-18" title="18">  <span class="dt">xlab =</span> <span class="st">&quot;t&quot;</span>,</a>
+<a class="sourceLine" id="cb30-19" title="19">  <span class="dt">main =</span> <span class="kw">expression</span>(gamma <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb30-20" title="20">)</a></code></pre></div>
+<p><img src="exercicio-cap-5_files/figure-html/q54_alfa_var-2.png" width="672" /></p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="co"># Gama = 1.75</span></a>
+<a class="sourceLine" id="cb31-2" title="2"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb31-3" title="3"><span class="co"># Sobrevivência</span></a>
+<a class="sourceLine" id="cb31-4" title="4"><span class="kw">curve</span>(</a>
+<a class="sourceLine" id="cb31-5" title="5">  <span class="kw">exp</span>(<span class="op">-</span>(alfa <span class="op">*</span><span class="st"> </span>x) <span class="op">^</span><span class="st"> </span>gama_<span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb31-6" title="6">  <span class="dt">from =</span> <span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb31-7" title="7">  <span class="dt">to =</span> <span class="dv">20</span>,</a>
+<a class="sourceLine" id="cb31-8" title="8">  <span class="dt">ylab =</span> <span class="st">&quot;S(t)&quot;</span>,</a>
+<a class="sourceLine" id="cb31-9" title="9">  <span class="dt">xlab =</span> <span class="st">&quot;t&quot;</span>,</a>
+<a class="sourceLine" id="cb31-10" title="10">  <span class="dt">main =</span> <span class="kw">expression</span>(gamma <span class="op">==</span><span class="st"> </span><span class="fl">1.75</span>)</a>
+<a class="sourceLine" id="cb31-11" title="11">)</a>
+<a class="sourceLine" id="cb31-12" title="12"><span class="co"># Risco</span></a>
+<a class="sourceLine" id="cb31-13" title="13"><span class="kw">curve</span>(</a>
+<a class="sourceLine" id="cb31-14" title="14">  alfa <span class="op">*</span><span class="st"> </span>gama_<span class="dv">3</span> <span class="op">*</span><span class="st"> </span>(alfa <span class="op">*</span><span class="st"> </span>x) <span class="op">^</span><span class="st"> </span>(gama_<span class="dv">3</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb31-15" title="15">  <span class="dt">from =</span> <span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb31-16" title="16">  <span class="dt">to =</span> <span class="dv">20</span>,</a>
+<a class="sourceLine" id="cb31-17" title="17">  <span class="dt">ylab =</span> <span class="kw">expression</span>(<span class="kw">lambda</span>(t)),</a>
+<a class="sourceLine" id="cb31-18" title="18">  <span class="dt">xlab =</span> <span class="st">&quot;t&quot;</span>,</a>
+<a class="sourceLine" id="cb31-19" title="19">  <span class="dt">main =</span> <span class="kw">expression</span>(gamma <span class="op">==</span><span class="st"> </span><span class="fl">1.75</span>)</a>
+<a class="sourceLine" id="cb31-20" title="20">)</a></code></pre></div>
+<p><img src="exercicio-cap-5_files/figure-html/q54_alfa_var-3.png" width="672" /></p>
+<p>O parâmetro gama afeta principalmente os formatos das curvas de sobrevivência e risco. No caso da curva de sobrevivência, um valor de <span class="math inline">\(0 &lt; \gamma &lt; 1\)</span> descreve uma distribuição em que os desfechos se concentram no início do tempo de observação, enquanto <span class="math inline">\(\gamma &gt; 1\)</span> descreve uma distribuição em que os eventos tendem a ocorrer mais tarde. No caso da curva de risco, o primeiro caso é no qual o risco descrece exponencialmente, enquanto o segundo o risco cresce exponencialmente. O caso em que <span class="math inline">\(\gamma = 1\)</span> é apenas uma distribuição exponencial comum, no qual o parâmetro não oferece nenhuma informação adicional.</p>
+</div>
+<div id="section-4" class="section level2">
+<h2>5.5</h2>
+<p>Em um estudo sobre o tempo de incubação de uma infecção verificou-se que T é adequadamente descrito por uma função Weibull com parâmetros <span class="math inline">\(\gamma = 1,2\)</span> e <span class="math inline">\(\alpha = 0,07\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Calcule o tempo mediano de incubação desta infecção.</li>
+<li>É correto dizer que 10 horas após a infecção, espera-se que 80% das pessoas já tenha desenvolvimento sintomas?</li>
+<li>O risco de surgimento de sintomas é crescente ou decrescente ao longo do tempo?</li>
+</ol>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1">alfa =<span class="st"> </span><span class="fl">0.07</span></a>
+<a class="sourceLine" id="cb32-2" title="2">gama =<span class="st"> </span><span class="fl">1.2</span></a>
+<a class="sourceLine" id="cb32-3" title="3"></a>
+<a class="sourceLine" id="cb32-4" title="4"><span class="co"># Tempo mediano de incubação</span></a>
+<a class="sourceLine" id="cb32-5" title="5"><span class="kw">log</span>(<span class="dv">1</span><span class="op">/</span><span class="fl">0.5</span>)<span class="op">^</span>(<span class="dv">1</span><span class="op">/</span>gama)<span class="op">/</span>alfa</a></code></pre></div>
+<pre><code>## [1] 10.52583</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1"><span class="co"># Quando 80% das pessoas desenvolveu sintomas?</span></a>
+<a class="sourceLine" id="cb34-2" title="2"><span class="kw">log</span>(<span class="dv">1</span><span class="op">/</span><span class="fl">0.2</span>)<span class="op">^</span>(<span class="dv">1</span><span class="op">/</span>gama)<span class="op">/</span>alfa</a></code></pre></div>
+<pre><code>## [1] 21.23882</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1"><span class="co"># Função de risco</span></a>
+<a class="sourceLine" id="cb36-2" title="2"><span class="kw">curve</span>(</a>
+<a class="sourceLine" id="cb36-3" title="3">  alfa <span class="op">*</span><span class="st"> </span>gama <span class="op">*</span><span class="st"> </span>(alfa <span class="op">*</span><span class="st"> </span>x) <span class="op">^</span><span class="st"> </span>(gama <span class="op">-</span><span class="st"> </span><span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb36-4" title="4">  <span class="dt">from =</span> <span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb36-5" title="5">  <span class="dt">to =</span> <span class="dv">20</span>,</a>
+<a class="sourceLine" id="cb36-6" title="6">  <span class="dt">ylab =</span> <span class="kw">expression</span>(<span class="kw">lambda</span>(t)),</a>
+<a class="sourceLine" id="cb36-7" title="7">  <span class="dt">xlab =</span> <span class="st">&quot;t&quot;</span>,</a>
+<a class="sourceLine" id="cb36-8" title="8">  <span class="dt">main =</span> <span class="st">&quot;Risco&quot;</span></a>
+<a class="sourceLine" id="cb36-9" title="9">)</a></code></pre></div>
+<p><img src="exercicio-cap-5_files/figure-html/q55-1.png" width="672" /></p>
+<p>Podemos ver acima o tempo mediano da infecção e que levou 21.2388248 horas para que 80% das pessoas manifestassem sintomas, por fim, o gráfico mostra o risco crescente ao longo do tempo, consistente com o parâmetro <span class="math inline">\(\gamma &gt; 1\)</span>.</p>
+</div>
+<div id="section-5" class="section level2">
+<h2>5.6</h2>
+<p>Mil crianças não vacinadas são acompanhadas, a partir do nascimento, em um estudo cujo objetivo é identificar a idade em que adquirem hepatite A. Os resultados do estudo indicam que média da soroconversão das crianças foi de 4,5 anos e que o risco de contrair hepatite A foi constante e independente da idade.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Proponha um modelo paramétrico para o tempo até a aquisição de hepatite A.</li>
+<li>Faça no R o gráfico da função de sobrevivência, de acordo com esse modelo.</li>
+<li>Com base nesse modelo, em que idade espera-se ter 90% das crianças soropositivas?</li>
+<li>Após esse estudo, um projeto de saneamento é implementado nesta comunidade. Para avaliar o efeito do saneamento na transmissão de hepatite A, uma nova coorte é montada, semelhante à anterior. Ao analisar os dados dessa nova coorte, encontramos que um modelo Weibull com parâmetros <span class="math inline">\(\gamma = 1,3\)</span> e <span class="math inline">\(\alpha = 0,1\)</span> descreve bem a curva de sobrevivência. Com base nessa informação, avalie qual foi o efeito do saneamento no risco de contrarir hepatite A nessa comunidade. Sugestão: compare os gráficos das funções de sobrevivência.</li>
+</ol>
+<p>Dado o risco para a contração da hepatite ser constante na primeira coorte, o modelo paramétrico adequado é exponencial.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="co"># Cálculo do alfa do modelo exponencial</span></a>
+<a class="sourceLine" id="cb37-2" title="2">alfa =<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="fl">4.5</span></a>
+<a class="sourceLine" id="cb37-3" title="3">alfa_san =<span class="st"> </span><span class="fl">0.1</span></a>
+<a class="sourceLine" id="cb37-4" title="4">gama =<span class="st"> </span><span class="fl">1.3</span></a>
+<a class="sourceLine" id="cb37-5" title="5"></a>
+<a class="sourceLine" id="cb37-6" title="6"><span class="co"># Idade em que 90% das crianças são soropositivas</span></a>
+<a class="sourceLine" id="cb37-7" title="7"><span class="kw">log</span>(<span class="dv">1</span><span class="op">/</span><span class="fl">0.1</span>)<span class="op">/</span>alfa</a></code></pre></div>
+<pre><code>## [1] 10.36163</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1"><span class="co"># Gráfico da função de sobrevivência</span></a>
+<a class="sourceLine" id="cb39-2" title="2"><span class="kw">curve</span>(</a>
+<a class="sourceLine" id="cb39-3" title="3">  <span class="kw">exp</span>(<span class="op">-</span>alfa <span class="op">*</span><span class="st"> </span>x),</a>
+<a class="sourceLine" id="cb39-4" title="4">  <span class="dt">from =</span> <span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb39-5" title="5">  <span class="dt">to =</span> <span class="dv">25</span>,</a>
+<a class="sourceLine" id="cb39-6" title="6">  <span class="dt">ylab =</span> <span class="st">&quot;S(t)&quot;</span>,</a>
+<a class="sourceLine" id="cb39-7" title="7">  <span class="dt">xlab =</span> <span class="st">&quot;Tempo&quot;</span>,</a>
+<a class="sourceLine" id="cb39-8" title="8">  <span class="dt">main =</span> <span class="st">&quot;Comparação entre as funções das duas coortes&quot;</span>,</a>
+<a class="sourceLine" id="cb39-9" title="9">  <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb39-10" title="10">)</a>
+<a class="sourceLine" id="cb39-11" title="11"><span class="kw">curve</span>(</a>
+<a class="sourceLine" id="cb39-12" title="12">  <span class="kw">exp</span>(<span class="op">-</span>(alfa_san <span class="op">*</span><span class="st"> </span>x) <span class="op">^</span><span class="st"> </span>gama),</a>
+<a class="sourceLine" id="cb39-13" title="13">  <span class="dt">from =</span> <span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb39-14" title="14">  <span class="dt">to =</span> <span class="dv">25</span>,</a>
+<a class="sourceLine" id="cb39-15" title="15">  <span class="dt">lty =</span> <span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb39-16" title="16">  <span class="dt">add =</span> <span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb39-17" title="17">)</a>
+<a class="sourceLine" id="cb39-18" title="18"><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, </a>
+<a class="sourceLine" id="cb39-19" title="19">       <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;Pré-saneamento&quot;</span>, <span class="st">&quot;Pós-saneamento&quot;</span>),</a>
+<a class="sourceLine" id="cb39-20" title="20">       <span class="dt">lty =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a></code></pre></div>
+<p><img src="exercicio-cap-5_files/figure-html/q56-1.png" width="672" /></p>
+<p>Utilizando a comparação gráfica entre as duas funções de sobrevivência, fica claro que o saneamento reduziu as infecções por hepatite A.</p>
+</div>
+<div id="section-6" class="section level2">
+<h2>5.7</h2>
+<p>Retorne ao exemplo do primeiro exercício do Capítulo 4, sobre tempo de aleitamento de crianças (arquivo <em>leite.txt</em>).</p>
+<ol style="list-style-type: lower-alpha">
+<li>Ajuste uma distribuição Weibull ao tempo de aleitamento. Existe evidência de que o modelo Weibull seja mais adequado que o exponencial?</li>
+<li>Qual o tempo mediano de amamentação estimado por esse modelo?</li>
+<li>Faça um gráfico da curva de sobrevivência ajustada pelo modelo Weibull, junto com o gráfico de Kaplan-Meier. O modelo paramétrico representa bem os dados?</li>
+</ol>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1">leite &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">tempo =</span> <span class="kw">c</span>(6L, 12L, 10L, 3L, 5L, 1L, 6L, 8L, 1L, 5L, 2L, 2L, 5L, 8L, 1L),</a>
+<a class="sourceLine" id="cb40-2" title="2">                    <span class="dt">status =</span> 1L,</a>
+<a class="sourceLine" id="cb40-3" title="3">                    <span class="dt">crianca =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">15</span>)</a>
+<a class="sourceLine" id="cb40-4" title="4"></a>
+<a class="sourceLine" id="cb40-5" title="5"><span class="co"># Modelo Weibull</span></a>
+<a class="sourceLine" id="cb40-6" title="6">leite_wei &lt;-<span class="st"> </span><span class="kw">survreg</span>(<span class="kw">Surv</span>(tempo, status) <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> leite, <span class="dt">dist =</span> <span class="st">&quot;weibull&quot;</span>)</a>
+<a class="sourceLine" id="cb40-7" title="7">leite_wei</a></code></pre></div>
+<pre><code>## Call:
+## survreg(formula = Surv(tempo, status) ~ 1, data = leite, dist = &quot;weibull&quot;)
+## 
+## Coefficients:
+## (Intercept) 
+##    1.713409 
+## 
+## Scale= 0.6601589 
+## 
+## Loglik(model)= -37.5   Loglik(intercept only)= -37.5
+## n= 15</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"><span class="co">#Modelo exponencial</span></a>
+<a class="sourceLine" id="cb42-2" title="2">leite_exp &lt;-<span class="st"> </span><span class="kw">survreg</span>(<span class="kw">Surv</span>(tempo, status) <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> leite, <span class="dt">dist =</span> <span class="st">&quot;exponential&quot;</span>)</a>
+<a class="sourceLine" id="cb42-3" title="3">leite_exp</a></code></pre></div>
+<pre><code>## Call:
+## survreg(formula = Surv(tempo, status) ~ 1, data = leite, dist = &quot;exponential&quot;)
+## 
+## Coefficients:
+## (Intercept) 
+##    1.609438 
+## 
+## Scale fixed at 1 
+## 
+## Loglik(model)= -39.1   Loglik(intercept only)= -39.1
+## n= 15</code></pre>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="co"># Comparação entre os modelos</span></a>
+<a class="sourceLine" id="cb44-2" title="2"><span class="kw">anova</span>(leite_exp, leite_wei)</a></code></pre></div>
+<pre><code>##   Terms Resid. Df    -2*LL Test Df Deviance   Pr(&gt;Chi)
+## 1     1        14 78.28314      NA       NA         NA
+## 2     1        13 74.97531    =  1 3.307824 0.06895072</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1"><span class="co"># Comparação gráfica do ajuste</span></a>
+<a class="sourceLine" id="cb46-2" title="2">leite_km &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(tempo, status) <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> leite)</a>
+<a class="sourceLine" id="cb46-3" title="3">alfa_wei &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>leite_wei<span class="op">$</span>coefficients)</a>
+<a class="sourceLine" id="cb46-4" title="4">gama_wei &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span>leite_wei<span class="op">$</span>scale</a>
+<a class="sourceLine" id="cb46-5" title="5"></a>
+<a class="sourceLine" id="cb46-6" title="6"><span class="kw">plot</span>(leite_km, <span class="dt">conf.int =</span> F)</a>
+<a class="sourceLine" id="cb46-7" title="7"><span class="kw">curve</span>(</a>
+<a class="sourceLine" id="cb46-8" title="8">  <span class="kw">exp</span>(<span class="op">-</span>(alfa_wei <span class="op">*</span><span class="st"> </span>x) <span class="op">^</span><span class="st"> </span>gama_wei),</a>
+<a class="sourceLine" id="cb46-9" title="9">  <span class="dt">from =</span> <span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb46-10" title="10">  <span class="dt">to =</span> <span class="dv">12</span>,</a>
+<a class="sourceLine" id="cb46-11" title="11">  <span class="dt">lty =</span> <span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb46-12" title="12">  <span class="dt">add =</span> <span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb46-13" title="13">)</a></code></pre></div>
+<p><img src="exercicio-cap-5_files/figure-html/q57-1.png" width="672" /></p>
+<p>A análise visual do modelo em relação ao Kaplan-Meier sugere que o modelo se ajustou bem aos dados, porém, a análise formal de variância não encontrou diferenças estatisticamente significativas entre o modelo Weibull e o modelo exponencial.</p>
 </div>
 
 

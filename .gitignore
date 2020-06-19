@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # History files
 .Rhistory
 .Rapp.history
@@ -44,4 +43,6 @@ dados/
 
 # Pdfs
 *.pdf
->>>>>>> 3c5c28afca48d51d118d5055fc3f80555d28746a
+
+# Images
+R/*.png

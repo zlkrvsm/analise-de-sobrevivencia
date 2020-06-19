@@ -11,6 +11,8 @@ navbar:
       href: exercicio-cap-3.html
     - text: "Exercícios Capítulo 4"
       href: exercicio-cap-4.html
+    - text: "Exercícios Capítulo 5"
+      href: exercicio-cap-5.html
 output:
  html_document:
   theme: cosmo
